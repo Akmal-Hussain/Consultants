@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<Consultant>
+    <Name>
+        Ravi Kumar
+    </Name>
+    <Dates_Of_Leave>
+        <Leave_Block>
+            <From>
+                <Day>24</Day>
+                <Month>2</Month>
+                <Year>2020</Year>
+            </From>
+            <To>
+                <Day>28</Day>
+                <Month>2</Month>
+                <Year>2020</Year>
+            </To>
+        </Leave_Block> 
+        <Leave_Block>
+            <From>
+                <Day>1</Day>
+                <Month>5</Month>
+                <Year>2010</Year>
+            </From>
+            <To>
+                <Day>2</Day>
+                <Month>7</Month>
+                <Year>2010</Year>
+            </To>
+        </Leave_Block>    
+    </Dates_Of_Leave>
+    <FullOrPartTime>
+        Full
+        <DaysWorking>
+            <WeekDay>Thursday</WeekDay>
+            <WeekDay>tuesday</WeekDay>
+            <WeekDay>Monday</WeekDay>
+        </DaysWorking>
+    </FullOrPartTime>
+    <Types_Of_Work>
+        <Week_Work>
+            <Type>COW</Type>
+            <Type>NOW</Type>
+        </Week_Work>
+        <Weekend_Work>
+            <Type>COW</Type>
+            <Type>NOW</Type>
+        </Weekend_Work>
+        <OnCalls>
+            <Type>Paed</Type>
+            <Type>Neo</Type>
+        </OnCalls>
+    </Types_Of_Work>
+    <Balance_Last_Rota>
+<!--        negative means shift owed in next rota and vice versa-->
+        <COW_Week>0</COW_Week>
+        <NOW_Week>0</NOW_Week>
+        <COW_Weekend>0</COW_Weekend>
+        <NOW_Weekend>0</NOW_Weekend>
+        <OnCalls>0</OnCalls>
+    </Balance_Last_Rota>
+</Consultant>
+

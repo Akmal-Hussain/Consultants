@@ -1,0 +1,23 @@
+
+
+Heat map the results - Which rules are broken and which shifts are responsible - move this code
+Then make a UI interface....
+
+First with a basic menu confirming dates and number of consultants with characteristics
+Then running through solving with some kind of screen. Option of when to stop and how to stop early.
+Then Presenting the results.
+
+Consider doing the holidays first.
+Choose the best heuristic
+Test the system
+Go through the code making sure it is as general as possible to change to different rotas
+
+
+Number of shifts has to be the sameish.Have not added balance and made specific for different consultant specifics.
+    Then make rule with accumulate for each category of target
+Then to do the holidays first. solve the rest of the problem. 
+Have to remove Xmas period from the ShiftList and handle separately.
+
+
+Custom moves
+Get rid of Aim  
