@@ -133,7 +133,7 @@ public class WorkingSolution extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent ae) {
         ConsultantPanel pane = (ConsultantPanel) keyMap.get(ConsultantList.getConsultantList().get(0),dateRange.get(0));
         
-        pane.getCOW().setVisible(true);
+        pane.getNOW().setVisible(true);
         pane.getNeo().setVisible(true);
         //revalidate();
         //repaint();
