@@ -6,12 +6,14 @@
 package main.java.RunData;
 
 import main.java.DisplayData.DisplaySolution;
-import main.java.DisplayData.TitleScreen;
+import main.java.DisplaySolution.WorkingSolution;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
 import main.java.ReadData.ShiftStructureReader;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
+import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
+import org.optaplanner.core.api.solver.event.SolverEventListener;
 
 /**
  *
@@ -29,7 +31,7 @@ public class RunRota {
                 "main/resources/Configuration/config.xml");
         Solver<ShiftList> solver = solverFactory.buildSolver();
         
-        new TitleScreen();
+       
 
         //Load the problem
         new DatesReader("src/main/resources/Data/Dates.xml");
@@ -37,9 +39,18 @@ public class RunRota {
         new ConsultantList("src/main/resources/Data/All_Consultants.xml");
         ShiftList unsolvedShiftList = new ShiftList();
         ConsultantList.addShiftTargets(unsolvedShiftList);
-
+        WorkingSolution display = new WorkingSolution();
         
+        solver.addEventListener(new SolverEventListener<ShiftList>() {
+            @Override
+            public void bestSolutionChanged(BestSolutionChangedEvent<ShiftList> event) {
+if (event.getNewBestSolution().getScore().isFeasible()) {
+     display.update(event.getNewBestSolution());
+}
+            }
+        });
         ShiftList solvedShiftList = solver.solve(unsolvedShiftList);
+        display.update(solvedShiftList);
         //Display the result with heat map and constraint matching...
         new DisplaySolution(solvedShiftList, solver);
  

@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -25,6 +26,9 @@ import main.java.DisplayData.SetLookAndFeel;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.DatesReader;
+import main.java.RunData.Shift;
+import main.java.RunData.ShiftList;
+import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.apache.commons.collections4.map.MultiKeyMap;
 
 /**
@@ -32,7 +36,7 @@ import org.apache.commons.collections4.map.MultiKeyMap;
  * @author pi
  */
 public class WorkingSolution extends JFrame implements ActionListener{
-    MultiKeyMap keyMap;
+    MultiKeyMap <Object,ConsultantPanel> keyMap;
     List<LocalDate> dateRange;
     
     public WorkingSolution () {
@@ -93,7 +97,7 @@ public class WorkingSolution extends JFrame implements ActionListener{
             date = date.plusDays(1);
         }
        
-        keyMap = new MultiKeyMap();
+        keyMap = new MultiKeyMap<>();
         
         for (ConsultantReader c : ConsultantList.getConsultantList()){
             for (LocalDate d : dateRange) {
@@ -137,6 +141,39 @@ public class WorkingSolution extends JFrame implements ActionListener{
         pane.getNeo().setVisible(true);
         //revalidate();
         //repaint();
+    }
+    
+    public void update(ShiftList s) {
+        for (Map.Entry<MultiKey<?>,ConsultantPanel> entry :  keyMap.entrySet()){
+            entry.getValue().getCOW().setVisible(false);
+                        entry.getValue().getNOW().setVisible(false);
+                                    entry.getValue().getPaed().setVisible(false);
+                                    entry.getValue().getNeo().setVisible(false);
+
+
+            
+        }
+  
+        
+        
+        for (Shift shift : s.getShiftList()) {
+            ConsultantPanel pane = (ConsultantPanel) keyMap.get(shift.getConsultant(), shift.getStartDate());
+         
+            if (shift.getShiftType().equalsIgnoreCase("COW")) {
+                pane.getCOW().setVisible(true);
+            } 
+            
+              if (shift.getShiftType().equalsIgnoreCase("NOW")) {
+                pane.getNOW().setVisible(true);
+            } 
+            
+                if (shift.getShiftType().equalsIgnoreCase("PaedOnCall")) {
+                pane.getPaed().setVisible(true);
+            }  
+                  if (shift.getShiftType().equalsIgnoreCase("NeoOnCall")) {
+                pane.getNeo().setVisible(true);
+            } 
+        }
     }
     
 }
