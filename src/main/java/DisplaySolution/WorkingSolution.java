@@ -36,7 +36,7 @@ import org.apache.commons.collections4.map.MultiKeyMap;
  * @author pi
  */
 public class WorkingSolution extends JFrame implements ActionListener{
-    MultiKeyMap <Object,ConsultantPanel> keyMap;
+    MultiKeyMap keyMap;
     List<LocalDate> dateRange;
     
     public WorkingSolution () {
@@ -144,6 +144,15 @@ public class WorkingSolution extends JFrame implements ActionListener{
     }
     
     public void update(ShiftList s) {
+        
+        for (Object entry: keyMap.values()) {
+            ConsultantPanel p = (ConsultantPanel) entry;
+            p.getCOW().setVisible(false);
+            p.getNOW().setVisible(false);
+            p.getPaed().setVisible(false);
+            p.getNeo().setVisible(false);
+        }
+        /*
         for (Map.Entry<MultiKey<?>,ConsultantPanel> entry :  keyMap.entrySet()){
             entry.getValue().getCOW().setVisible(false);
                         entry.getValue().getNOW().setVisible(false);
@@ -152,7 +161,7 @@ public class WorkingSolution extends JFrame implements ActionListener{
 
 
             
-        }
+        }*/
   
         
         
