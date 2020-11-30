@@ -52,7 +52,7 @@ if (event.getNewBestSolution().getScore().isFeasible()) {
         ShiftList solvedShiftList = solver.solve(unsolvedShiftList);
         display.update(solvedShiftList);
         //Display the result with heat map and constraint matching...
-        new DisplaySolution(solvedShiftList, solver);
+        new DisplaySolution(solvedShiftList, solver, display);
  
     }
 

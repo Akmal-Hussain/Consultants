@@ -6,6 +6,7 @@
 package main.java.DisplaySolution;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +14,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -28,7 +28,6 @@ import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.DatesReader;
 import main.java.RunData.Shift;
 import main.java.RunData.ShiftList;
-import org.apache.commons.collections4.keyvalue.MultiKey;
 import org.apache.commons.collections4.map.MultiKeyMap;
 
 /**
@@ -183,6 +182,28 @@ public class WorkingSolution extends JFrame implements ActionListener{
                 pane.getNeo().setVisible(true);
             } 
         }
+    }
+    
+    public void heatMap(Shift s) {
+                 ConsultantPanel pane = (ConsultantPanel) keyMap.get(s.getConsultant(), s.getStartDate());
+                 
+            if (s.getShiftType().equalsIgnoreCase("COW")) {
+                pane.getCOW().setBackground(Color.RED);
+            } 
+            
+              if (s.getShiftType().equalsIgnoreCase("NOW")) {
+                pane.getNOW().setBackground(Color.RED);
+            } 
+            
+                if (s.getShiftType().equalsIgnoreCase("PaedOnCall")) {
+                pane.getPaed().setBackground(Color.RED);
+            }  
+                  if (s.getShiftType().equalsIgnoreCase("NeoOnCall")) {
+                pane.getNeo().setBackground(Color.RED);
+            } 
+               //  pane.setBackground(Color.RED);
+
+        
     }
     
 }
