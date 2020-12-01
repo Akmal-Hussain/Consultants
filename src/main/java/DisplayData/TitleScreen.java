@@ -84,7 +84,7 @@ public class TitleScreen extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         try {
             // setLookAndFeel();
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException ex) {
         }
       this.dispose();
