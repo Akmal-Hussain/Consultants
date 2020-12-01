@@ -10,18 +10,21 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
 
 /**
  *
  * @author pi
  */
-public class ConfirmData extends JFrame{
+public class ConfirmData extends JFrame implements ActionListener{
 
     /**
      * @param args the command line arguments
@@ -145,6 +148,7 @@ public class ConfirmData extends JFrame{
         modifyOrConfirm.setLayout(new BorderLayout());
         JButton modify = new JButton("Modify");
         JButton confirm = new JButton("Confirm");
+        confirm.addActionListener(this);
         modifyOrConfirm.add(modify,BorderLayout.WEST);
         modifyOrConfirm.add(confirm, BorderLayout.EAST);
         lowerPane.add(modifyOrConfirm, BorderLayout.EAST);
@@ -173,6 +177,13 @@ public class ConfirmData extends JFrame{
     public static void main(String[] args) {
    new DatesReader("src/main/resources/Data/Dates.xml");
         new ConfirmData();
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        this.dispose();
+                new ConfirmStaff(ConsultantList.getConsultantList());
+
     }
     
 }

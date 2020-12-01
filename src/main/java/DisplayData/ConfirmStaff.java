@@ -10,6 +10,8 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
@@ -31,12 +33,13 @@ import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.FullOrPartTime;
 import main.java.ReadData.TypeOfWorking;
+import main.java.RunData.RunRota;
 
 /**
  *
  * @author pi
  */
-public class ConfirmStaff extends JFrame implements ListSelectionListener{
+public class ConfirmStaff extends JFrame implements ListSelectionListener, ActionListener{
 
     List<ConsultantReader> consultantList;
     ConsultantReader selectedConsultant;
@@ -264,6 +267,7 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener{
         modifyOrConfirm.setLayout(new BorderLayout());
         JButton modify = new JButton("Modify");
         JButton confirm = new JButton("Confirm");
+        confirm.addActionListener(this);
         modifyOrConfirm.add(modify, BorderLayout.WEST);
         modifyOrConfirm.add(confirm, BorderLayout.EAST);
         lowerPane.add(modifyOrConfirm, BorderLayout.EAST);
@@ -359,6 +363,12 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener{
             tue.setSelected(c.getDaysWorkingList().contains(DayOfWeek.TUESDAY));
             wed.setSelected(c.getDaysWorkingList().contains(DayOfWeek.WEDNESDAY));
             thurs.setSelected(c.getDaysWorkingList().contains(DayOfWeek.THURSDAY));
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        this.dispose();
+        new RunRota();
     }
     class ShiftTypeBox extends JComboBox {
         ShiftTypeBox (){

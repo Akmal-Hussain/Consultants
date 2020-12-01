@@ -12,6 +12,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -80,8 +82,13 @@ public class TitleScreen extends JFrame {
         // add(continueButton);
              setLocationRelativeTo(null);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-      // setLookAndFeel();
-
+        try {
+            // setLookAndFeel();
+            Thread.sleep(2000);
+        } catch (InterruptedException ex) {
+        }
+      this.dispose();
+      new ConfirmData();
     }
 
     @Override
