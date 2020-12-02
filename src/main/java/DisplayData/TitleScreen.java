@@ -21,6 +21,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.UIManager;
+import main.java.ReadData.ConsultantList;
+import main.java.ReadData.DatesReader;
+import main.java.ReadData.ShiftStructureReader;
 
 /**
  *
@@ -98,6 +101,9 @@ public class TitleScreen extends JFrame {
 
   
     public static void main(String[] args) {
+        new DatesReader("src/main/resources/Data/Dates.xml");
+        new ShiftStructureReader("src/main/resources/Data/Shift_Structure.xml");
+        new ConsultantList("src/main/resources/Data/All_Consultants.xml");
         new TitleScreen();
     }
 }
