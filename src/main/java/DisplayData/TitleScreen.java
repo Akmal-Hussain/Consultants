@@ -97,13 +97,13 @@ public class TitleScreen extends JFrame {
     @Override
     public Insets getInsets() {
         return new Insets(100, 10, 10, 10);
-    }
+    } 
 
   
     public static void main(String[] args) {
         new DatesReader("src/main/resources/Data/Dates.xml");
         new ShiftStructureReader("src/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("src/main/resources/Data/All_Consultants.xml");
-        new TitleScreen();
+        TitleScreen t = new TitleScreen();
     }
 }
