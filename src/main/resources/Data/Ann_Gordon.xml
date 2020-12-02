@@ -38,6 +38,8 @@ and open the template in the editor.
     </Dates_Of_Leave>
     <FullOrPartTime>
         Full
+        <Factor> 0.5
+        </Factor>    
         <DaysWorking>
             <WeekDay>Thursday</WeekDay>
             <WeekDay>tuesday</WeekDay>

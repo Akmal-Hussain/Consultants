@@ -24,7 +24,7 @@ and open the template in the editor.
         </Leave_Block>    
     </Dates_Of_Leave>
     <FullOrPartTime>
-        Full
+        Full        
         <DaysWorking>
             <WeekDay>Thursday</WeekDay>
             <WeekDay>tuesday</WeekDay>

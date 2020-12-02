@@ -23,17 +23,7 @@ import nu.xom.ParsingException;
  */
 public class DatesReader implements Serializable{
 
-    public static LocalDate[] getRange() {
-        return range;
-    }
-
-    public static LocalDate[] getBankHolidays() {
-        return bankHolidays;
-    }
-
-    public static LocalDate[][] getSchoolHolidays() {
-        return schoolHolidays;
-    }
+  
     static LocalDate [] range = new LocalDate[2];
     static LocalDate [] bankHolidays;
     static LocalDate [][] schoolHolidays;
@@ -76,4 +66,15 @@ public class DatesReader implements Serializable{
         }
     }
     
+        public static LocalDate[] getRange() {
+        return range;
+    }
+
+    public static LocalDate[] getBankHolidays() {
+        return bankHolidays;
+    }
+
+    public static LocalDate[][] getSchoolHolidays() {
+        return schoolHolidays;
+    }
 }

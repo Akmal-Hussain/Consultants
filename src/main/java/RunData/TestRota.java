@@ -6,9 +6,9 @@
 package main.java.RunData;
 
 import main.java.DisplayData.DisplaySolution;
-import main.java.DisplayData.TitleScreen;
 import main.java.DisplaySolution.WorkingSolution;
 import main.java.ReadData.ConsultantList;
+import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.DatesReader;
 import main.java.ReadData.ShiftStructureReader;
 import org.optaplanner.core.api.solver.Solver;
@@ -30,7 +30,9 @@ public class TestRota {
         new DatesReader("src/main/resources/Data/Dates.xml");
         new ShiftStructureReader("src/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("src/main/resources/Data/All_Consultants.xml");
-
+       // ConsultantReader ann = (ConsultantList.getConsultantList().get(0));
+       // System.out.println(ann.getFullOrPartTime().getFactor());
+      //  System.exit(-1);
                 SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
                 "main/resources/Configuration/config.xml");
         Solver<ShiftList> solver = solverFactory.buildSolver();

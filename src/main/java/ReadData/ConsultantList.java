@@ -96,10 +96,9 @@ public class ConsultantList implements Serializable {
             }
         }
         for (ConsultantReader c : getConsultantList()) {
-            double x = 1;
-            if (c.getFullOrPartTime() == FullOrPartTime.PartTime) {
-                x = 0.6;
-            } 
+            double x = c.getFullOrPartTime().getFactor();
+            
+            
             
             if (c.getWeekdays() == TypeOfWorking.Paeds || c.getWeekdays() == TypeOfWorking.Both) {
                 consultantNumberCOW_Weekday += x;}
@@ -125,11 +124,7 @@ public class ConsultantList implements Serializable {
             for (Iterator<ConsultantReader> cs = getConsultantList().iterator(); cs.hasNext();) {
             ConsultantReader cons = cs.next();
             
-            double partTimeFactor = 1;
-
-            if (cons.getFullOrPartTime() == FullOrPartTime.PartTime) {
-                partTimeFactor = 0.6;
-            }
+            double partTimeFactor = cons.getFullOrPartTime().getFactor();
             
             cons.setCOW_WeekTarget(partTimeFactor * (COW_WeekdayNumber+consultantShiftsCarriedCOW_Weekday)/consultantNumberCOW_Weekday - cons.getBalance().get("COW_Week") );
             cons.setCOW_WeekendTarget(partTimeFactor * (COW_WeekendNumber+consultantShiftsCarriedCOW_Weekend)/consultantNumberCOW_Weekend - cons.getBalance().get("COW_Weekend"));

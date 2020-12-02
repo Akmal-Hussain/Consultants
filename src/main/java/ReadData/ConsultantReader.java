@@ -24,108 +24,20 @@ public class ConsultantReader implements Serializable {
 
     String consultantName;
 
-    public String getConsultantName() {
-        return consultantName;
-    }
-    LocalDate[][] leaveDatesArray;
-
-    public LocalDate[][] getLeaveDatesArray() {
-        return leaveDatesArray;
-    }
-    FullOrPartTime fullOrPartTime;
-
-    public FullOrPartTime getFullOrPartTime() {
-        return fullOrPartTime;
-    }
-    DayOfWeek[] daysWorking;
-
-    public List<DayOfWeek> getDaysWorkingList() {
-        return daysWorkingList;
-    }
-    List <DayOfWeek> daysWorkingList;
-    List<LocalDate> leaveDates;
-
-    public List<LocalDate> getLeaveDates() {
-        return leaveDates;
-    }
-
+    
     double COW_WeekTarget;
     double NOW_WeekTarget;
     double COW_WeekendTarget;
     double NOW_WeekendTarget;
     double onCallsTarget;
 
-    public void setCOW_WeekTarget(double COW_WeekTarget) {
-        this.COW_WeekTarget = COW_WeekTarget;
-    }
-
-    public void setNOW_WeekTarget(double NOW_WeekTarget) {
-        this.NOW_WeekTarget = NOW_WeekTarget;
-    }
-
-    public void setCOW_WeekendTarget(double COW_WeekendTarget) {
-        this.COW_WeekendTarget = COW_WeekendTarget;
-    }
-
-    public void setNOW_WeekendTarget(double NOW_WeekendTarget) {
-        this.NOW_WeekendTarget = NOW_WeekendTarget;
-    }
-
-    public void setOnCallsTarget(double onCallsTarget) {
-        this.onCallsTarget = onCallsTarget;
-    }
-
-    public double getCOW_WeekTarget() {
-        return COW_WeekTarget;
-    }
-
-    public double getNOW_WeekTarget() {
-        return NOW_WeekTarget;
-    }
-
-    public double getCOW_WeekendTarget() {
-        return COW_WeekendTarget;
-    }
-
-    public double getNOW_WeekendTarget() {
-        return NOW_WeekendTarget;
-    }
-
-    public double getOnCallsTarget() {
-        return onCallsTarget;
-    }
-    
     
     
     TypeOfWorking weekdays;
     TypeOfWorking weekends;
     TypeOfWorking onCalls;
 
-    public DayOfWeek[] getDaysWorking() {
-        return daysWorking;
-    }
-
-    public TypeOfWorking getWeekdays() {
-        return weekdays;
-    }
-
-    public TypeOfWorking getWeekends() {
-        return weekends;
-    }
-
-    public TypeOfWorking getOnCalls() {
-        return onCalls;
-    }
-    HashMap<String, Double> balance = new HashMap<>();
-
-    public HashMap<String, Double> getBalance() {
-        return balance;
-    }
-
-    @Override
-    public String toString() {
-        return consultantName;
-    }
+   
     public ConsultantReader(String fileName) {
         try {
             Builder builder = new Builder();
@@ -175,7 +87,10 @@ public class ConsultantReader implements Serializable {
             } else {
                 fullOrPartTime = FullOrPartTime.PartTime;
             }
-
+            if (fullOrPartTime.equals(FullOrPartTime.PartTime)) {
+                Element factor = timeWorking.getFirstChildElement("Factor");
+                fullOrPartTime.setFactor(Double.valueOf(factor.getValue()));
+            }
             // populate array of the Working Days of the week.
             Elements daysOfWeekWorking = timeWorking.getFirstChildElement("DaysWorking")
                     .getChildElements("WeekDay");
@@ -240,6 +155,95 @@ public class ConsultantReader implements Serializable {
             System.out.println(ioe.getMessage());
         }
 
+    }
+     public DayOfWeek[] getDaysWorking() {
+        return daysWorking;
+    }
+
+    public TypeOfWorking getWeekdays() {
+        return weekdays;
+    }
+
+    public TypeOfWorking getWeekends() {
+        return weekends;
+    }
+
+    public TypeOfWorking getOnCalls() {
+        return onCalls;
+    }
+    HashMap<String, Double> balance = new HashMap<>();
+
+    public HashMap<String, Double> getBalance() {
+        return balance;
+    }
+
+    @Override
+    public String toString() {
+        return consultantName;
+    }
+    public void setCOW_WeekTarget(double COW_WeekTarget) {
+        this.COW_WeekTarget = COW_WeekTarget;
+    }
+
+    public void setNOW_WeekTarget(double NOW_WeekTarget) {
+        this.NOW_WeekTarget = NOW_WeekTarget;
+    }
+
+    public void setCOW_WeekendTarget(double COW_WeekendTarget) {
+        this.COW_WeekendTarget = COW_WeekendTarget;
+    }
+
+    public void setNOW_WeekendTarget(double NOW_WeekendTarget) {
+        this.NOW_WeekendTarget = NOW_WeekendTarget;
+    }
+
+    public void setOnCallsTarget(double onCallsTarget) {
+        this.onCallsTarget = onCallsTarget;
+    }
+
+    public double getCOW_WeekTarget() {
+        return COW_WeekTarget;
+    }
+
+    public double getNOW_WeekTarget() {
+        return NOW_WeekTarget;
+    }
+
+    public double getCOW_WeekendTarget() {
+        return COW_WeekendTarget;
+    }
+
+    public double getNOW_WeekendTarget() {
+        return NOW_WeekendTarget;
+    }
+
+    public double getOnCallsTarget() {
+        return onCallsTarget;
+    }
+    
+public String getConsultantName() {
+        return consultantName;
+    }
+    LocalDate[][] leaveDatesArray;
+
+    public LocalDate[][] getLeaveDatesArray() {
+        return leaveDatesArray;
+    }
+    FullOrPartTime fullOrPartTime;
+
+    public FullOrPartTime getFullOrPartTime() {
+        return fullOrPartTime;
+    }
+    DayOfWeek[] daysWorking;
+
+    public List<DayOfWeek> getDaysWorkingList() {
+        return daysWorkingList;
+    }
+    List <DayOfWeek> daysWorkingList;
+    List<LocalDate> leaveDates;
+
+    public List<LocalDate> getLeaveDates() {
+        return leaveDates;
     }
 
     public static void main(String[] args) {
