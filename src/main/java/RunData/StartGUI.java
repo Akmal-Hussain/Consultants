@@ -20,9 +20,9 @@ public class StartGUI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new DatesReader("src/main/resources/Data/Dates.xml");
-        new ShiftStructureReader("src/main/resources/Data/Shift_Structure.xml");
-        new ConsultantList("src/main/resources/Data/All_Consultants.xml");
+        new DatesReader("/main/resources/Data/Dates.xml");
+        new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
+        new ConsultantList("/main/resources/Data/All_Consultants.xml");
         new TitleScreen();
     }
     

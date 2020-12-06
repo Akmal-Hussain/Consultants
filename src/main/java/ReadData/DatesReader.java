@@ -1,9 +1,9 @@
 package main.java.ReadData;
 
 
-import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.net.URL;
 import java.time.LocalDate;
 import nu.xom.Builder;
 import nu.xom.Document;
@@ -31,8 +31,8 @@ public class DatesReader implements Serializable{
     public DatesReader(String filename){
         try {
             Builder builder = new Builder();
-            File file = new File(filename);
-            Document doc = builder.build(file);
+            //File file = new File(filename);
+            Document doc = builder.build(getClass().getResourceAsStream(filename));
             
             Element root = doc.getRootElement();
             

@@ -41,8 +41,8 @@ public class ConsultantReader implements Serializable {
     public ConsultantReader(String fileName) {
         try {
             Builder builder = new Builder();
-            File xfile = new File(fileName);
-            Document doc = builder.build(xfile);
+           // File xfile = new File(fileName);
+            Document doc = builder.build(getClass().getResourceAsStream(fileName));
 
             Element root = doc.getRootElement();
 

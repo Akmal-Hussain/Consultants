@@ -9,35 +9,35 @@ and open the template in the editor.
 <Consultants>
     <Consultant>
         <Name>Ann Gordon</Name>
-        <FileName>src/main/resources/Data/Ann_Gordon.xml</FileName>
+        <FileName>/main/resources/Data/Ann_Gordon.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Chandan Yaliwal</Name>
-        <FileName>src/main/resources/Data/Chandan_Yaliwal.xml</FileName>
+        <FileName>/main/resources/Data/Chandan_Yaliwal.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Jo Spinks</Name>
-        <FileName>src/main/resources/Data/Jo_Spinks.xml</FileName>
+        <FileName>/main/resources/Data/Jo_Spinks.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Ravi Kumar</Name>
-        <FileName>src/main/resources/Data/Ravi_Kumar.xml</FileName>
+        <FileName>/main/resources/Data/Ravi_Kumar.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Ahmed Aldouri</Name>
-        <FileName>src/main/resources/Data/Ahmed_Aldouri.xml</FileName>
+        <FileName>/main/resources/Data/Ahmed_Aldouri.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Elspeth Brooker</Name>
-        <FileName>src/main/resources/Data/Elspeth_Brooker.xml</FileName>
+        <FileName>/main/resources/Data/Elspeth_Brooker.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Kemy Naidoo</Name>
-        <FileName>src/main/resources/Data/Kemy_Naidoo.xml</FileName>
+        <FileName>/main/resources/Data/Kemy_Naidoo.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Helen Wolfenden</Name>
-        <FileName>src/main/resources/Data/Helen_Wolfenden.xml</FileName>
+        <FileName>/main/resources/Data/Helen_Wolfenden.xml</FileName>
     </Consultant>
     <Consultant>
         <Name></Name>

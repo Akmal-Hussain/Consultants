@@ -166,6 +166,7 @@ public class ConfirmData extends JFrame implements ActionListener{
                 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
            setVisible(true);
+           
           
     }
     

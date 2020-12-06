@@ -30,8 +30,8 @@ public class ShiftStructureReader implements Serializable{
     public ShiftStructureReader(String filename) {
         try {
             Builder builder = new Builder();
-            File file = new File(filename);
-            Document doc = builder.build(file);
+            //File file = new File(filename);
+            Document doc = builder.build(getClass().getResourceAsStream(filename));
 
             Element root = doc.getRootElement();
 
@@ -73,7 +73,7 @@ public class ShiftStructureReader implements Serializable{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new ShiftStructureReader("src/main/resources/Data/Shift_Structure.xml");
+        new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
     }
 
 }

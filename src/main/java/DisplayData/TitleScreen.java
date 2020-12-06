@@ -41,7 +41,7 @@ public class TitleScreen extends JFrame {
  
         Image resize = null;
         try {
-            BufferedImage bufferedImage = ImageIO.read(new File("emoji.png"));
+            BufferedImage bufferedImage = ImageIO.read(getClass().getResourceAsStream("/emoji.png"));
 
             resize = bufferedImage.getScaledInstance(100, 100, 0);
         } catch (Exception e) {
@@ -50,7 +50,7 @@ public class TitleScreen extends JFrame {
 
         ImageIcon image = new ImageIcon(resize);
 
-        JLabel picLabel = new JLabel(image);
+       JLabel picLabel = new JLabel(image);
         JLabel textLabel = new JLabel("WTF Enterprises\u00a9");
         Font font = new Font(Font.SANS_SERIF, Font.ITALIC, 30);
         Font font2 = new Font(Font.SERIF, Font.BOLD, 60);
@@ -101,9 +101,9 @@ public class TitleScreen extends JFrame {
 
   
     public static void main(String[] args) {
-        new DatesReader("src/main/resources/Data/Dates.xml");
-        new ShiftStructureReader("src/main/resources/Data/Shift_Structure.xml");
-        new ConsultantList("src/main/resources/Data/All_Consultants.xml");
+        new DatesReader("/main/resources/Data/Dates.xml");
+        new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
+        new ConsultantList("/main/resources/Data/All_Consultants.xml");
         TitleScreen t = new TitleScreen();
     }
 }

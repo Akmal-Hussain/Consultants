@@ -36,8 +36,8 @@ public class ConsultantList implements Serializable {
 
         try {
             Builder builder = new Builder();
-            File xfile = new File(fileName);
-            Document doc = builder.build(xfile);
+        //    File xfile = new File(fileName);
+            Document doc = builder.build(getClass().getResourceAsStream(fileName));
 
             Element root = doc.getRootElement();
 
