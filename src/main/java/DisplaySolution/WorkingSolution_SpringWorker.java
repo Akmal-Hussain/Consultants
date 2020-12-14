@@ -26,6 +26,8 @@ import main.java.DisplayData.SetLookAndFeel;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.DatesReader;
+import main.java.ReadData.ShiftStructureReader;
+import main.java.RunData.RunRota_SpringWorker;
 import main.java.RunData.Shift;
 import main.java.RunData.ShiftList;
 import org.apache.commons.collections4.map.MultiKeyMap;
@@ -34,11 +36,11 @@ import org.apache.commons.collections4.map.MultiKeyMap;
  *
  * @author pi
  */
-public class WorkingSolution extends JFrame implements ActionListener{
+public class WorkingSolution_SpringWorker extends JFrame implements ActionListener{
     MultiKeyMap keyMap;
     List<LocalDate> dateRange;
     
-    public WorkingSolution () {
+    public WorkingSolution_SpringWorker () {
         super("Processing Problem");
         SetLookAndFeel.setLookAndFeel();
         JPanel pane = new JPanel();
@@ -121,16 +123,21 @@ public class WorkingSolution extends JFrame implements ActionListener{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
-       
+        System.out.println(Thread.currentThread().getName());
+        System.out.println("1");
+        new RunRota_SpringWorker(this);
+        System.out.println("2");
+    
         
     }
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new DatesReader("src/main/resources/Data/Dates.xml");
-        new ConsultantList("src/main/resources/Data/All_Consultants.xml");
-        new WorkingSolution();
+        new DatesReader("/main/resources/Data/Dates.xml");
+        new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
+        new ConsultantList("/main/resources/Data/All_Consultants.xml");
+        new WorkingSolution_SpringWorker();
     }
 
     @Override

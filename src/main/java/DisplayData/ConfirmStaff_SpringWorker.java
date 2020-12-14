@@ -27,21 +27,22 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
+import javax.swing.SwingWorker;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import main.java.DisplaySolution.WorkingSolution_SpringWorker;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.DatesReader;
 import main.java.ReadData.FullOrPartTime;
 import main.java.ReadData.ShiftStructureReader;
 import main.java.ReadData.TypeOfWorking;
-import main.java.RunData.RunRota;
 
 /**
  *
  * @author pi
  */
-public class ConfirmStaff extends JFrame implements ListSelectionListener, ActionListener{
+public class ConfirmStaff_SpringWorker extends JFrame implements ListSelectionListener, ActionListener{
 
     List<ConsultantReader> consultantList;
     ConsultantReader selectedConsultant;
@@ -61,7 +62,7 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
     JPanel leaveButtons;
     JPanel consultantBalance;
     
-    public ConfirmStaff(List<ConsultantReader> consultantList) {
+    public ConfirmStaff_SpringWorker(List<ConsultantReader> consultantList) {
         super("Confirm Consultant Info");
         SetLookAndFeel.setLookAndFeel();
         setSize(800, 650);
@@ -216,7 +217,7 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
         }
  */       
         
-        System.out.println(Thread.currentThread().getName());
+        
         
         JLabel newLine3 = new JLabel( "  ");
         
@@ -289,7 +290,7 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
                 new ConsultantList("/main/resources/Data/All_Consultants.xml");
 new DatesReader("/main/resources/Data/Dates.xml");
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
-        new ConfirmStaff(ConsultantList.getConsultantList());
+        new ConfirmStaff_SpringWorker(ConsultantList.getConsultantList());
     }
 
     @Override
@@ -371,9 +372,17 @@ new DatesReader("/main/resources/Data/Dates.xml");
     @Override
     public void actionPerformed(ActionEvent ae) {
        this.dispose();
-        new RunRota();
+      WorkingSolution_SpringWorker display = new WorkingSolution_SpringWorker();
+  
+};
+       
+       
+        
+        
 
     }
+
+
     class ShiftTypeBox extends JComboBox {
         ShiftTypeBox (){
             super(TypeOfWorking.values());
@@ -384,4 +393,4 @@ new DatesReader("/main/resources/Data/Dates.xml");
         
     }
 
-}
+

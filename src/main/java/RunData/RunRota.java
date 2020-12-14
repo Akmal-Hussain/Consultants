@@ -38,9 +38,9 @@ public class RunRota {
         solver.addEventListener(new SolverEventListener<ShiftList>() {
             @Override
             public void bestSolutionChanged(BestSolutionChangedEvent<ShiftList> event) {
-if (event.getNewBestSolution().getScore().isFeasible()) {
+//if (event.getNewBestSolution().getScore().isFeasible()) {
      display.update(event.getNewBestSolution());
-}
+//}
             }
         });
         ShiftList solvedShiftList = solver.solve(unsolvedShiftList);
@@ -54,7 +54,10 @@ if (event.getNewBestSolution().getScore().isFeasible()) {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-      
+      new DatesReader("/main/resources/Data/Dates.xml");
+        new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
+        new ConsultantList("/main/resources/Data/All_Consultants.xml");
+        new RunRota();
        
     }
 

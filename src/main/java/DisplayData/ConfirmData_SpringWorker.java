@@ -25,7 +25,7 @@ import main.java.RunData.RunRota;
  *
  * @author pi
  */
-public class ConfirmData extends JFrame 
+public class ConfirmData_SpringWorker extends JFrame 
         implements ActionListener
 
 {
@@ -33,7 +33,7 @@ public class ConfirmData extends JFrame
     /**
      * @param args the command line arguments
      */
-    public ConfirmData() {
+    public ConfirmData_SpringWorker() {
         super("Confirm Data");
         SetLookAndFeel.setLookAndFeel();
         setSize(800,600);
@@ -181,13 +181,13 @@ public class ConfirmData extends JFrame
    
     public static void main(String[] args) {
    new DatesReader("src/main/resources/Data/Dates.xml");
-       new ConfirmData();
+       new ConfirmData_SpringWorker();
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
         this.dispose();
-            new ConfirmStaff(ConsultantList.getConsultantList());
+            new ConfirmStaff_SpringWorker(ConsultantList.getConsultantList());
 
     }
     

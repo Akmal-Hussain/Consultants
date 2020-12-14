@@ -6,24 +6,20 @@
 package main.java.DisplayData;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.UIManager;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
 import main.java.ReadData.ShiftStructureReader;
+import main.java.RunData.RunRota;
 
 /**
  *
@@ -73,6 +69,7 @@ public class TitleScreen extends JFrame {
         panel.add(textLabel);
         panel.add(presentsText);
         setSize(800, 600);
+        System.out.println(Thread.currentThread().getName());
         setVisible(true);
         continueButton.setSize(100, 100);
         pane.add(panel, BorderLayout.NORTH);
@@ -91,7 +88,7 @@ public class TitleScreen extends JFrame {
         } catch (InterruptedException ex) {
         }
       this.dispose();
-      new ConfirmData();
+      ConfirmData d = new ConfirmData();
     }
 
     @Override
