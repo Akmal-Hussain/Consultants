@@ -29,13 +29,13 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import main.java.DisplaySolution.WorkingSolution;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.DatesReader;
 import main.java.ReadData.FullOrPartTime;
 import main.java.ReadData.ShiftStructureReader;
 import main.java.ReadData.TypeOfWorking;
-import main.java.RunData.RunRota;
 
 /**
  *
@@ -371,7 +371,7 @@ new DatesReader("/main/resources/Data/Dates.xml");
     @Override
     public void actionPerformed(ActionEvent ae) {
        this.dispose();
-        new RunRota();
+       new WorkingSolution();
 
     }
     class ShiftTypeBox extends JComboBox {

@@ -26,6 +26,7 @@ import main.java.DisplayData.SetLookAndFeel;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.DatesReader;
+import main.java.RunData.RunRota;
 import main.java.RunData.Shift;
 import main.java.RunData.ShiftList;
 import org.apache.commons.collections4.map.MultiKeyMap;
@@ -121,7 +122,7 @@ public class WorkingSolution extends JFrame implements ActionListener{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
-       
+       new RunRota(this);
         
     }
     /**

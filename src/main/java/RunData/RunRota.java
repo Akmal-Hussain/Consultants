@@ -5,8 +5,9 @@
  */
 package main.java.RunData;
 
+import java.util.List;
+import javax.swing.SwingWorker;
 import main.java.DisplayData.DisplaySolution;
-import main.java.DisplayData.TitleScreen;
 import main.java.DisplaySolution.WorkingSolution;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
@@ -20,44 +21,73 @@ import org.optaplanner.core.api.solver.event.SolverEventListener;
  *
  * @author dakhussain
  */
-public class RunRota {
+public class RunRota extends SwingWorker <ShiftList,ShiftList> {
+    ShiftList solvedShiftList;
+    ShiftList unsolvedShiftList;
+    Solver<ShiftList> solver;
+    WorkingSolution display;
     
-    public RunRota() {
+    public RunRota(WorkingSolution display) {
     // Build the Solver
+    
+        this.display = display;
+        
         SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
                 "main/resources/Configuration/config.xml");
-        Solver<ShiftList> solver = solverFactory.buildSolver();
+        solver = solverFactory.buildSolver();
         
        
 
       
-        ShiftList unsolvedShiftList = new ShiftList();
+        unsolvedShiftList = new ShiftList();
         ConsultantList.addShiftTargets(unsolvedShiftList);
-        WorkingSolution display = new WorkingSolution();
+ //       WorkingSolution display = new WorkingSolution();
         
-        solver.addEventListener(new SolverEventListener<ShiftList>() {
-            @Override
-            public void bestSolutionChanged(BestSolutionChangedEvent<ShiftList> event) {
-//if (event.getNewBestSolution().getScore().isFeasible()) {
-     display.update(event.getNewBestSolution());
-//}
-            }
-        });
-        ShiftList solvedShiftList = solver.solve(unsolvedShiftList);
-        display.update(solvedShiftList);
+        this.execute();
+        
         //Display the result with heat map and constraint matching...
-        new DisplaySolution(solvedShiftList, solver, display);
+      //  new DisplaySolution(solvedShiftList, solver, display);
  
     }
 
     /**
      * @param args the command line arguments
      */
+    
+    @Override
+    protected ShiftList doInBackground() throws Exception {
+       solver.addEventListener(new SolverEventListener<ShiftList>() {
+            @Override
+            public void bestSolutionChanged(BestSolutionChangedEvent<ShiftList> event) {
+//if (event.getNewBestSolution().getScore().isFeasible()) {
+     //display.update(event.getNewBestSolution());
+     publish(event.getNewBestSolution());
+//}
+            }
+        });
+        solvedShiftList = solver.solve(unsolvedShiftList);
+        //display.update(solvedShiftList);
+        return solvedShiftList;
+    }
+
+   @Override
+  protected void process(List<ShiftList> chunks) {
+    display.update(chunks.get(chunks.size()-1));
+       System.out.println("Chunks size" + chunks.size());
+        
+  }
+
+  @Override
+  protected void done() {
+    display.update(solvedShiftList);
+    new DisplaySolution(solvedShiftList, solver, display);
+  }
     public static void main(String[] args) {
       new DatesReader("/main/resources/Data/Dates.xml");
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("/main/resources/Data/All_Consultants.xml");
-        new RunRota();
+        
+        new RunRota(new WorkingSolution());
        
     }
 

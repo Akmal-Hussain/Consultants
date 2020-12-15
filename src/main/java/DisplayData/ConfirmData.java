@@ -171,6 +171,7 @@ public class ConfirmData extends JFrame
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
            setVisible(true);
            
+           
           
     }
     

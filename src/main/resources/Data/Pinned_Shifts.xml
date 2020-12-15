@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<Shifts>
+    <Date>
+        <Day>31</Day>
+            <Month>1</Month>
+            <Year>2020</Year>
+        <Shift>
+            <Type>
+                COW
+            </Type>
+            <Consultant>
+                Chandan Yaliwal
+            </Consultant>
+        </Shift>
+        <Shift>
+            <Type>
+                NOW
+            </Type>
+            <Consultant>
+                Ahmed Aldouri
+            </Consultant>
+        </Shift>
+    </Date>
+</Shifts>
