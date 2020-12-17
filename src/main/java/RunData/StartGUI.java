@@ -8,6 +8,7 @@ package main.java.RunData;
 import main.java.DisplayData.TitleScreen;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
+import main.java.ReadData.PinnedShiftsReader;
 import main.java.ReadData.ShiftStructureReader;
 
 /**
@@ -23,6 +24,7 @@ public class StartGUI {
         new DatesReader("/main/resources/Data/Dates.xml");
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("/main/resources/Data/All_Consultants.xml");
+        new PinnedShiftsReader("/main/resources/Data/Pinned_Shifts.xml");
         new TitleScreen();
     }
     

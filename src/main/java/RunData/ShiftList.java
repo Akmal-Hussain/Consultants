@@ -11,11 +11,12 @@ import java.time.temporal.WeekFields;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import main.java.ReadData.PinnedShift;
+import main.java.ReadData.PinnedShiftsReader;
 import org.optaplanner.core.api.domain.solution.PlanningEntityCollectionProperty;
 import org.optaplanner.core.api.domain.solution.PlanningScore;
 import org.optaplanner.core.api.domain.solution.PlanningSolution;
 import org.optaplanner.core.api.domain.solution.drools.ProblemFactCollectionProperty;
-import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore;
 
 
@@ -103,6 +104,19 @@ public class ShiftList {
                 .stream()
                 .filter(c -> c.isHoliday())
                 .forEach(d -> holidayList.add(d));
+        
+        for(PinnedShift pinnedShift : PinnedShiftsReader.getPinnedShifts()) {
+           for (Shift shiFt : shiftList) {
+               if (shiFt.getStartDate().equals(pinnedShift.getDate()) && shiFt.getShiftType().contains(pinnedShift.getShiftType())) {
+                   for (ConsultantReader c : ConsultantList.getConsultantList()) {
+                       if (c.getConsultantName().contains(pinnedShift.getConsultantName())) {
+                           shiFt.setConsultant(c);
+                           shiFt.setPinned(true);
+                       }
+                   }
+               }
+           }
+        }
 
     }
         

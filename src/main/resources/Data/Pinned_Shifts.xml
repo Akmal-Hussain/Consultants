@@ -12,20 +12,12 @@ and open the template in the editor.
             <Month>1</Month>
             <Year>2020</Year>
         <Shift>
-            <Type>
-                COW
-            </Type>
-            <Consultant>
-                Chandan Yaliwal
-            </Consultant>
+            <Type>COW</Type>
+            <Consultant>Chandan Yaliwal</Consultant>
         </Shift>
         <Shift>
-            <Type>
-                NOW
-            </Type>
-            <Consultant>
-                Ahmed Aldouri
-            </Consultant>
+            <Type>NOW</Type>
+            <Consultant>Ahmed Aldouri</Consultant>
         </Shift>
     </Date>
 </Shifts>

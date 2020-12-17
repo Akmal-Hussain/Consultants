@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import org.optaplanner.core.api.domain.entity.PlanningEntity;
+import org.optaplanner.core.api.domain.entity.PlanningPin;
 import org.optaplanner.core.api.domain.valuerange.ValueRangeProvider;
 import org.optaplanner.core.api.domain.variable.PlanningVariable;
 
@@ -29,6 +30,17 @@ import org.optaplanner.core.api.domain.variable.PlanningVariable;
 public class Shift {
     int id;
 
+    public void setPinned(boolean pinned) {
+        this.pinned = pinned;
+    }
+
+    private boolean pinned = false;
+    
+    @PlanningPin
+    public boolean isPinned() {
+        return pinned;
+    }
+    
     public int getId() {
         return id;
     }

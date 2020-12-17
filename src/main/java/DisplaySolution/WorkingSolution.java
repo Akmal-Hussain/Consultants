@@ -11,7 +11,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
-import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.BorderFactory;
@@ -81,13 +81,16 @@ public class WorkingSolution extends JFrame implements ActionListener{
 
         //Center Panel code
         
-        Period period = Period.between(DatesReader.getRange()[0], DatesReader.getRange()[1]);
-        JPanel centerPanel = new JPanel(new GridLayout(x,period.getDays()));
+       // Period period = Period.between(DatesReader.getRange()[0], DatesReader.getRange()[1]);
+       int period = (int) ChronoUnit.DAYS.between(DatesReader.getRange()[0], DatesReader.getRange()[1]);
+        JPanel centerPanel = new JPanel(new GridLayout(x,period));
         List<JLabel> label = new ArrayList<>();
         
         LocalDate date = DatesReader.getRange()[0];
+        System.out.println(period);
+        
         dateRange = new ArrayList<>();
-        for (int z=0; z<=period.getDays(); z++) {
+        for (int z=0; z<=period; z++) {
             JPanel tester = new JPanel();
             JLabel test = new JLabel(date.toString());
             tester.add(test);
@@ -129,8 +132,8 @@ public class WorkingSolution extends JFrame implements ActionListener{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new DatesReader("src/main/resources/Data/Dates.xml");
-        new ConsultantList("src/main/resources/Data/All_Consultants.xml");
+        new DatesReader("/main/resources/Data/Dates.xml");
+        new ConsultantList("/main/resources/Data/All_Consultants.xml");
         new WorkingSolution();
     }
 
