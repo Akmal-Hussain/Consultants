@@ -13,11 +13,11 @@ and open the template in the editor.
             <Year>2020</Year>
         <Shift>
             <Type>COW</Type>
-            <Consultant>Chandan Yaliwal</Consultant>
+            <Consultant></Consultant>
         </Shift>
         <Shift>
             <Type>NOW</Type>
-            <Consultant>zzz</Consultant>
+            <Consultant>Ahmed Aldouri</Consultant>
         </Shift>
     </Date>
 </Shifts>
