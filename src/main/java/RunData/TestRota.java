@@ -10,6 +10,7 @@ import main.java.DisplaySolution.WorkingSolution;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
 import main.java.ReadData.DatesReader;
+import main.java.ReadData.PinnedShiftsReader;
 import main.java.ReadData.ShiftStructureReader;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
@@ -30,7 +31,9 @@ public class TestRota {
         new DatesReader("/main/resources/Data/Dates.xml");
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("/main/resources/Data/All_Consultants.xml");
-       // ConsultantReader ann = (ConsultantList.getConsultantList().get(0));
+              new PinnedShiftsReader("/main/resources/Data/Pinned_Shifts.xml");
+
+        // ConsultantReader ann = (ConsultantList.getConsultantList().get(0));
        // System.out.println(ann.getFullOrPartTime().getFactor());
       //  System.exit(-1);
                 SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
@@ -38,8 +41,8 @@ public class TestRota {
         Solver<ShiftList> solver = solverFactory.buildSolver();
         ShiftList unsolvedShiftList = new ShiftList();
         ConsultantList.addShiftTargets(unsolvedShiftList);
-        WorkingSolution display = new WorkingSolution();
-        
+      //  WorkingSolution display = new WorkingSolution();
+       /* 
         solver.addEventListener(new SolverEventListener<ShiftList>() {
             @Override
             public void bestSolutionChanged(BestSolutionChangedEvent<ShiftList> event) {
@@ -47,11 +50,11 @@ if (event.getNewBestSolution().getScore().isFeasible()) {
      display.update(event.getNewBestSolution());
 }
             }
-        });
+        });*/
         ShiftList solvedShiftList = solver.solve(unsolvedShiftList);
-        display.update(solvedShiftList);
+        //display.update(solvedShiftList);
         //Display the result with heat map and constraint matching...
-        new DisplaySolution(solvedShiftList, solver, display);
+        new DisplaySolution(solvedShiftList, solver);
 
 
     }

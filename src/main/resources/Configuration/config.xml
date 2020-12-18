@@ -19,7 +19,7 @@ and open the template in the editor.
     </scoreDirectorFactory>
     
     <termination>
-        <spentLimit>PT60S</spentLimit>
+        <spentLimit>PT10S</spentLimit>
     </termination>
 
 

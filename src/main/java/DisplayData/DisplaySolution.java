@@ -25,7 +25,8 @@ import org.optaplanner.core.impl.score.director.ScoreDirectorFactory;
  */
 public class DisplaySolution {
 
-    public DisplaySolution(ShiftList solvedSolution, Solver<ShiftList> solver, WorkingSolution display) {
+    public DisplaySolution(ShiftList solvedSolution, Solver<ShiftList> solver //,WorkingSolution display
+            ) {
 
         ScoreDirectorFactory<ShiftList> scoreDirectorFactory = solver.getScoreDirectorFactory();
         ScoreDirector<ShiftList> guiScoreDirector = scoreDirectorFactory.buildScoreDirector();
@@ -66,7 +67,7 @@ public class DisplaySolution {
             Score scoreTotal = indictment.getScoreTotal();
             System.out.println(shift.getId() + "  " + scoreTotal);
            // if (scoreTotal.equals(HardSoftScore.ZERO)) {
-            display.heatMap(shift);
+        //   display.heatMap(shift);
             //}
             for (ConstraintMatch constraintMatch : indictment.getConstraintMatchSet()) {
                 String constraintName = constraintMatch.getConstraintName();

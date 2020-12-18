@@ -43,7 +43,7 @@ public class PinnedShiftsReader {
             for (Element shift: shifts) {
                 String shiftType = shift.getFirstChildElement("Type").getValue();
                 String consultantName = shift.getFirstChildElement("Consultant").getValue();
-                pinnedShifts.add(new PinnedShift(consultantName,theDate,shiftType));
+                pinnedShifts.add(new PinnedShift(consultantName,theDate,shiftType));   
             }
             }
         } catch (ParsingException | IOException ioe) {
@@ -59,7 +59,7 @@ public class PinnedShiftsReader {
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("/main/resources/Data/All_Consultants.xml");
         new PinnedShiftsReader("/main/resources/Data/Pinned_Shifts.xml");
-        new ShiftList();
+      //  new ShiftList();
     }
     
 }

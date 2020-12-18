@@ -108,10 +108,13 @@ public class ShiftList {
         for(PinnedShift pinnedShift : PinnedShiftsReader.getPinnedShifts()) {
            for (Shift shiFt : shiftList) {
                if (shiFt.getStartDate().equals(pinnedShift.getDate()) && shiFt.getShiftType().contains(pinnedShift.getShiftType())) {
+                                              shiFt.setPinned(true);
                    for (ConsultantReader c : ConsultantList.getConsultantList()) {
                        if (c.getConsultantName().contains(pinnedShift.getConsultantName())) {
                            shiFt.setConsultant(c);
-                           shiFt.setPinned(true);
+                           System.out.println(c.getConsultantName() + "1");
+                           System.out.println(pinnedShift.getShiftType());
+                           System.out.println(pinnedShift.getConsultantName() + "2");
                        }
                    }
                }
