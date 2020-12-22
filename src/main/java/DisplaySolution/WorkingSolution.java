@@ -172,7 +172,7 @@ public class WorkingSolution extends JFrame implements ActionListener{
         
         for (Shift shift : s.getShiftList()) {
             ConsultantPanel pane = (ConsultantPanel) keyMap.get(shift.getConsultant(), shift.getStartDate());
-         
+         if (pane != null) {
             if (shift.getShiftType().equalsIgnoreCase("COW")) {
                 pane.getCOW().setVisible(true);
             } 
@@ -187,14 +187,15 @@ public class WorkingSolution extends JFrame implements ActionListener{
                   if (shift.getShiftType().equalsIgnoreCase("NeoOnCall")) {
                 pane.getNeo().setVisible(true);
             } 
-        }
+        }}
     }
     
     public void heatMap(Shift s) {
                  ConsultantPanel pane = (ConsultantPanel) keyMap.get(s.getConsultant(), s.getStartDate());
-                 
+           if (pane != null) {      
             if (s.getShiftType().equalsIgnoreCase("COW")) {
                 pane.getCOW().setBackground(Color.RED);
+                pane.addMouseListener();
             } 
             
               if (s.getShiftType().equalsIgnoreCase("NOW")) {
@@ -208,7 +209,7 @@ public class WorkingSolution extends JFrame implements ActionListener{
                 pane.getNeo().setBackground(Color.RED);
             } 
                //  pane.setBackground(Color.RED);
-
+           }
         
     }
     
