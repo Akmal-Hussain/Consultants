@@ -10,16 +10,21 @@ import java.awt.Color;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS;
 import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
 import main.java.DisplayData.SetLookAndFeel;
@@ -30,6 +35,9 @@ import main.java.RunData.RunRota;
 import main.java.RunData.Shift;
 import main.java.RunData.ShiftList;
 import org.apache.commons.collections4.map.MultiKeyMap;
+import org.optaplanner.core.api.score.Score;
+import org.optaplanner.core.api.score.constraint.ConstraintMatch;
+import org.optaplanner.core.api.score.constraint.Indictment;
 
 /**
  *
@@ -190,27 +198,73 @@ public class WorkingSolution extends JFrame implements ActionListener{
         }}
     }
     
-    public void heatMap(Shift s) {
+    public void heatMap(Shift s, String string) {
                  ConsultantPanel pane = (ConsultantPanel) keyMap.get(s.getConsultant(), s.getStartDate());
            if (pane != null) {      
+            myMouseAdapter mouseAdapter = new myMouseAdapter(pane,string);   
             if (s.getShiftType().equalsIgnoreCase("COW")) {
                 pane.getCOW().setBackground(Color.RED);
-                pane.addMouseListener();
+                pane.getCOW().addMouseListener(new MouseAdapter() {
+                    Popup p;
+            
+
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                                      p = PopupFactory.getSharedInstance().getPopup(pane, new JLabel(string), pane.getLocationOnScreen().x, pane.getLocationOnScreen().y-50);
+
+               p.show();
+                        
+                    }
+                    
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        p.hide();
+                    }
+                });
             } 
             
               if (s.getShiftType().equalsIgnoreCase("NOW")) {
                 pane.getNOW().setBackground(Color.RED);
+                pane.getNOW().addMouseListener(mouseAdapter);
             } 
             
                 if (s.getShiftType().equalsIgnoreCase("PaedOnCall")) {
                 pane.getPaed().setBackground(Color.RED);
+                pane.getPaed().addMouseListener(mouseAdapter);
             }  
                   if (s.getShiftType().equalsIgnoreCase("NeoOnCall")) {
                 pane.getNeo().setBackground(Color.RED);
+                pane.getNeo().addMouseListener(mouseAdapter);
             } 
                //  pane.setBackground(Color.RED);
            }
-        
+           
+                   
     }
+    
+    class myMouseAdapter extends MouseAdapter {
+                Popup p;
+                ConsultantPanel pane;
+                String string;
+                public myMouseAdapter(ConsultantPanel pane, String string) {
+                    this.pane = pane;
+                    this.string = string;
+                }
+                    
+                    
+                    @Override
+                    public void mouseEntered(MouseEvent e) {
+                                      p = PopupFactory.getSharedInstance().getPopup(pane, new JLabel(string), pane.getLocationOnScreen().x, pane.getLocationOnScreen().y-50);
+
+               p.show();
+                        
+                    }
+                    
+                    @Override
+                    public void mouseExited(MouseEvent e) {
+                        p.hide();
+                    }
+           }
+
     
 }

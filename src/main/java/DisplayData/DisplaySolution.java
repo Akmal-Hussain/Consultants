@@ -67,14 +67,19 @@ public class DisplaySolution {
             Score scoreTotal = indictment.getScoreTotal();
             System.out.println(shift.getId() + "  " + scoreTotal);
            // if (scoreTotal.equals(HardSoftScore.ZERO)) {
-           display.heatMap(shift);
+           
             //}
+            String constraintString = "<html>"; 
+            
             for (ConstraintMatch constraintMatch : indictment.getConstraintMatchSet()) {
                 String constraintName = constraintMatch.getConstraintName();
                 Score shiftScore = constraintMatch.getScore();
                 System.out.println(shift.getStartDate() + "\nShiftType" + shift.getShiftType() + "\n Constraint Name: " + constraintName + "\n " + shiftScore);
-
+                constraintString = constraintString.concat("Rule Broken: ").concat(constraintName).concat("\t Score: ").concat(shiftScore.toString()).concat("<br/>");
             }
+            constraintString = constraintString.concat("</html>");
+            System.out.println(constraintString);
+            display.heatMap(shift, constraintString);
         }
 
     }

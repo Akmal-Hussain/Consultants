@@ -7,11 +7,17 @@ package TestingPackage;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
+import javax.swing.Popup;
+import javax.swing.PopupFactory;
 
 /**
  *
@@ -29,8 +35,19 @@ public class Listening extends JFrame implements ActionListener{
         hi = "hello";
         JButton button1 = new JButton(hi);
         JButton button2 = new JButton("Bye");
+ 
         button1.addActionListener(this);
+
+        button2.addMouseListener(new MouseAdapter(){
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                           Popup p = PopupFactory.getSharedInstance().getPopup(button2, new JLabel("help"), 100, 100);
+
+               p.show();
+            }
+        });
        panel.add(button1);
+       panel.add(button2);
        add(panel);
          setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
