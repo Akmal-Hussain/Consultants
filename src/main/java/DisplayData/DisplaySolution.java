@@ -24,10 +24,11 @@ import org.optaplanner.core.impl.score.director.ScoreDirectorFactory;
  * @author pi
  */
 public class DisplaySolution {
+    Map<Object, Indictment> indictmentMap;
 
     public DisplaySolution(ShiftList solvedSolution, Solver<ShiftList> solver ,WorkingSolution display
             ) {
-
+       // display.update(solvedSolution);
         ScoreDirectorFactory<ShiftList> scoreDirectorFactory = solver.getScoreDirectorFactory();
         ScoreDirector<ShiftList> guiScoreDirector = scoreDirectorFactory.buildScoreDirector();
 
@@ -56,7 +57,7 @@ public class DisplaySolution {
             }
         }
 
-        Map<Object, Indictment> indictmentMap = guiScoreDirector.getIndictmentMap();
+        indictmentMap = guiScoreDirector.getIndictmentMap();
         System.out.println("--------------------------------------BREAK-----------------------------------------------");
         for (Shift shift : solvedSolution.getShiftList()) {
             Indictment indictment = indictmentMap.get(shift);
@@ -81,6 +82,6 @@ public class DisplaySolution {
             System.out.println(constraintString);
             display.heatMap(shift, constraintString);
         }
-
+        display.endButtons(solvedSolution, indictmentMap);
     }
 }

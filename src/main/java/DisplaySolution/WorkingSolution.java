@@ -34,18 +34,18 @@ import main.java.ReadData.DatesReader;
 import main.java.RunData.RunRota;
 import main.java.RunData.Shift;
 import main.java.RunData.ShiftList;
+import main.java.WriteData.ExportSolution;
 import org.apache.commons.collections4.map.MultiKeyMap;
-import org.optaplanner.core.api.score.Score;
-import org.optaplanner.core.api.score.constraint.ConstraintMatch;
 import org.optaplanner.core.api.score.constraint.Indictment;
 
 /**
  *
  * @author pi
  */
-public class WorkingSolution extends JFrame implements ActionListener{
+public class WorkingSolution extends JFrame{
     MultiKeyMap keyMap;
     List<LocalDate> dateRange;
+    JPanel buttons;
     
     public WorkingSolution () {
         super("Processing Problem");
@@ -55,16 +55,15 @@ public class WorkingSolution extends JFrame implements ActionListener{
         
         // North Panel code
         JPanel northPanel = new JPanel(new BorderLayout());
-        
         //Title
         JPanel pagetitle = new JPanel();
         JLabel pageTitle = new JLabel("Solving Problem");
         pagetitle.add(pageTitle);        
         
         //Start Box
-        JPanel buttons = new JPanel();
-        JButton start = new JButton("Start");
-        start.addActionListener(this);
+        buttons = new JPanel();
+        JButton start = new JButton("Stop");
+       // start.addActionListener(this);
         buttons.add(start);
         
         northPanel.add(pagetitle,BorderLayout.CENTER);
@@ -145,15 +144,6 @@ public class WorkingSolution extends JFrame implements ActionListener{
         new WorkingSolution();
     }
 
-    @Override
-    public void actionPerformed(ActionEvent ae) {
-        ConsultantPanel pane = (ConsultantPanel) keyMap.get(ConsultantList.getConsultantList().get(0),dateRange.get(0));
-        
-        pane.getNOW().setVisible(true);
-        pane.getNeo().setVisible(true);
-        //revalidate();
-        //repaint();
-    }
     
     public void update(ShiftList s) {
         
@@ -238,10 +228,39 @@ public class WorkingSolution extends JFrame implements ActionListener{
             } 
                //  pane.setBackground(Color.RED);
            }
-           
-                   
     }
     
+    public void endButtons(ShiftList solvedSolution, Map<Object, Indictment> indictment) {
+        buttons.removeAll();
+                  JButton export = new JButton("Export");
+           JButton summary = new JButton("Staff Summary");
+           JButton exit = new JButton("Exit");
+           export.addActionListener(new ActionListener(){
+               @Override
+        public void actionPerformed(ActionEvent e) {
+           
+            new ExportSolution(solvedSolution, indictment);      
+           }
+    });
+           summary.addActionListener(new ActionListener(){
+               @Override
+        public void actionPerformed(ActionEvent e) {
+ System.exit(-1);              
+           }
+    });
+           exit.addActionListener(new ActionListener(){
+               @Override
+        public void actionPerformed(ActionEvent e) {
+ System.exit(-1);              
+           }
+    });
+           buttons.add(export);
+           buttons.add(summary);
+           buttons.add(exit);
+           revalidate();
+           repaint();
+              
+    }
     class myMouseAdapter extends MouseAdapter {
                 Popup p;
                 ConsultantPanel pane;

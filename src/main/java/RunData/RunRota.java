@@ -12,6 +12,7 @@ import main.java.DisplaySolution.WorkingSolution;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
 import main.java.ReadData.ShiftStructureReader;
+import main.java.WriteData.ExportSolution;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
@@ -67,6 +68,16 @@ public class RunRota extends SwingWorker <ShiftList,ShiftList> {
         });
         solvedShiftList = solver.solve(unsolvedShiftList);
         //display.update(solvedShiftList);
+        display.update(solvedShiftList);
+  
+      try {
+            // setLookAndFeel();
+            Thread.sleep(10000);
+        } catch (InterruptedException ex) {
+        }
+            DisplaySolution d = new DisplaySolution(solvedShiftList, solver, display);
+
+
         return solvedShiftList;
     }
 
@@ -79,8 +90,16 @@ public class RunRota extends SwingWorker <ShiftList,ShiftList> {
 
   @Override
   protected void done() {
-    display.update(solvedShiftList);
-    new DisplaySolution(solvedShiftList, solver, display);
+     /*  display.update(solvedShiftList);
+  
+      try {
+            // setLookAndFeel();
+            Thread.sleep(10000);
+        } catch (InterruptedException ex) {
+        }
+   
+    DisplaySolution d = new DisplaySolution(solvedShiftList, solver, display);*/
+   // new ExportSolution(solvedShiftList);
   }
     public static void main(String[] args) {
       new DatesReader("/main/resources/Data/Dates.xml");
