@@ -9,10 +9,11 @@ import java.util.List;
 import javax.swing.SwingWorker;
 import main.java.DisplayData.DisplaySolution;
 import main.java.DisplaySolution.WorkingSolution;
+import main.java.DisplaySolution.ShiftScore;
+
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
 import main.java.ReadData.ShiftStructureReader;
-import main.java.WriteData.ExportSolution;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
 import org.optaplanner.core.api.solver.event.BestSolutionChangedEvent;
@@ -22,11 +23,12 @@ import org.optaplanner.core.api.solver.event.SolverEventListener;
  *
  * @author dakhussain
  */
-public class RunRota extends SwingWorker <ShiftList,ShiftList> {
+public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
     ShiftList solvedShiftList;
     ShiftList unsolvedShiftList;
     Solver<ShiftList> solver;
     WorkingSolution display;
+    ShiftScore shiftScore;
     
     public RunRota(WorkingSolution display) {
     // Build the Solver
@@ -57,18 +59,26 @@ public class RunRota extends SwingWorker <ShiftList,ShiftList> {
     
     @Override
     protected ShiftList doInBackground() throws Exception {
+     shiftScore = new ShiftScore();
        solver.addEventListener(new SolverEventListener<ShiftList>() {
             @Override
             public void bestSolutionChanged(BestSolutionChangedEvent<ShiftList> event) {
 //if (event.getNewBestSolution().getScore().isFeasible()) {
      //display.update(event.getNewBestSolution());
-     publish(event.getNewBestSolution());
+     //ShiftScore shiftScore = new ShiftScore();
+     shiftScore.setSolution(event.getNewBestSolution());
+     shiftScore.setScore(event.getNewBestScore());
+     publish(shiftScore);
+    
 //}
             }
         });
         solvedShiftList = solver.solve(unsolvedShiftList);
         //display.update(solvedShiftList);
-        display.update(solvedShiftList);
+        ShiftScore finalShiftScore = new ShiftScore();
+        finalShiftScore.setSolution(solvedShiftList);
+        finalShiftScore.setScore(solvedShiftList.getScore());
+        display.update(finalShiftScore);
   
       try {
             // setLookAndFeel();
@@ -82,7 +92,7 @@ public class RunRota extends SwingWorker <ShiftList,ShiftList> {
     }
 
    @Override
-  protected void process(List<ShiftList> chunks) {
+  protected void process(List<ShiftScore> chunks) {
     display.update(chunks.get(chunks.size()-1));
        System.out.println("Chunks size" + chunks.size());
         
@@ -110,4 +120,5 @@ public class RunRota extends SwingWorker <ShiftList,ShiftList> {
        
     }
 
+    
 }

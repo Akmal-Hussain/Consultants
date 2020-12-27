@@ -77,7 +77,7 @@ style1.setFillPattern(FillPatternType.SOLID_FOREGROUND);
           List<Shift> shiftList = map.get(date);
             for (Shift s: shiftList) {
                 int x =0;
-                switch (s.getShiftType()) {
+                switch (s.getShiftType().trim()) {
                     case "COW":
                         x =1;
                         break;

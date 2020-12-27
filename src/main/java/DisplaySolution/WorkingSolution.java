@@ -46,6 +46,7 @@ public class WorkingSolution extends JFrame{
     MultiKeyMap keyMap;
     List<LocalDate> dateRange;
     JPanel buttons;
+    JLabel score;
     
     public WorkingSolution () {
         super("Processing Problem");
@@ -62,8 +63,10 @@ public class WorkingSolution extends JFrame{
         
         //Start Box
         buttons = new JPanel();
+        score = new JLabel("Score: " );
         JButton start = new JButton("Stop");
        // start.addActionListener(this);
+       buttons.add(score);
         buttons.add(start);
         
         northPanel.add(pagetitle,BorderLayout.CENTER);
@@ -145,7 +148,7 @@ public class WorkingSolution extends JFrame{
     }
 
     
-    public void update(ShiftList s) {
+    public void update(ShiftScore s) {
         
         for (Object entry: keyMap.values()) {
             ConsultantPanel p = (ConsultantPanel) entry;
@@ -168,7 +171,7 @@ public class WorkingSolution extends JFrame{
   
         
         
-        for (Shift shift : s.getShiftList()) {
+        for (Shift shift : s.getSolution().getShiftList()) {
             ConsultantPanel pane = (ConsultantPanel) keyMap.get(shift.getConsultant(), shift.getStartDate());
          if (pane != null) {
             if (shift.getShiftType().equalsIgnoreCase("COW")) {
@@ -186,6 +189,7 @@ public class WorkingSolution extends JFrame{
                 pane.getNeo().setVisible(true);
             } 
         }}
+        score.setText("Score: " + s.getScore().toShortString());
     }
     
     public void heatMap(Shift s, String string) {
@@ -254,6 +258,7 @@ public class WorkingSolution extends JFrame{
  System.exit(-1);              
            }
     });
+           buttons.add(score);
            buttons.add(export);
            buttons.add(summary);
            buttons.add(exit);
