@@ -34,7 +34,7 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
     // Build the Solver
     
         this.display = display;
-        
+       /* 
         SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
                 "main/resources/Configuration/config.xml");
         solver = solverFactory.buildSolver();
@@ -45,7 +45,7 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
         unsolvedShiftList = new ShiftList();
         ConsultantList.addShiftTargets(unsolvedShiftList);
  //       WorkingSolution display = new WorkingSolution();
-        
+        */
         this.execute();
         
         //Display the result with heat map and constraint matching...
@@ -59,6 +59,23 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
     
     @Override
     protected ShiftList doInBackground() throws Exception {
+        
+        SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
+                "main/resources/Configuration/config.xml");
+        solver = solverFactory.buildSolver();
+        
+       
+
+      
+        unsolvedShiftList = new ShiftList();
+        ConsultantList.addShiftTargets(unsolvedShiftList);
+ //       WorkingSolution display = new WorkingSolution();
+        
+        
+        
+        
+        
+        
      shiftScore = new ShiftScore();
        solver.addEventListener(new SolverEventListener<ShiftList>() {
             @Override
@@ -82,7 +99,7 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
   
       try {
             // setLookAndFeel();
-            Thread.sleep(10000);
+            Thread.sleep(2000);
         } catch (InterruptedException ex) {
         }
             DisplaySolution d = new DisplaySolution(solvedShiftList, solver, display);
@@ -116,8 +133,8 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("/main/resources/Data/All_Consultants.xml");
         
-        new RunRota(new WorkingSolution());
-       
+       // new RunRota(new WorkingSolution());
+       new WorkingSolution();
     }
 
     

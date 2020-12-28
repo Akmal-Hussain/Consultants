@@ -47,6 +47,8 @@ public class WorkingSolution extends JFrame{
     List<LocalDate> dateRange;
     JPanel buttons;
     JLabel score;
+    JPanel centerPanel;
+    JScrollPane scroller; 
     
     public WorkingSolution () {
         super("Processing Problem");
@@ -93,7 +95,7 @@ public class WorkingSolution extends JFrame{
         
        // Period period = Period.between(DatesReader.getRange()[0], DatesReader.getRange()[1]);
        int period = (int) ChronoUnit.DAYS.between(DatesReader.getRange()[0], DatesReader.getRange()[1]);
-        JPanel centerPanel = new JPanel(new GridLayout(x,period));
+        centerPanel = new JPanel(new GridLayout(x,period));
         List<JLabel> label = new ArrayList<>();
         
         LocalDate date = DatesReader.getRange()[0];
@@ -122,7 +124,7 @@ public class WorkingSolution extends JFrame{
                 
             }
         }
-        JScrollPane scroller = new JScrollPane(centerPanel, VERTICAL_SCROLLBAR_NEVER, HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroller = new JScrollPane(centerPanel, VERTICAL_SCROLLBAR_NEVER, HORIZONTAL_SCROLLBAR_ALWAYS);
      
         
         pane.add(scroller,BorderLayout.CENTER);
@@ -135,7 +137,7 @@ public class WorkingSolution extends JFrame{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
-       new RunRota(this);
+        runSolver();
         
     }
     /**
@@ -147,6 +149,10 @@ public class WorkingSolution extends JFrame{
         new WorkingSolution();
     }
 
+    
+    public void runSolver() {
+        new RunRota(this);
+    }
     
     public void update(ShiftScore s) {
         
@@ -249,12 +255,13 @@ public class WorkingSolution extends JFrame{
            summary.addActionListener(new ActionListener(){
                @Override
         public void actionPerformed(ActionEvent e) {
- System.exit(-1);              
+            new Summary(solvedSolution);
            }
     });
            exit.addActionListener(new ActionListener(){
                @Override
         public void actionPerformed(ActionEvent e) {
+            dispose();
  System.exit(-1);              
            }
     });
