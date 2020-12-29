@@ -37,6 +37,8 @@ import main.java.RunData.ShiftList;
 import main.java.WriteData.ExportSolution;
 import org.apache.commons.collections4.map.MultiKeyMap;
 import org.optaplanner.core.api.score.constraint.Indictment;
+import org.optaplanner.core.api.solver.Solver;
+import org.optaplanner.core.api.solver.SolverFactory;
 
 /**
  *
@@ -49,6 +51,7 @@ public class WorkingSolution extends JFrame{
     JLabel score;
     JPanel centerPanel;
     JScrollPane scroller; 
+    Solver<ShiftList> solver;
     
     public WorkingSolution () {
         super("Processing Problem");
@@ -67,7 +70,12 @@ public class WorkingSolution extends JFrame{
         buttons = new JPanel();
         score = new JLabel("Score: " );
         JButton start = new JButton("Stop");
-       // start.addActionListener(this);
+        start.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                solver.terminateEarly();
+            }
+        });
        buttons.add(score);
         buttons.add(start);
         
@@ -137,6 +145,9 @@ public class WorkingSolution extends JFrame{
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
+        SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
+                "main/resources/Configuration/config.xml");
+        solver = solverFactory.buildSolver();
         runSolver();
         
     }
@@ -153,6 +164,12 @@ public class WorkingSolution extends JFrame{
     public void runSolver() {
         new RunRota(this);
     }
+
+    public Solver<ShiftList> getSolver() {
+        return solver;
+    }
+    
+    
     
     public void update(ShiftScore s) {
         

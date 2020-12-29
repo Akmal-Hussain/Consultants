@@ -34,6 +34,7 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
     // Build the Solver
     
         this.display = display;
+        this.solver = display.getSolver();
        /* 
         SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
                 "main/resources/Configuration/config.xml");
@@ -59,12 +60,11 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
     
     @Override
     protected ShiftList doInBackground() throws Exception {
-        
+      /*  
         SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
                 "main/resources/Configuration/config.xml");
         solver = solverFactory.buildSolver();
-        
-       
+        */
 
       
         unsolvedShiftList = new ShiftList();
