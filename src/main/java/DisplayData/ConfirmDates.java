@@ -5,6 +5,7 @@
  */
 package main.java.DisplayData;
 
+import static com.google.common.util.concurrent.Striped.lock;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -13,27 +14,31 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
-import main.java.RunData.RunRota;
+import static sun.misc.GThreadHelper.lock;
 
 /**
  *
  * @author pi
  */
-public class ConfirmData extends JFrame 
+public class ConfirmDates extends JFrame 
         implements ActionListener
 
 {
-
+JButton confirm;
+JButton from;
+JButton to;
     /**
      * @param args the command line arguments
      */
-    public ConfirmData() {
+    public ConfirmDates() {
         super("Confirm Data");
         SetLookAndFeel.setLookAndFeel();
         setSize(800,600);
@@ -75,10 +80,10 @@ public class ConfirmData extends JFrame
         JLabel rangeFroM = new JLabel("From: ");
         JLabel rangeTO =   new JLabel("To:     ");
         
-        JButton from = new JButton(DatesReader.getRange()[0].toString());
-        JButton to = new JButton(DatesReader.getRange()[1].toString());
-
-        
+        from = new JButton(DatesReader.getRange()[0].toString());
+        to = new JButton(DatesReader.getRange()[1].toString());
+        from.addActionListener(this);
+        to.addActionListener(this);
         rangeTitle.add(rangeTitlE);
         rangeFrom.add(rangeFroM);
         rangeFrom.add(from);
@@ -150,10 +155,10 @@ public class ConfirmData extends JFrame
         lowerPane.setLayout(new BorderLayout());
         JPanel modifyOrConfirm = new JPanel();
         modifyOrConfirm.setLayout(new BorderLayout());
-        JButton modify = new JButton("Modify");
-        JButton confirm = new JButton("Confirm");
+      //  JButton modify = new JButton("Modify");
+        confirm = new JButton("Confirm");
         confirm.addActionListener(this);
-        modifyOrConfirm.add(modify,BorderLayout.WEST);
+        //modifyOrConfirm.add(modify,BorderLayout.WEST);
         modifyOrConfirm.add(confirm, BorderLayout.EAST);
         lowerPane.add(modifyOrConfirm, BorderLayout.EAST);
     
@@ -181,15 +186,35 @@ public class ConfirmData extends JFrame
     }
    
     public static void main(String[] args) {
-   new DatesReader("src/main/resources/Data/Dates.xml");
-       new ConfirmData();
+   new DatesReader("/main/resources/Data/Dates.xml");
+       new ConfirmDates();
     }
 
     @Override
     public void actionPerformed(ActionEvent ae) {
+        if(ae.getSource().equals(confirm)) {
         this.dispose();
             new ConfirmStaff(ConsultantList.getConsultantList());
-
+        }
+        
+        if(ae.getSource().equals(from)){
+         SelectedDate d = new SelectedDate(from,this) {
+             @Override
+             public void changeDate(LocalDate d) {
+         DatesReader.getRange()[0] = d;
+     }    
+         };
+            //System.out.println(d.getDate());
+        }
+        if(ae.getSource().equals(to)){
+         SelectedDate d = new SelectedDate(to,this){
+             @Override
+             public void changeDate(LocalDate d) {
+         DatesReader.getRange()[1] = d;
+         }
+            
+        };
     }
     
+}
 }

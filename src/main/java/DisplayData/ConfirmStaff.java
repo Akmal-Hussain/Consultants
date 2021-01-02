@@ -267,10 +267,10 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
         lowerPane.setLayout(new BorderLayout());
         JPanel modifyOrConfirm = new JPanel();
         modifyOrConfirm.setLayout(new BorderLayout());
-        JButton modify = new JButton("Modify");
+        //JButton modify = new JButton("Modify");
         JButton confirm = new JButton("Confirm");
         confirm.addActionListener(this);
-        modifyOrConfirm.add(modify, BorderLayout.WEST);
+       // modifyOrConfirm.add(modify, BorderLayout.WEST);
         modifyOrConfirm.add(confirm, BorderLayout.EAST);
         lowerPane.add(modifyOrConfirm, BorderLayout.EAST);
         add(lowerPane, BorderLayout.SOUTH);

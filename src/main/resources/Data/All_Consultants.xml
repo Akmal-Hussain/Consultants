@@ -27,7 +27,7 @@ and open the template in the editor.
         <Name>Ahmed Aldouri</Name>
         <FileName>/main/resources/Data/Ahmed_Aldouri.xml</FileName>
     </Consultant>
-<!--    <Consultant>
+    <Consultant>
         <Name>Elspeth Brooker</Name>
         <FileName>/main/resources/Data/Elspeth_Brooker.xml</FileName>
     </Consultant>
@@ -35,7 +35,7 @@ and open the template in the editor.
         <Name>Kemy Naidoo</Name>
         <FileName>/main/resources/Data/Kemy_Naidoo.xml</FileName>
     </Consultant>
-    <Consultant>
+<!--    <Consultant>
         <Name>Helen Wolfenden</Name>
         <FileName>/main/resources/Data/Helen_Wolfenden.xml</FileName>
     </Consultant>-->

@@ -11,7 +11,7 @@ and open the template in the editor.
         Ann Gordon
     </Name>
     <Dates_Of_Leave>
-        <Leave_Block>
+<!--        <Leave_Block>
             <From>
                 <Day>3</Day>
                 <Month>2</Month>
@@ -22,7 +22,7 @@ and open the template in the editor.
                 <Month>2</Month>
                 <Year>2020</Year>
             </To>
-        </Leave_Block> 
+        </Leave_Block> -->
         <Leave_Block>
             <From>
                 <Day>1</Day>

@@ -3,7 +3,6 @@ package main.java.ReadData;
 
 import java.time.LocalDate;
 import nu.xom.Element;
-import nu.xom.Elements;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -21,6 +20,20 @@ public class ReaderHelper {
         int month = Integer.parseInt(e.getFirstChildElement("Month").getValue());
         int year = Integer.parseInt(e.getFirstChildElement("Year").getValue());
         return LocalDate.of(year, month, day);
+    }
+    
+    static Element setDate(LocalDate d,String name) {
+        Element root = new Element(name);
+        Element day = new Element("Day");
+        day.appendChild(""+d.getDayOfMonth());
+        Element month = new Element("Month");
+        month.appendChild(""+d.getMonthValue());
+        Element year = new Element("Year");
+        year.appendChild(""+d.getYear());
+        root.appendChild(day);
+        root.appendChild(month);
+        root.appendChild(year);
+        return root;
     }
     
     

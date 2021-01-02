@@ -76,8 +76,8 @@ public class TitleScreen extends JFrame {
         pane.add(centerpanel, BorderLayout.CENTER);
 
         buttonPanel.setLayout(new BorderLayout());
-        buttonPanel.add(continueButton, BorderLayout.EAST);
-        pane.add(buttonPanel, BorderLayout.SOUTH);
+        //buttonPanel.add(continueButton, BorderLayout.EAST);
+        //pane.add(buttonPanel, BorderLayout.SOUTH);
         add(pane);
         // add(continueButton);
              setLocationRelativeTo(null);
@@ -88,7 +88,7 @@ public class TitleScreen extends JFrame {
         } catch (InterruptedException ex) {
         }
       this.dispose();
-      ConfirmData d = new ConfirmData();
+      ConfirmDates d = new ConfirmDates();
     }
 
     @Override
