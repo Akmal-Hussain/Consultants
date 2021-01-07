@@ -13,6 +13,7 @@ import main.java.DisplaySolution.ShiftScore;
 
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
+import main.java.ReadData.PinnedShiftsReader;
 import main.java.ReadData.ShiftStructureReader;
 import org.optaplanner.core.api.solver.Solver;
 import org.optaplanner.core.api.solver.SolverFactory;
@@ -132,7 +133,8 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
       new DatesReader("/main/resources/Data/Dates.xml");
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("/main/resources/Data/All_Consultants.xml");
-        
+                new PinnedShiftsReader("/main/resources/Data/Pinned_Shifts.xml");
+
        // new RunRota(new WorkingSolution());
        new WorkingSolution();
     }

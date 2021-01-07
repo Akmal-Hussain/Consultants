@@ -5,9 +5,9 @@
  */
 package main.java.DisplayData;
 
+import java.awt.Color;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.util.Properties;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
@@ -16,9 +16,11 @@ import javax.swing.PopupFactory;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import main.java.ReadData.DatesReader;
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.SqlDateModel;
+import org.jdatepicker.ComponentColorDefaults;
+import org.jdatepicker.ComponentTextDefaults;
+import org.jdatepicker.JDatePanel;
+import org.jdatepicker.SqlDateModel;
+
 
 /**
  *
@@ -38,15 +40,53 @@ public class SelectedDate {
     }
     
             public SelectedDate(JComponent b, JFrame f){
-                super();
-                JDatePickerImpl datePicker;
+        
+                ComponentTextDefaults.getInstance().setText(ComponentTextDefaults.Key.MON, "M");
+                ComponentTextDefaults.getInstance().setText(ComponentTextDefaults.Key.TUE, "TU");
+                ComponentTextDefaults.getInstance().setText(ComponentTextDefaults.Key.WED, "W");
+                ComponentTextDefaults.getInstance().setText(ComponentTextDefaults.Key.THU, "TH");
+                ComponentTextDefaults.getInstance().setText(ComponentTextDefaults.Key.FRI, "F");
+                ComponentTextDefaults.getInstance().setText(ComponentTextDefaults.Key.SAT, "Sa");
+                ComponentTextDefaults.getInstance().setText(ComponentTextDefaults.Key.SUN, "Su");
+                
+                ComponentColorDefaults defaults = ComponentColorDefaults.getInstance();
+
+        defaults.setColor(ComponentColorDefaults.Key.FG_MONTH_SELECTOR, Color.ORANGE);
+        defaults.setColor(ComponentColorDefaults.Key.BG_MONTH_SELECTOR, Color.BLACK);
+
+        defaults.setColor(ComponentColorDefaults.Key.FG_GRID_HEADER, Color.RED);
+        defaults.setColor(ComponentColorDefaults.Key.BG_GRID_HEADER, Color.GREEN);
+
+        defaults.setColor(ComponentColorDefaults.Key.FG_GRID_THIS_MONTH, Color.BLACK);
+        defaults.setColor(ComponentColorDefaults.Key.FG_GRID_OTHER_MONTH, Color.DARK_GRAY);
+        defaults.setColor(ComponentColorDefaults.Key.FG_GRID_TODAY, Color.YELLOW);
+        defaults.setColor(ComponentColorDefaults.Key.BG_GRID, Color.LIGHT_GRAY);
+        defaults.setColor(ComponentColorDefaults.Key.BG_GRID_NOT_SELECTABLE, Color.RED);
+
+        defaults.setColor(ComponentColorDefaults.Key.FG_GRID_SELECTED, Color.BLACK);
+        defaults.setColor(ComponentColorDefaults.Key.BG_GRID_SELECTED, Color.YELLOW);
+
+        defaults.setColor(ComponentColorDefaults.Key.FG_GRID_TODAY_SELECTED, Color.RED);
+        defaults.setColor(ComponentColorDefaults.Key.BG_GRID_TODAY_SELECTED, Color.YELLOW);
+
+        defaults.setColor(ComponentColorDefaults.Key.FG_TODAY_SELECTOR_ENABLED, Color.PINK);
+        defaults.setColor(ComponentColorDefaults.Key.FG_TODAY_SELECTOR_DISABLED, Color.YELLOW);
+        defaults.setColor(ComponentColorDefaults.Key.BG_TODAY_SELECTOR, Color.BLACK);
+
+        defaults.setColor(ComponentColorDefaults.Key.POPUP_BORDER, Color.WHITE);
+        
+                SetLookAndFeel.setLookAndFeel();
+               
+           
         SqlDateModel model = new SqlDateModel();
-        Properties p = new Properties();
-p.put("text.today", "Today");
-p.put("text.month", "Month");
-p.put("text.year", "Year");
-        JDatePanelImpl datePanel = new JDatePanelImpl(model,p);
-        datePicker = new JDatePickerImpl(datePanel, null);
+        
+        
+        
+        JDatePanel datePanel = new JDatePanel(model);
+        
+       
+        
+        //datePicker = new JDatePickerImpl(datePanel, null);
         Popup pop = PopupFactory.getSharedInstance().getPopup(b, datePanel, b.getLocationOnScreen().x+100, b.getLocationOnScreen().y-50);
 pop.show();
         

@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
@@ -26,8 +28,9 @@ public class DatesReader implements Serializable{
 
   
     static LocalDate [] range = new LocalDate[2];
-    static LocalDate [] bankHolidays;
-    static LocalDate [][] schoolHolidays;
+   // static LocalDate [] bankHolidays;
+    static List<LocalDate> bankHolidays;
+    static List<LocalDate[]> schoolHolidays;
     static String filename;
     
     public DatesReader(String filename){
@@ -45,24 +48,27 @@ public class DatesReader implements Serializable{
             
             Element elementBankHolidays = root.getFirstChildElement("BankHolidays");
      
-            bankHolidays = new LocalDate[elementBankHolidays.getChildElements("BankHoliday").size()];
+            //bankHolidays = new LocalDate[elementBankHolidays.getChildElements("BankHoliday").size()];
+            bankHolidays = new ArrayList<>();
+            
             Elements bankHoliday = elementBankHolidays.getChildElements();
             int x = 0;
             for (Element bank: bankHoliday) {
                 
-                bankHolidays[x] = ReaderHelper.getDate(bank);
+                //bankHolidays[x] = ReaderHelper.getDate(bank);
+                bankHolidays.add(ReaderHelper.getDate(bank));
                 x++;
             }
             
             Element elementSchoolHolidays = root.getFirstChildElement("SchoolHolidays");
             Elements schoolHoliday = elementSchoolHolidays.getChildElements();
-            schoolHolidays = new LocalDate[schoolHoliday.size()][2];
+            schoolHolidays = new ArrayList<>();
             int y = 0;
             for (Element sHoliday : schoolHoliday) {
-                
-                schoolHolidays[y][0] = ReaderHelper.getDate(sHoliday.getFirstChildElement("From"));
-                schoolHolidays[y][1] = ReaderHelper.getDate(sHoliday.getFirstChildElement("To"));
-                y++;
+                LocalDate[]schoolHolidaY = new LocalDate[2]; 
+                schoolHolidaY[0] = ReaderHelper.getDate(sHoliday.getFirstChildElement("From"));
+                schoolHolidaY[1] = ReaderHelper.getDate(sHoliday.getFirstChildElement("To"));
+                schoolHolidays.add(schoolHolidaY);
             }
         } catch (ParsingException | IOException ioe) {
             System.out.println(ioe.getMessage());
@@ -73,11 +79,11 @@ public class DatesReader implements Serializable{
         return range;
     }
 
-    public static LocalDate[] getBankHolidays() {
+    public static List<LocalDate> getBankHolidays() {
         return bankHolidays;
     }
 
-    public static LocalDate[][] getSchoolHolidays() {
+    public static List<LocalDate[]> getSchoolHolidays() {
         return schoolHolidays;
     }
     
