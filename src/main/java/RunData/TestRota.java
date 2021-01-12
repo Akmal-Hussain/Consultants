@@ -27,7 +27,7 @@ public class TestRota {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-                //Load the problem
+     /*           //Load the problem
         new DatesReader("/main/resources/Data/Dates.xml");
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("/main/resources/Data/All_Consultants.xml");
@@ -50,13 +50,14 @@ if (event.getNewBestSolution().getScore().isFeasible()) {
      display.update(event.getNewBestSolution());
 }
             }
-        });*/
+        });
         ShiftList solvedShiftList = solver.solve(unsolvedShiftList);
         //display.update(solvedShiftList);
         //Display the result with heat map and constraint matching...
         new DisplaySolution(solvedShiftList, solver);
 
 
-    }
+   */ }
+     
     
 }

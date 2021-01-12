@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package main.java.RunData;
+package TestingPackage;
 
-import main.java.DisplayData.ConfirmData_SpringWorker;
+//import main.java.DisplayData.ConfirmData_SpringWorker;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.DatesReader;
 import main.java.ReadData.ShiftStructureReader;
@@ -23,7 +23,7 @@ public class StartGUI_SpringWorker {
         new DatesReader("/main/resources/Data/Dates.xml");
         new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
         new ConsultantList("/main/resources/Data/All_Consultants.xml");
-       new ConfirmData_SpringWorker();
+      // new ConfirmData_SpringWorker();
     }
     
 }
