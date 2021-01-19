@@ -15,14 +15,14 @@ import nu.xom.Element;
  */
 public class ReaderHelper {
 
-    static LocalDate getDate(Element e) {
+    public static LocalDate getDate(Element e) {
         int day = Integer.parseInt(e.getFirstChildElement("Day").getValue());
         int month = Integer.parseInt(e.getFirstChildElement("Month").getValue());
         int year = Integer.parseInt(e.getFirstChildElement("Year").getValue());
         return LocalDate.of(year, month, day);
     }
     
-    static Element setDate(LocalDate d,String name) {
+    public static Element setDate(LocalDate d,String name) {
         Element root = new Element(name);
         Element day = new Element("Day");
         day.appendChild(""+d.getDayOfMonth());

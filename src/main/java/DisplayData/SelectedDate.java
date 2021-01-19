@@ -101,11 +101,11 @@ datePanel.getModel().addChangeListener(new ChangeListener(){
                     System.out.println(date);
 //                    superDate = date;
                     changeDate(date);
-                    System.out.println(DatesReader.getRange()[0]);
+                    /*System.out.println(DatesReader.getRange()[0]);
                     DatesReader.updateDatesReader();
                     pop.hide();
                     f.dispose();
-                    new ConfirmDates();
+                    new ConfirmDates();*/
                 }
                
                 

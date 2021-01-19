@@ -14,17 +14,8 @@ public enum FullOrPartTime {
     Full,
     PartTime;
     
-    double factor = 1;
-    
     FullOrPartTime() {
         
         }
                 
-    public void setFactor(double factor) {
-        this.factor = factor;
-    }
-    
-    public double getFactor() {
-        return factor;
-    }
 }

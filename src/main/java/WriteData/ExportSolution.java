@@ -173,8 +173,8 @@ public class ExportSolution {
             //Write the workbook in file system
             try {
                 FileOutputStream out = new FileOutputStream(
-                        new File("src/main/resources/Solutions/ExportSolution.xlsx"));
-
+                     //   new File("src/main/resources/Solutions/ExportSolution.xlsx"));
+new File("ExportSolution.xlsx"));
                 workbook.write(out);
                 out.close();
                 System.out.println("ExportSolution.xlsx written successfully");

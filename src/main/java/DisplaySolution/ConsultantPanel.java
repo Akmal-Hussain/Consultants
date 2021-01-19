@@ -5,9 +5,10 @@
  */
 package main.java.DisplaySolution;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import main.java.DisplayData.SetLookAndFeel;
@@ -52,6 +53,7 @@ public class ConsultantPanel extends JPanel {
         //JPanel northWest = new JPanel();
        
         COW = new JButton(" COW ");
+        COW.setPreferredSize(new Dimension(2,2));
         COW.setBackground(Color.YELLOW);
         COW.setVisible(false);
         //        northWest.add(COW);
@@ -84,6 +86,7 @@ public class ConsultantPanel extends JPanel {
        add(NOW);
        add(paed);  
        add(neo);
+        setBorder(BorderFactory.createLineBorder(Color.BLACK));
        setVisible(true);
     }
     

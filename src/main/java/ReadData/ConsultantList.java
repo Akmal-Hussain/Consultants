@@ -96,7 +96,7 @@ public class ConsultantList implements Serializable {
             }
         }
         for (ConsultantReader c : getConsultantList()) {
-            double x = c.getFullOrPartTime().getFactor();
+            double x = c.getFactor();
             
             
             
@@ -124,7 +124,7 @@ public class ConsultantList implements Serializable {
             for (Iterator<ConsultantReader> cs = getConsultantList().iterator(); cs.hasNext();) {
             ConsultantReader cons = cs.next();
             
-            double partTimeFactor = cons.getFullOrPartTime().getFactor();
+            double partTimeFactor = cons.getFactor();
             
             cons.setCOW_WeekTarget(partTimeFactor * (COW_WeekdayNumber+consultantShiftsCarriedCOW_Weekday)/consultantNumberCOW_Weekday - cons.getBalance().get("COW_Week") );
             cons.setCOW_WeekendTarget(partTimeFactor * (COW_WeekendNumber+consultantShiftsCarriedCOW_Weekend)/consultantNumberCOW_Weekend - cons.getBalance().get("COW_Weekend"));
@@ -136,7 +136,11 @@ public class ConsultantList implements Serializable {
         }
     }
 
-    
+    public static void update(){
+        for(ConsultantReader c :consultantList) {
+            c.update();
+        }
+    }
 
     public static void main(String[] args) {
         new ConsultantList("src/main/resources/Data/All_Consultants.xml");

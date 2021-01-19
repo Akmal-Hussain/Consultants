@@ -1,40 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <Consultant>
-    <Name>
-        Elspeth Brooker
-    </Name>
-    <Dates_Of_Leave>
-        
-        <Leave_Block>
-            <From>
-                <Day>1</Day>
-                <Month>5</Month>
-                <Year>2010</Year>
-            </From>
-            <To>
-                <Day>2</Day>
-                <Month>7</Month>
-                <Year>2010</Year>
-            </To>
-        </Leave_Block>    
-    </Dates_Of_Leave>
-    <FullOrPartTime>
-        Full        
+    <Name> Elspeth Brooker </Name>
+    <Dates_Of_Leave/>
+    <FullOrPartTime>Full
+        <Factor>1.0</Factor>
         <DaysWorking>
-            <WeekDay>Thursday</WeekDay>
-            <WeekDay>tuesday</WeekDay>
-            <WeekDay>Monday</WeekDay>
+            <WeekDay>MONDAY</WeekDay>
+            <WeekDay>TUESDAY</WeekDay>
+            <WeekDay>THURSDAY</WeekDay>
         </DaysWorking>
     </FullOrPartTime>
     <Types_Of_Work>
         <Week_Work>
             <Type>COW</Type>
-           <Type>NOW</Type>
+            <Type>NOW</Type>
         </Week_Work>
         <Weekend_Work>
             <Type>COW</Type>
@@ -46,11 +25,10 @@ and open the template in the editor.
         </OnCalls>
     </Types_Of_Work>
     <Balance_Last_Rota>
-<!--        negative means shift owed in next rota and vice versa-->
-        <COW_Week>0</COW_Week>
-        <NOW_Week>0</NOW_Week>
-        <COW_Weekend>0</COW_Weekend>
-        <NOW_Weekend>0</NOW_Weekend>
-        <OnCalls>0</OnCalls>
+        <OnCalls>0.0</OnCalls>
+        <COW_Week>0.0</COW_Week>
+        <NOW_Week>0.0</NOW_Week>
+        <COW_Weekend>0.0</COW_Weekend>
+        <NOW_Weekend>0.0</NOW_Weekend>
     </Balance_Last_Rota>
 </Consultant>

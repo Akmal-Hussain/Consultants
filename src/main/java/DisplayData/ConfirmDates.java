@@ -117,9 +117,9 @@ public class ConfirmDates extends JFrame
             bankHolidayDel.addActionListener(new ActionListener(){
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                     int b = (bankHolidayButtonsList.indexOf(ae.getSource()) + 1) / 2;
-                        DatesReader.getBankHolidays().remove(DatesReader.getBankHolidays().get(b-1));
-                        DatesReader.updateDatesReader();
+                    // int b = (bankHolidayButtonsList.indexOf(ae.getSource()) + 1) / 2; DatesReader.getBankHolidays().get(b-1)
+                        DatesReader.getBankHolidays().remove(bankHoliday);
+                       // DatesReader.updateDatesReader();
                         dispose();
                         new ConfirmDates();
                 }
@@ -177,17 +177,17 @@ public class ConfirmDates extends JFrame
             schoolHolidayButtonDel.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent ae) {
-                    for (JButton [] schoolButtons : schoolHolidayButtonsList) {
+                   // for (JButton [] schoolButtons : schoolHolidayButtonsList) {
                         
                     
-                    if (schoolButtons[2].equals(ae.getSource())){
-                        DatesReader.getSchoolHolidays().remove(schoolHolidayButtonsList.indexOf(schoolButtons));
+                   // if (schoolButtons[2].equals(ae.getSource())){
+                        DatesReader.getSchoolHolidays().remove(dates);
 
                         DatesReader.updateDatesReader();
                         dispose();
                         new ConfirmDates();
-                    }
-                    }
+                    //}
+                    //}
                 }
             });
             JButton[] schoolButtons = new JButton[]{schoolHolidayButton1, schoolHolidayButton2, schoolHolidayButtonDel};
@@ -262,6 +262,7 @@ public class ConfirmDates extends JFrame
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource().equals(confirm)) {
             this.dispose();
+            DatesReader.updateDatesReader();
             new ConfirmStaff(ConsultantList.getConsultantList());
         }
 
@@ -270,6 +271,10 @@ public class ConfirmDates extends JFrame
                 @Override
                 public void changeDate(LocalDate d) {
                     DatesReader.getRange()[0] = d;
+                    DatesReader.updateDatesReader();
+                    //pop.hide();
+                    dispose();
+                    new ConfirmDates();
                 }
             };
             //System.out.println(d.getDate());
@@ -279,6 +284,10 @@ public class ConfirmDates extends JFrame
                 @Override
                 public void changeDate(LocalDate d) {
                     DatesReader.getRange()[1] = d;
+                    DatesReader.updateDatesReader();
+                    //pop.hide();
+                    dispose();
+                    new ConfirmDates();
                 }
 
             };
@@ -297,6 +306,10 @@ public class ConfirmDates extends JFrame
                                 DatesReader.getBankHolidays().remove(DatesReader.getBankHolidays().get(y));
                                 DatesReader.getBankHolidays().add(d);
                                 Collections.sort(DatesReader.getBankHolidays());
+                                DatesReader.updateDatesReader();
+                    //pop.hide();
+                    dispose();
+                    new ConfirmDates();
                                 
                             }
                         };
@@ -325,6 +338,11 @@ public class ConfirmDates extends JFrame
                                     @Override
                                     public void changeDate(LocalDate d) {
                                         DatesReader.getSchoolHolidays().get(y)[a] = d;
+                                        System.out.println(DatesReader.getRange()[0]);
+                    DatesReader.updateDatesReader();
+                    //pop.hide();
+                    dispose();
+                    new ConfirmDates();
                                     }
                                 };
                             }

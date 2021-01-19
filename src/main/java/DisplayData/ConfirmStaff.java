@@ -14,6 +14,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.BoxLayout;
@@ -48,6 +49,7 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
     ShiftTypeBox weekDays;
     ShiftTypeBox weekEnds;
     ShiftTypeBox onCalls;
+    ButtonGroup fullOrPart;
     JRadioButton full;
     JRadioButton part;
     JCheckBox mon;
@@ -60,6 +62,16 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
     FlowLayout f;
     JPanel leaveButtons;
     JPanel consultantBalance;
+    JButton confirm;
+    List<JButton[]> leaveButtonsList;
+    JList consultantJList;
+     JLabel factorLabel;
+     JTextField factor;
+    
+    public ConfirmStaff(List<ConsultantReader> consultantList, ConsultantReader c) {
+        this(consultantList);
+        consultantJList.setSelectedValue(c, true);
+    }
     
     public ConfirmStaff(List<ConsultantReader> consultantList) {
         super("Confirm Consultant Info");
@@ -89,7 +101,7 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
         JPanel consultantButton = new JPanel();
         consultantButton.setLayout(f);
                 
-        JList consultantJList = new JList(consultantList.toArray());
+        consultantJList = new JList(consultantList.toArray());
        consultantJList.setSelectedIndex(0);
        selectedConsultant = consultantList.get(0);
         consultantJList.addListSelectionListener(this);
@@ -129,14 +141,32 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
         JLabel weekdays = new JLabel("Weekdays \u27f6");
         weekDays = new ShiftTypeBox();
         weekDays.setSelectedItem(selectedConsultant.getWeekdays());
+        weekDays.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                selectedConsultant.setWeekdays((TypeOfWorking)weekDays.getSelectedItem());
+            }
+        });
         
         JLabel weekends = new JLabel("Weekends \u27f6");
         weekEnds = new ShiftTypeBox();
         weekEnds.setSelectedItem(selectedConsultant.getWeekends());
+        weekEnds.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                                selectedConsultant.setWeekends((TypeOfWorking)weekEnds.getSelectedItem());
+
+            }
+        });
         
         JLabel oncalls = new JLabel("On Calls \u27f6");
         onCalls = new ShiftTypeBox();
         onCalls.setSelectedItem(selectedConsultant.getOnCalls());
+        onCalls.addActionListener(new ActionListener(){
+            public void actionPerformed(ActionEvent ae){
+                                selectedConsultant.setOnCalls((TypeOfWorking)onCalls.getSelectedItem());
+
+            }
+        });
+        
         
         weekdayShifts.add(weekdays);
         weekdayShifts.add(weekDays);
@@ -149,13 +179,30 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
         JPanel fulltime = new JPanel();
         fulltime.setMaximumSize(d);
         fulltime.setLayout(f);
-        ButtonGroup fullOrPart = new ButtonGroup();
+        fullOrPart = new ButtonGroup();
         full = new JRadioButton("Full Time", selectedConsultant.getFullOrPartTime() == FullOrPartTime.Full);
         part = new JRadioButton("Part Time", selectedConsultant.getFullOrPartTime() == FullOrPartTime.PartTime);
         fullOrPart.add(full);
         fullOrPart.add(part);
+        full.addActionListener(this);
+        part.addActionListener(this);
         fulltime.add(full);
         fulltime.add(part);
+        factorLabel = new JLabel("   Factor: ");
+        factor = new JTextField(""+ selectedConsultant.getFactor());
+        factor.addActionListener(new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                selectedConsultant.setFactor(Double.parseDouble(factor.getText()));
+            }
+        });
+        if (selectedConsultant.getFullOrPartTime() == FullOrPartTime.Full){
+            factorLabel.setVisible(false);
+            factor.setVisible(false);
+        }
+        
+        fulltime.add(factorLabel);
+        fulltime.add(factor);
         
         JLabel newLine1 = new JLabel( "  ");
         JPanel normalDays = new JPanel();
@@ -170,14 +217,33 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
          tue = new JCheckBox("Tues", true);
          wed = new JCheckBox("Wed", true);
         thurs = new JCheckBox("Thurs", true);
+        mon.addActionListener(this);
+                /*new ActionListener(){
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                
+                if (mon.isSelected() && !selectedConsultant.getDaysWorkingList().contains(DayOfWeek.MONDAY)) {
+                               selectedConsultant.getDaysWorkingList().add(DayOfWeek.MONDAY);
+                }
+                if (!mon.isSelected() && selectedConsultant.getDaysWorkingList().contains(DayOfWeek.MONDAY)) {
+                    selectedConsultant.getDaysWorkingList().remove(DayOfWeek.MONDAY);
+                }
+                                    selectedConsultant.getDaysWorkingList().remove(DayOfWeek.MONDAY);
+
+            }
+        });*/
+        tue.addActionListener(this);
+        wed.addActionListener(this);
+        thurs.addActionListener(this);
         DaysWorking(selectedConsultant);
+     
       //  fri = new JCheckBox("Fri", true);
      //   fri.setEnabled(false);
         
         normalWorkingDays.add(mon);
         normalWorkingDays.add(tue);
         normalWorkingDays.add(wed);
-        normalWorkingDays.add(thurs);
+        normalWorkingDays.add(thurs); 
       //  normalWorkingDays.add(fri);
         
         JLabel newLine2 = new JLabel( "  ");
@@ -216,7 +282,7 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
         }
  */       
         
-        System.out.println(Thread.currentThread().getName());
+        //System.out.println(Thread.currentThread().getName());
         
         JLabel newLine3 = new JLabel( "  ");
         
@@ -268,7 +334,7 @@ public class ConfirmStaff extends JFrame implements ListSelectionListener, Actio
         JPanel modifyOrConfirm = new JPanel();
         modifyOrConfirm.setLayout(new BorderLayout());
         //JButton modify = new JButton("Modify");
-        JButton confirm = new JButton("Confirm");
+        confirm = new JButton("Confirm");
         confirm.addActionListener(this);
        // modifyOrConfirm.add(modify, BorderLayout.WEST);
         modifyOrConfirm.add(confirm, BorderLayout.EAST);
@@ -302,6 +368,14 @@ new DatesReader("/main/resources/Data/Dates.xml");
             onCalls.setSelectedItem(selectedConsultant.getOnCalls());
             full.setSelected(selectedConsultant.getFullOrPartTime() == FullOrPartTime.Full);
             part.setSelected(selectedConsultant.getFullOrPartTime() == FullOrPartTime.PartTime);
+            factor.setText(""+ selectedConsultant.getFactor());
+            if (part.isSelected()) {
+                factor.setVisible(true);
+                factorLabel.setVisible(true);
+            } else {
+                factor.setVisible(false);
+                factorLabel.setVisible(false);
+            }
             DaysWorking(selectedConsultant);
           /*  mon.setSelected(selectedConsultant.getDaysWorkingList().contains(DayOfWeek.MONDAY));
             tue.setSelected(selectedConsultant.getDaysWorkingList().contains(DayOfWeek.TUESDAY));
@@ -321,29 +395,61 @@ new DatesReader("/main/resources/Data/Dates.xml");
     
     public void LeaveButtons(JPanel pane,ConsultantReader c) {
         pane.removeAll();
-        int y= c.getLeaveDatesArray().length;
+        int y = c.getLeaveDatesList().size();
+   //     int y= c.getLeaveDatesArray().length; swapping over to List
 
         d2 = new Dimension();
         d2.setSize(d.getWidth(),d.getHeight()*y);
-        
+
+        leaveButtonsList = new ArrayList<>();
         
         
         pane.setMaximumSize(d2);
-        pane.setLayout(new GridLayout(y,1));
-        for (LocalDate [] dates : c.getLeaveDatesArray()) {
+        pane.setLayout(new GridLayout(y+1,1));
+        for (LocalDate [] dates : c.getLeaveDatesList()) {
             JPanel leaveDates = new JPanel();
             leaveDates.setMaximumSize(d2);
             leaveDates.setLayout(f);
             JButton leaveButton1 = new JButton(dates[0].toString());
+            leaveButton1.addActionListener(this);
             JLabel arrow = new JLabel("  \u27f6 ");
            // arrow.setFont(new Font(Font.SERIF, Font.BOLD, 20));
             JButton leaveButton2 = new JButton(dates[1].toString());
+            leaveButton2.addActionListener(this);
+            JButton del = new JButton("del");
+            del.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                  c.getLeaveDatesList().remove(dates);
+                  dispose();
+                                        new ConfirmStaff(ConsultantList.getConsultantList(),c);
+                
+                }
+            });
+            JButton[] leaveButtons = new JButton[]{leaveButton1,leaveButton2, del};
+            leaveButtonsList.add(leaveButtons);
             leaveDates.add(leaveButton1);
             leaveDates.add(arrow);
             leaveDates.add(leaveButton2);
-            pane.add(leaveDates);                    
+            leaveDates.add(del);
+            pane.add(leaveDates);
+            
         }
+        JPanel leaveDates = new JPanel();
+        JButton add = new JButton("+");
+        add.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               LocalDate[] blankLeaveDates = new LocalDate[]{LocalDate.of(1999, 1, 1), LocalDate.of(1999, 1, 1)};
+               c.getLeaveDatesList().add(blankLeaveDates); 
+               dispose();
+               new ConfirmStaff(ConsultantList.getConsultantList(),c);
+
+            }
+        });
         
+        leaveDates.add(add);
+        pane.add(leaveDates);
        
     }
     
@@ -354,6 +460,13 @@ new DatesReader("/main/resources/Data/Dates.xml");
          //balanceEntry.setMaximumSize(d);
             JLabel key = new JLabel(balance.getKey() + ": ");
             JTextField value = new JTextField(balance.getValue().toString(),5);
+            value.addActionListener(new ActionListener(){
+                @Override
+                public void actionPerformed(ActionEvent ae) {
+                   balance.setValue(Double.parseDouble(value.getText()));
+                    
+                }
+            });
             balanceEntry.setLayout(f);
             balanceEntry.add(key);
             balanceEntry.add(value);
@@ -370,9 +483,82 @@ new DatesReader("/main/resources/Data/Dates.xml");
 
     @Override
     public void actionPerformed(ActionEvent ae) {
-       this.dispose();
+       if(ae.getSource()==confirm){
+           this.dispose();
+           ConsultantList.update();
        new WorkingSolution();
+       }
+       if(ae.getSource()==full || ae.getSource()==part) {
+        if(full.isSelected()){
+            selectedConsultant.setFullOrPartTime(FullOrPartTime.Full);
+            factorLabel.setVisible(false);
+            factor.setVisible(false);
+            selectedConsultant.setFactor(1D);
+        }
+        if(part.isSelected()){
+            selectedConsultant.setFullOrPartTime(FullOrPartTime.PartTime);
+            factorLabel.setVisible(true);
+            factor.setVisible(true);
+        }
+       }
+       
+       if(ae.getSource()==mon || ae.getSource() == tue||ae.getSource()== wed || ae.getSource() == thurs) {
+           if (!mon.isSelected() && selectedConsultant.getDaysWorkingList().contains(DayOfWeek.MONDAY)) {
+           selectedConsultant.getDaysWorkingList().remove(DayOfWeek.MONDAY);
+       }
+       if (mon.isSelected() && !selectedConsultant.getDaysWorkingList().contains(DayOfWeek.MONDAY)) {
+                               selectedConsultant.getDaysWorkingList().add(DayOfWeek.MONDAY);
+                }
+       
+       if (!tue.isSelected() && selectedConsultant.getDaysWorkingList().contains(DayOfWeek.TUESDAY)) {
+           selectedConsultant.getDaysWorkingList().remove(DayOfWeek.TUESDAY);
+       }
+       if (tue.isSelected() && !selectedConsultant.getDaysWorkingList().contains(DayOfWeek.TUESDAY)) {
+                               selectedConsultant.getDaysWorkingList().add(DayOfWeek.TUESDAY);
+                }
+       
+       if (!wed.isSelected() && selectedConsultant.getDaysWorkingList().contains(DayOfWeek.WEDNESDAY)) {
+           selectedConsultant.getDaysWorkingList().remove(DayOfWeek.WEDNESDAY);
+       }
+       if (wed.isSelected() && !selectedConsultant.getDaysWorkingList().contains(DayOfWeek.WEDNESDAY)) {
+                               selectedConsultant.getDaysWorkingList().add(DayOfWeek.WEDNESDAY);
+                }
+       if (!thurs.isSelected() && selectedConsultant.getDaysWorkingList().contains(DayOfWeek.THURSDAY)) {
+           selectedConsultant.getDaysWorkingList().remove(DayOfWeek.THURSDAY);
+       }
+       if (thurs.isSelected() && !selectedConsultant.getDaysWorkingList().contains(DayOfWeek.THURSDAY)) {
+                               selectedConsultant.getDaysWorkingList().add(DayOfWeek.THURSDAY);
+                }
+       }
+       
+         
+        for (JButton[] leavePair : leaveButtonsList) {
+            for (JButton leaveDate : leavePair) {
+                if (ae.getSource().equals(leaveDate)) {
+                    //System.out.println("Here");
+                    for (int x = 0; x < selectedConsultant.getLeaveDatesList().size(); x++) {
+                        int y = x;
+                        for (int z = 0; z < 2; z++) {
+                            if (selectedConsultant.getLeaveDatesList().get(x)[z].toString().equals(((JButton) ae.getSource()).getText())) {
+                                int a = z;
+                                SelectedDate d = new SelectedDate(leaveDate, this) {
 
+                                    @Override
+                                    public void changeDate(LocalDate d) {
+                                        selectedConsultant.getLeaveDatesList().get(y)[a] = d;
+                                        dispose();
+                                        new ConfirmStaff(ConsultantList.getConsultantList(),selectedConsultant);
+                                    }
+                                };
+                            }
+                        }
+                    }
+                    
+
+                }
+            }
+        }
+       
     }
     class ShiftTypeBox extends JComboBox {
         ShiftTypeBox (){

@@ -1,6 +1,6 @@
 package main.java.ReadData;
 
-import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.DayOfWeek;
@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import nu.xom.*;
 
 /*
@@ -23,6 +24,7 @@ import nu.xom.*;
 public class ConsultantReader implements Serializable {
 
     String consultantName;
+    String filename;
 
     
     double COW_WeekTarget;
@@ -43,7 +45,7 @@ public class ConsultantReader implements Serializable {
             Builder builder = new Builder();
            // File xfile = new File(fileName);
             Document doc = builder.build(getClass().getResourceAsStream(fileName));
-
+            this.filename= fileName;
             Element root = doc.getRootElement();
 
             Element name = root.getFirstChildElement("Name");
@@ -54,17 +56,22 @@ public class ConsultantReader implements Serializable {
 
             //populate array of Leave Dates
             leaveDatesArray = new LocalDate[blocks.size()][2];
+            leaveDatesList = new ArrayList<>();
+            
             int y = 0;
             for (Element block : blocks) {
                 String date = "From";
+                LocalDate[] dateBlock = new LocalDate[2];
                 for (int x = 0; x < 2; x++) {
                     if (x == 1) {
                         date = "To";
                     }
                     Element theDate = block.getFirstChildElement(date);
                     leaveDatesArray[y][x] = ReaderHelper.getDate(theDate);
+                    dateBlock[x] = ReaderHelper.getDate(theDate);
                 }
                 y++;
+                leaveDatesList.add(dateBlock);
             }
             //          LocalDate localDate = leaveDatesArray[0][0];
             //          List<LocalDate> dates leaveDates.add(localDate);
@@ -87,9 +94,10 @@ public class ConsultantReader implements Serializable {
             } else {
                 fullOrPartTime = FullOrPartTime.PartTime;
             }
+            factor = 1D;
             if (fullOrPartTime.equals(FullOrPartTime.PartTime)) {
-                Element factor = timeWorking.getFirstChildElement("Factor");
-                fullOrPartTime.setFactor(Double.valueOf(factor.getValue()));
+                Element factoR = timeWorking.getFirstChildElement("Factor");
+                factor =Double.valueOf(factoR.getValue());
             }
             // populate array of the Working Days of the week.
             Elements daysOfWeekWorking = timeWorking.getFirstChildElement("DaysWorking")
@@ -102,7 +110,7 @@ public class ConsultantReader implements Serializable {
             }
             
             Arrays.sort(daysWorking);
-            daysWorkingList = Arrays.asList(daysWorking);
+            daysWorkingList = new ArrayList<>(Arrays.asList(daysWorking));
             // COW or NOW and OnCalls
             Element typeOfWorking = root.getFirstChildElement("Types_Of_Work");
 
@@ -163,14 +171,29 @@ public class ConsultantReader implements Serializable {
     public TypeOfWorking getWeekdays() {
         return weekdays;
     }
+    
+    
+    public void setWeekdays(TypeOfWorking t) {
+        weekdays = t;
+    }
 
     public TypeOfWorking getWeekends() {
         return weekends;
     }
+    
+    public void setWeekends(TypeOfWorking t) {
+        weekends = t;
+    }
+    
 
     public TypeOfWorking getOnCalls() {
         return onCalls;
     }
+    
+    public void setOnCalls(TypeOfWorking t) {
+        onCalls = t;
+    }
+    
     HashMap<String, Double> balance = new HashMap<>();
 
     public HashMap<String, Double> getBalance() {
@@ -179,7 +202,7 @@ public class ConsultantReader implements Serializable {
 
     @Override
     public String toString() {
-        return consultantName;
+        return consultantName.trim();
     }
     public void setCOW_WeekTarget(double COW_WeekTarget) {
         this.COW_WeekTarget = COW_WeekTarget;
@@ -225,15 +248,35 @@ public String getConsultantName() {
         return consultantName;
     }
     LocalDate[][] leaveDatesArray;
+    List<LocalDate[]> leaveDatesList;
+    
+    public List<LocalDate[]> getLeaveDatesList(){
+        return leaveDatesList;
+    }
 
     public LocalDate[][] getLeaveDatesArray() {
         return leaveDatesArray;
     }
     FullOrPartTime fullOrPartTime;
-
+    
+    Double factor;
+    
+    public double getFactor(){
+        return factor;
+    }
+    
+    public void setFactor(Double d){
+        factor = d;
+    }
+    
     public FullOrPartTime getFullOrPartTime() {
         return fullOrPartTime;
     }
+    
+    public void setFullOrPartTime(FullOrPartTime t) {
+        fullOrPartTime = t;
+    }
+    
     DayOfWeek[] daysWorking;
 
     public List<DayOfWeek> getDaysWorkingList() {
@@ -244,6 +287,121 @@ public String getConsultantName() {
 
     public List<LocalDate> getLeaveDates() {
         return leaveDates;
+    }
+    
+    public void update(){
+        Element Root = new Element("Consultant");
+        
+        Element name = new Element("Name");
+        name.appendChild(consultantName);
+        
+        Element datesOfLeave = new Element("Dates_Of_Leave");
+        for (LocalDate[]d:leaveDatesList){
+            Element leaveBlock = new Element("Leave_Block");
+            Element fro = ReaderHelper.setDate(d[0],"From");
+            Element too = ReaderHelper.setDate(d[1],"To");
+            leaveBlock.appendChild(fro);
+            leaveBlock.appendChild(too);
+            datesOfLeave.appendChild(leaveBlock);
+        }
+        
+        Element fullOrPart = new Element("FullOrPartTime");
+        fullOrPart.appendChild(fullOrPartTime.toString());        
+        Element factoR = new Element("Factor");
+        factoR.appendChild(""+factor);
+        Element daysWorking = new Element("DaysWorking");
+        for (DayOfWeek d: daysWorkingList) {
+            Element weekDay = new Element("WeekDay");
+            weekDay.appendChild(d.toString());
+            daysWorking.appendChild(weekDay);
+        }
+        fullOrPart.appendChild(factoR);
+        fullOrPart.appendChild(daysWorking);
+        
+        Element typesOfWork = new Element("Types_Of_Work");
+        Element weekDayWork = new Element("Week_Work");
+        if (weekdays == TypeOfWorking.Both) {
+            Element type1 = new Element("Type");
+            Element type2 = new Element("Type");
+            type1.appendChild("COW");
+            type2.appendChild("NOW");
+            weekDayWork.appendChild(type1);
+            weekDayWork.appendChild(type2);
+        } else {
+            Element type = new Element("Type");
+            if (weekdays == TypeOfWorking.Paeds) {
+                type.appendChild("COW");
+            } else {
+                type.appendChild("NOW");
+            }
+            weekDayWork.appendChild(type);
+        }
+        Element weekEndWork = new Element("Weekend_Work");
+        if (weekends == TypeOfWorking.Both) {
+            Element type1 = new Element("Type");
+            Element type2 = new Element("Type");
+            type1.appendChild("COW");
+            type2.appendChild("NOW");
+            weekEndWork.appendChild(type1);
+            weekEndWork.appendChild(type2);
+        } else {
+            Element type = new Element("Type");
+            if (weekends == TypeOfWorking.Paeds) {
+                type.appendChild("COW");
+            } else {
+                type.appendChild("NOW");
+            }
+            weekEndWork.appendChild(type);
+        }
+        Element onCallWork = new Element("OnCalls");
+        if (onCalls == TypeOfWorking.Both) {
+            Element type1 = new Element("Type");
+            Element type2 = new Element("Type");
+            type1.appendChild("Paed");
+            type2.appendChild("Neo");
+            onCallWork.appendChild(type1);
+            onCallWork.appendChild(type2);
+        } else {
+            Element type = new Element("Type");
+            if (onCalls == TypeOfWorking.Paeds) {
+                type.appendChild("Paed");
+            } else {
+                type.appendChild("Neo");
+            }
+            onCallWork.appendChild(type);
+        }
+        typesOfWork.appendChild(weekDayWork);
+        typesOfWork.appendChild(weekEndWork);
+        typesOfWork.appendChild(onCallWork);
+        
+        Element balanceLastRota = new Element("Balance_Last_Rota");
+        for (Map.Entry<String,Double> entry :balance.entrySet()) {
+            Element balancing = new Element(entry.getKey());
+            balancing.appendChild(""+entry.getValue());
+            balanceLastRota.appendChild(balancing);            
+        }
+       
+        Root.appendChild(name);
+        Root.appendChild(datesOfLeave);
+        Root.appendChild(fullOrPart);
+        Root.appendChild(typesOfWork);
+        Root.appendChild(balanceLastRota);
+        
+         Document doc = new Document(Root);
+  System.out.println(doc.toXML());
+        System.out.println(filename);
+        try {
+             FileOutputStream fileOutputStream = new FileOutputStream ("src"+filename);
+Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
+serializer.setIndent(4);
+serializer.write(doc);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+ 
+
+        
+    
     }
 
     public static void main(String[] args) {

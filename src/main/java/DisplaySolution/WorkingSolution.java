@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -26,7 +27,7 @@ import javax.swing.JScrollPane;
 import javax.swing.Popup;
 import javax.swing.PopupFactory;
 import static javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS;
-import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER;
+import static javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED;
 import main.java.DisplayData.SetLookAndFeel;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
@@ -96,7 +97,7 @@ public class WorkingSolution extends JFrame{
             consultant.add(consultAnt);
             westPanel.add(consultant);                    
         }
-        westPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 15, 0));
+        westPanel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
         pane.add(westPanel,BorderLayout.WEST);
 
         //Center Panel code
@@ -112,9 +113,19 @@ public class WorkingSolution extends JFrame{
         dateRange = new ArrayList<>();
         for (int z=0; z<=period; z++) {
             JPanel tester = new JPanel();
+            tester.setLayout(new BoxLayout(tester,BoxLayout.Y_AXIS));
             JLabel test = new JLabel(date.toString());
+            JLabel month = new JLabel(date.getMonth().toString());
+            JLabel week = new JLabel(date.getDayOfWeek().toString());
+            test.setAlignmentX(CENTER_ALIGNMENT);
+            month.setAlignmentX(CENTER_ALIGNMENT);
+            week.setAlignmentX(CENTER_ALIGNMENT);
+            
+            tester.add(week);
+            tester.add(month);
             tester.add(test);
             label.add(test);
+            
             centerPanel.add(tester);
             dateRange.add(date);
             date = date.plusDays(1);
@@ -124,15 +135,22 @@ public class WorkingSolution extends JFrame{
         
         for (ConsultantReader c : ConsultantList.getConsultantList()){
             for (LocalDate d : dateRange) {
-                JPanel panel = new JPanel();
+              //  JPanel panel = new JPanel();
                 ConsultantPanel consultantPane = new ConsultantPanel();
-                panel.add(consultantPane);
+              //  panel.add(consultantPane);
+                if (d.getDayOfWeek().getValue()>5){
+                    consultantPane.setBackground(Color.darkGray);
+                    
+                }
+                if (DatesReader.getBankHolidays().contains(d)) {
+                    consultantPane.setBackground(Color.cyan);
+                }
                 keyMap.put(c,d, consultantPane);
-                centerPanel.add(panel);
+                centerPanel.add(consultantPane);
                 
             }
         }
-        scroller = new JScrollPane(centerPanel, VERTICAL_SCROLLBAR_NEVER, HORIZONTAL_SCROLLBAR_ALWAYS);
+        scroller = new JScrollPane(centerPanel, VERTICAL_SCROLLBAR_AS_NEEDED, HORIZONTAL_SCROLLBAR_ALWAYS);
      
         
         pane.add(scroller,BorderLayout.CENTER);

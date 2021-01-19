@@ -35,25 +35,29 @@ and open the template in the editor.
         <Name>Kemy Naidoo</Name>
         <FileName>/main/resources/Data/Kemy_Naidoo.xml</FileName>
     </Consultant>
-<!--    <Consultant>
+ <Consultant>
         <Name>Helen Wolfenden</Name>
         <FileName>/main/resources/Data/Helen_Wolfenden.xml</FileName>
-    </Consultant>-->
-    <Consultant>
-        <Name></Name>
-        <FileName></FileName>
     </Consultant>
     <Consultant>
-        <Name></Name>
-        <FileName></FileName>
+        <Name>Claire Holt</Name>
+        <FileName>/main/resources/Data/Claire_Holt.xml</FileName>
     </Consultant>
     <Consultant>
-        <Name></Name>
-        <FileName></FileName>
+        <Name>Balaji Surayan</Name>
+        <FileName>/main/resources/Data/Balaji_Surayan.xml</FileName>
     </Consultant>
     <Consultant>
-        <Name></Name>
-        <FileName></FileName>
+        <Name>Peter DeHalpert</Name>
+        <FileName>/main/resources/Data/Peter_DeHalpert.xml</FileName>
+    </Consultant>
+    <Consultant>
+        <Name>Nicky Pritchard</Name>
+        <FileName>/main/resources/Data/Nicky_Pritchard.xml</FileName>
+    </Consultant>
+    <Consultant>
+        <Name>Ak Hussain</Name>
+        <FileName>/main/resources/Data/Ak_Hussain.xml</FileName>
     </Consultant>
 
 </Consultants>
