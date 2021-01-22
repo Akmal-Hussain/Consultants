@@ -1,0 +1,204 @@
+package main.resources.Rules;
+dialect "java"
+
+import org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScoreHolder;
+import main.java.RunData.Shift;
+import main.java.ReadData.ConsultantReader;
+import main.java.ReadData.TypeOfWorking;
+import java.time.LocalDate;
+import java.time.temporal.WeekFields;
+import java.time.DayOfWeek;
+import java.util.Locale;
+import java.util.Arrays;
+import java.lang.Math;
+
+
+global HardSoftScoreHolder scoreHolder;
+
+
+////////////////////////////// HARD CONSTRAINTS ///////////////////////////////////////////////
+
+rule "1: leavedates" salience 1
+    when
+        Shift($q: consultant, $startDate : startDate, $endDate : endDate, $id : id)
+        ConsultantReader($q == this, leaveDates.contains($startDate) || leaveDates.contains($endDate))
+then
+  scoreHolder.addHardConstraintMatch(kcontext, -4);
+    end
+
+rule "2.1: Some can only do paed on calls" salience 1
+    when 
+        $q : ConsultantReader(onCalls == TypeOfWorking.Paeds)
+        Shift($q == consultant, shiftType == "NeoOnCall")
+    then
+  scoreHolder.addHardConstraintMatch(kcontext, -4);
+    end
+
+rule "2.2: Most do both onCalls" salience 1
+    when 
+        Shift($p: consultant, shiftType == "PaedOnCall", $startDate : startDate)
+        ConsultantReader(this == $p, onCalls == TypeOfWorking.Both)
+        Shift($p != consultant, shiftType == "NeoOnCall", $startDate == startDate)
+then
+  scoreHolder.addHardConstraintMatch(kcontext, -4);
+    end
+
+
+rule "3.1: COW week only" salience 1
+// no other shifts COW or NOW shifts that week and the weekend before
+    when
+        Shift($id : id, $p: consultant, shiftType == "COW", $startDate:startDate)
+        Shift($id != id, $p == consultant, shiftType != "NeoOnCall",
+                     $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()) || 
+                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) ==  
+                      endDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+    then
+ scoreHolder.addHardConstraintMatch(kcontext, -4);
+    end
+
+
+rule "3.2: COW week only" salience 1
+// no other PaedOnCall or NeoOnCall shifts that week and the weekend before
+    when
+        Shift($id : id, $p: consultant, shiftType == "COW", $startDate:startDate)
+        Shift($id != id, $p == consultant, shiftType == "NeoOnCall",
+                     $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()) || 
+                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) ==  
+                      endDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+    then
+ scoreHolder.addHardConstraintMatch(kcontext, -2);
+    end
+
+
+
+rule "4.1: NOW week conditions" salience 1
+//No shifts weekend before, Cannot have COW before or of the week" salience 1
+when
+        Shift($id : id, $p: consultant, shiftType == "NOW", startDate.getDayOfWeek() == DayOfWeek.MONDAY, $startDate:startDate)
+        Shift($id != id, $p == consultant, (shiftType == "COW" && ($startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()) || 
+                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) ==  
+                      endDate.get(WeekFields.of(Locale.UK).weekOfYear()))) ||
+(shiftType =="NOW" && $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) ==  
+                      endDate.get(WeekFields.of(Locale.UK).weekOfYear())))
+ then
+ scoreHolder.addHardConstraintMatch(kcontext, -4);
+    end
+
+rule "4.2: NOW week conditions" salience 1
+//Can do weekend NOW or that week on calls but not both" 
+when
+        Shift($id : id, $p: consultant, shiftType == "NOW", startDate.getDayOfWeek() == DayOfWeek.MONDAY, $startDate:startDate)
+        Shift($id != id, $id1 :id, $p == consultant, shiftType == "NOW", $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+        Shift($id != id, $id1 != id, $p == consultant, shiftType == "PaedOnCall" || shiftType == "NeoOnCall",               
+ $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == startDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+then
+ scoreHolder.addHardConstraintMatch(kcontext, -1);
+    end
+
+
+
+rule "5: Only one oncall day per week" salience 1
+
+when 
+        Shift($p:consultant, shiftType == "PaedOnCall" || shiftType == "NeoOnCall", $startDate: startDate)
+        Shift($p == consultant, shiftType == "PaedOnCall" || shiftType == "NeoOnCall", $startDate != startDate,
+                $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+then
+ scoreHolder.addHardConstraintMatch(kcontext, -4);
+    end
+
+
+
+rule "6: No oncall on non working days" salience 1
+// except on Neo Weeks 
+
+when
+    Shift ($p:consultant, shiftType == "PaedOnCall" || shiftType == "NeoOnCall", $startDate : startDate)
+    ConsultantReader(this == $p, daysWorking  not contains $startDate.getDayOfWeek())
+    Shift ($p != consultant, shiftType == "NOW", $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()),
+                    startDate.getDayOfWeek() == DayOfWeek.MONDAY)
+
+ //                 ||
+//(ConsultantReader($p == this, daysWorkingList.contains($startDate.getDayOfWeek)) &&
+//      Shift ($p == consultant, shiftType == "NOW", $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+//                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()), 
+//                    startDate.getDayOfWeek() == DayOfWeek.MONDAY))              
+
+then
+ scoreHolder.addHardConstraintMatch(kcontext, -4);
+    end
+
+
+//////////////////////////// SOFT CONSTRAINTS /////////////////////////////////////////////////////////
+
+
+
+rule "7.1: Aim for on Call Target Shift number"
+
+when
+    ConsultantReader($p : this, onCalls == TypeOfWorking.Both || onCalls == TypeOfWorking.Neonates, $aim : onCallsTarget)
+    $num : Number()
+            from accumulate( Shift($p == consultant, shiftType == "NeoOnCall"),
+                            count())
+then
+    scoreHolder.addSoftConstraintMatch(kcontext, -(int)Math.pow($num.doubleValue()-$aim, 2));
+end
+
+
+rule "7.2: Aim for COW Week Target Shift number"
+
+when
+    ConsultantReader($p : this, weekdays == TypeOfWorking.Paeds || weekdays == TypeOfWorking.Both, $aim : COW_WeekTarget)
+    $num : Number()
+            from accumulate( Shift($p == consultant, shiftType == "COW", startDate.getDayOfWeek() == DayOfWeek.MONDAY),
+                            count())
+then
+    scoreHolder.addSoftConstraintMatch(kcontext, -(int)(Math.pow($num.intValue()-Math.round($aim),2)));
+
+end
+
+
+
+rule "7.3: Aim for NOW Week Target Shift number"
+
+when
+    ConsultantReader($p : this, weekdays == TypeOfWorking.Neonates || weekdays == TypeOfWorking.Both, $aim : NOW_WeekTarget)
+    $num : Number()
+            from accumulate( Shift($p == consultant, shiftType == "NOW", startDate.getDayOfWeek() == DayOfWeek.MONDAY),
+                            count())
+then
+    scoreHolder.addSoftConstraintMatch(kcontext, -(int)(Math.pow($num.doubleValue()-Math.round($aim), 2)));
+ //  System.out.println("////////////////////////////////////// Aim /////////////" + $aim);
+end
+
+
+rule "7.4: Aim for NOW Weekend Target Shift number"
+
+when
+    ConsultantReader($p : this, weekends == TypeOfWorking.Neonates || weekends == TypeOfWorking.Both, $aim : NOW_WeekendTarget)
+    $num : Number()
+            from accumulate( Shift($p == consultant, shiftType == "NOW", startDate.getDayOfWeek().getValue() > 4),
+                            count())
+then
+    scoreHolder.addSoftConstraintMatch(kcontext, -(int)(Math.pow($num.doubleValue()-Math.round($aim), 2)));
+ //  System.out.println("////////////////////////////////////// Aim /////////////" + $aim);
+end
+
+
+rule "7.5: Aim for COW Weekend Target Shift number"
+
+when
+    ConsultantReader($p : this, weekends == TypeOfWorking.Paeds || weekends == TypeOfWorking.Both, $aim : COW_WeekTarget)
+    $num : Number()
+            from accumulate( Shift($p == consultant, shiftType == "COW", startDate.getDayOfWeek().getValue() >4),
+                            count())
+then
+    scoreHolder.addSoftConstraintMatch(kcontext, -(int)(Math.pow($num.doubleValue()-Math.round($aim), 2)));
+ //   System.out.println("////////////////////////////////////// Aim /////////////" + $aim);
+end

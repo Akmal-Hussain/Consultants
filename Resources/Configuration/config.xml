@@ -20,7 +20,7 @@ and open the template in the editor.
     
     <termination>
   <!-- 2 minutes and 30 seconds in ISO 8601 format P[n]Y[n]M[n]DT[n]H[n]M[n]S -->
-  <unimprovedSpentLimit>PT2M30S</unimprovedSpentLimit>
+  <unimprovedSpentLimit>PT2H5M30S</unimprovedSpentLimit>
   
   </termination>
   
@@ -30,7 +30,7 @@ and open the template in the editor.
 <localSearch>
    
    <acceptor>
-  <simulatedAnnealingStartingTemperature>3hard/100soft</simulatedAnnealingStartingTemperature>
+  <simulatedAnnealingStartingTemperature>2hard/100soft</simulatedAnnealingStartingTemperature>
   <entityTabuSize>7</entityTabuSize>
    </acceptor>
   <forager>

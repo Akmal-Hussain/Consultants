@@ -1,0 +1,71 @@
+<plannerBenchmarkResult xStreamId="1">
+  <name>2021-01-21_210214</name>
+  <aggregation>false</aggregation>
+  <availableProcessors>4</availableProcessors>
+  <loggingLevelOptaPlannerCore>debug</loggingLevelOptaPlannerCore>
+  <loggingLevelDroolsCore>warn</loggingLevelDroolsCore>
+  <maxMemory>2075918336</maxMemory>
+  <optaPlannerVersion>7.42.0.Final</optaPlannerVersion>
+  <javaVersion>Java 1.8.0_212 (Oracle Corporation)</javaVersion>
+  <javaVM>Java OpenJDK Client VM 25.212-b01 (Oracle Corporation)</javaVM>
+  <operatingSystem>Linux arm 5.4.83-v7l+</operatingSystem>
+  <parallelBenchmarkCount>1</parallelBenchmarkCount>
+  <warmUpTimeMillisSpentLimit>30</warmUpTimeMillisSpentLimit>
+  <solverBenchmarkResult xStreamId="2">
+    <name>Config_0</name>
+    <subSingleCount>1</subSingleCount>
+    <solverConfig xStreamId="3">
+      <environmentMode>NON_REPRODUCIBLE</environmentMode>
+      <solutionClass>main.java.RunData.ShiftList</solutionClass>
+      <entityClass>main.java.RunData.Shift</entityClass>
+      <scoreDirectorFactory xStreamId="4">
+        <scoreDrl>Rules/RotaConstraints1.drl</scoreDrl>
+      </scoreDirectorFactory>
+      <termination xStreamId="5">
+        <unimprovedSpentLimit>PT2M30S</unimprovedSpentLimit>
+      </termination>
+      <constructionHeuristic xStreamId="6">
+        <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
+      </constructionHeuristic>
+      <localSearch xStreamId="7">
+        <acceptor xStreamId="8">
+          <entityTabuSize>7</entityTabuSize>
+          <simulatedAnnealingStartingTemperature>3hard/100soft</simulatedAnnealingStartingTemperature>
+        </acceptor>
+        <forager xStreamId="9">
+          <acceptedCountLimit>3</acceptedCountLimit>
+        </forager>
+      </localSearch>
+    </solverConfig>
+    <singleBenchmarkResult xStreamId="10">
+      <subSingleBenchmarkResult xStreamId="11">
+        <subSingleBenchmarkIndex>0</subSingleBenchmarkIndex>
+        <usedMemoryAfterInputSolution>15199856</usedMemoryAfterInputSolution>
+        <succeeded>true</succeeded>
+        <score class="org.optaplanner.core.api.score.buildin.hardsoft.HardSoftScore" xStreamId="12">0hard/-37soft</score>
+        <timeMillisSpent>261779</timeMillisSpent>
+        <scoreCalculationCount>311718</scoreCalculationCount>
+      </subSingleBenchmarkResult>
+      <timeMillisSpent>-1</timeMillisSpent>
+      <scoreCalculationCount>-1</scoreCalculationCount>
+    </singleBenchmarkResult>
+  </solverBenchmarkResult>
+  <unifiedProblemBenchmarkResult xStreamId="13">
+    <name>Problem_0</name>
+    <problemProvider class="instanceProblemProvider" xStreamId="14">
+      <problemName>Problem_0</problemName>
+    </problemProvider>
+    <writeOutputSolutionEnabled>false</writeOutputSolutionEnabled>
+    <problemStatistic class="bestScoreProblemStatistic" xStreamId="15">
+      <problemStatisticType>BEST_SCORE</problemStatisticType>
+    </problemStatistic>
+    <singleBenchmarkResult xStreamRef="10"/>
+    <entityCount>48</entityCount>
+    <variableCount>48</variableCount>
+    <maximumValueCount>13</maximumValueCount>
+    <problemScale>624</problemScale>
+    <inputSolutionLoadingTimeMillisSpent>12</inputSolutionLoadingTimeMillisSpent>
+  </unifiedProblemBenchmarkResult>
+  <startingTimestamp>2021-01-21T21:02:14.175Z</startingTimestamp>
+  <benchmarkTimeMillisSpent>268041</benchmarkTimeMillisSpent>
+</plannerBenchmarkResult>

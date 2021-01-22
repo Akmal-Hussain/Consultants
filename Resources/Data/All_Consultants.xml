@@ -9,55 +9,56 @@ and open the template in the editor.
 <Consultants>
     <Consultant>
         <Name>Ann Gordon</Name>
-        <FileName>/main/resources/Data/Ann_Gordon.xml</FileName>
+        <FileName>Resources/Data/Ann_Gordon.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Chandan Yaliwal</Name>
-        <FileName>/main/resources/Data/Chandan_Yaliwal.xml</FileName>
+        <FileName>Resources/Data/Chandan_Yaliwal.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Jo Spinks</Name>
-        <FileName>/main/resources/Data/Jo_Spinks.xml</FileName>
+        <FileName>Resources/Data/Jo_Spinks.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Ravi Kumar</Name>
-        <FileName>/main/resources/Data/Ravi_Kumar.xml</FileName>
+        <FileName>Resources/Data/Ravi_Kumar.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Ahmed Aldouri</Name>
-        <FileName>/main/resources/Data/Ahmed_Aldouri.xml</FileName>
+        <FileName>Resources/Data/Ahmed_Aldouri.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Elspeth Brooker</Name>
-        <FileName>/main/resources/Data/Elspeth_Brooker.xml</FileName>
+        <FileName>Resources/Data/Elspeth_Brooker.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Kemy Naidoo</Name>
-        <FileName>/main/resources/Data/Kemy_Naidoo.xml</FileName>
+        <FileName>Resources/Data/Kemy_Naidoo.xml</FileName>
     </Consultant>
  <Consultant>
         <Name>Helen Wolfenden</Name>
-        <FileName>/main/resources/Data/Helen_Wolfenden.xml</FileName>
+        <FileName>Resources/Data/Helen_Wolfenden.xml</FileName>
     </Consultant>
+    
     <Consultant>
         <Name>Claire Holt</Name>
-        <FileName>/main/resources/Data/Claire_Holt.xml</FileName>
+        <FileName>Resources/Data/Claire_Holt.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Balaji Surayan</Name>
-        <FileName>/main/resources/Data/Balaji_Surayan.xml</FileName>
+        <FileName>Resources/Data/Balaji_Surayan.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Peter DeHalpert</Name>
-        <FileName>/main/resources/Data/Peter_DeHalpert.xml</FileName>
+        <FileName>Resources/Data/Peter_DeHalpert.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Nicky Pritchard</Name>
-        <FileName>/main/resources/Data/Nicky_Pritchard.xml</FileName>
+        <FileName>Resources/Data/Nicky_Pritchard.xml</FileName>
     </Consultant>
     <Consultant>
         <Name>Ak Hussain</Name>
-        <FileName>/main/resources/Data/Ak_Hussain.xml</FileName>
+        <FileName>Resources/Data/Ak_Hussain.xml</FileName>
     </Consultant>
 
 </Consultants>

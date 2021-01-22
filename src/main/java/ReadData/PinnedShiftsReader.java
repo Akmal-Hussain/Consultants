@@ -5,11 +5,11 @@
  */
 package main.java.ReadData;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import main.java.RunData.ShiftList;
 import nu.xom.Builder;
 import nu.xom.Document;
 import nu.xom.Element;
@@ -30,7 +30,7 @@ public class PinnedShiftsReader {
         try {
             Builder builder = new Builder();
             //File file = new File(filename);
-            Document doc = builder.build(getClass().getResourceAsStream(filename));
+            Document doc = builder.build(new FileInputStream(filename));
             
             Element root = doc.getRootElement();
             
@@ -55,10 +55,10 @@ public class PinnedShiftsReader {
         return pinnedShifts;
     }
     public static void main(String[] args) {
-               new DatesReader("/main/resources/Data/Dates.xml");
-        new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
-        new ConsultantList("/main/resources/Data/All_Consultants.xml");
-        new PinnedShiftsReader("/main/resources/Data/Pinned_Shifts.xml");
+               new DatesReader("Resources/Data/Dates.xml");
+        new ShiftStructureReader("Resources/Data/Shift_Structure.xml");
+        new ConsultantList("Resources/Data/All_Consultants.xml");
+        new PinnedShiftsReader("Resources/Data/Pinned_Shifts.xml");
       //  new ShiftList();
     }
     

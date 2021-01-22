@@ -1,7 +1,7 @@
 package main.java.ReadData;
 
 
-import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import nu.xom.Builder;
@@ -31,7 +31,7 @@ public class ShiftStructureReader implements Serializable{
         try {
             Builder builder = new Builder();
             //File file = new File(filename);
-            Document doc = builder.build(getClass().getResourceAsStream(filename));
+            Document doc = builder.build(new FileInputStream(filename));
 
             Element root = doc.getRootElement();
 
@@ -73,7 +73,7 @@ public class ShiftStructureReader implements Serializable{
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
+        new ShiftStructureReader("Resources/Data/Shift_Structure.xml");
     }
 
 }

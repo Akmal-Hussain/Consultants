@@ -11,10 +11,7 @@ and open the template in the editor.
         <Day>31</Day>
             <Month>1</Month>
             <Year>2020</Year>
-        <Shift>
-            <Type>COW</Type>
-            <Consultant>Chandan Yaliwal</Consultant>
-        </Shift>
+
         <Shift>
             <Type>NOW</Type>
             <Consultant>Ahmed Aldouri</Consultant>

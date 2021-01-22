@@ -174,7 +174,7 @@ public class ExportSolution {
             try {
                 FileOutputStream out = new FileOutputStream(
                      //   new File("src/main/resources/Solutions/ExportSolution.xlsx"));
-new File("ExportSolution.xlsx"));
+new File("Resources/Solutions/ExportSolution.xlsx"));
                 workbook.write(out);
                 out.close();
                 System.out.println("ExportSolution.xlsx written successfully");

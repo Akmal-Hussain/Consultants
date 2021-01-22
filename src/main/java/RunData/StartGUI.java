@@ -21,10 +21,13 @@ public class StartGUI {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        new DatesReader("/main/resources/Data/Dates.xml");
-        new ShiftStructureReader("/main/resources/Data/Shift_Structure.xml");
-        new ConsultantList("/main/resources/Data/All_Consultants.xml");
-        new PinnedShiftsReader("/main/resources/Data/Pinned_Shifts.xml");
+        new DatesReader("Resources/Data/Dates.xml");
+        new ShiftStructureReader("Resources/Data/Shift_Structure.xml");
+        new ConsultantList("Resources/Data/All_Consultants.xml");
+        new PinnedShiftsReader("Resources/Data/Pinned_Shifts.xml");
+                System.out.println(ConsultantList.getConsultantList().get(1).getConsultantName());
+
+        System.out.println(ConsultantList.getConsultantList().get(1).getLeaveDates().get(1));
         new TitleScreen();
     }
     

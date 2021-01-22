@@ -1,5 +1,6 @@
 package main.java.ReadData;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -44,8 +45,9 @@ public class ConsultantReader implements Serializable {
         try {
             Builder builder = new Builder();
            // File xfile = new File(fileName);
-            Document doc = builder.build(getClass().getResourceAsStream(fileName));
-            this.filename= fileName;
+                       this.filename= fileName;
+
+            Document doc = builder.build(new FileInputStream(filename));
             Element root = doc.getRootElement();
 
             Element name = root.getFirstChildElement("Name");
@@ -300,6 +302,18 @@ public String getConsultantName() {
             Element leaveBlock = new Element("Leave_Block");
             Element fro = ReaderHelper.setDate(d[0],"From");
             Element too = ReaderHelper.setDate(d[1],"To");
+            leaveDates.clear();
+            
+            LocalDate localDate = d[0];
+      
+                while (!localDate.isEqual(d[1])) {
+                    leaveDates.add(localDate);
+                    localDate = localDate.plusDays(1L);
+                }
+                leaveDates.add(localDate);
+            
+
+            
             leaveBlock.appendChild(fro);
             leaveBlock.appendChild(too);
             datesOfLeave.appendChild(leaveBlock);
@@ -391,7 +405,7 @@ public String getConsultantName() {
   System.out.println(doc.toXML());
         System.out.println(filename);
         try {
-             FileOutputStream fileOutputStream = new FileOutputStream ("src"+filename);
+             FileOutputStream fileOutputStream = new FileOutputStream (filename);
 Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
 serializer.setIndent(4);
 serializer.write(doc);
@@ -405,8 +419,8 @@ serializer.write(doc);
     }
 
     public static void main(String[] args) {
-        ConsultantReader c = new ConsultantReader("src/main/resources/Data/Elspeth_Brooker.xml");
-        new DatesReader("src/main/resources/Data/Dates.xml");
+        ConsultantReader c = new ConsultantReader("Resources/Data/Elspeth_Brooker.xml");
+        new DatesReader("Resources/Data/Dates.xml");
         if (c.getFullOrPartTime() ==FullOrPartTime.PartTime) {
             System.out.println("Part");
         }

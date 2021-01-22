@@ -164,7 +164,7 @@ public class WorkingSolution extends JFrame{
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
         SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
-                "main/resources/Configuration/config.xml");
+                "Configuration/config.xml");
         solver = solverFactory.buildSolver();
         runSolver();
         

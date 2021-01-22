@@ -1,8 +1,10 @@
 package main.java.ReadData;
 
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -36,9 +38,10 @@ public class DatesReader implements Serializable{
     public DatesReader(String filename){
         try {
             this.filename = filename;
+            InputStream f = new FileInputStream(filename);
             Builder builder = new Builder();
             //File file = new File(filename);
-            Document doc = builder.build(getClass().getResourceAsStream(filename));
+            Document doc = builder.build(f);
             
             Element root = doc.getRootElement();
             
@@ -120,7 +123,7 @@ public class DatesReader implements Serializable{
          Document doc = new Document(Root);
   System.out.println(doc.toXML()); 
         try {
-             FileOutputStream fileOutputStream = new FileOutputStream ("src"+filename);
+             FileOutputStream fileOutputStream = new FileOutputStream (filename);
 Serializer serializer = new Serializer(fileOutputStream, "UTF-8");
 serializer.setIndent(4);
 serializer.write(doc);

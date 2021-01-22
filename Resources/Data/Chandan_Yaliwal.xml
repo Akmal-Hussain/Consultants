@@ -4,26 +4,14 @@
     <Dates_Of_Leave>
         <Leave_Block>
             <From>
-                <Day>14</Day>
-                <Month>2</Month>
+                <Day>13</Day>
+                <Month>1</Month>
                 <Year>2020</Year>
             </From>
             <To>
-                <Day>23</Day>
-                <Month>2</Month>
+                <Day>17</Day>
+                <Month>1</Month>
                 <Year>2020</Year>
-            </To>
-        </Leave_Block>
-        <Leave_Block>
-            <From>
-                <Day>1</Day>
-                <Month>5</Month>
-                <Year>2010</Year>
-            </From>
-            <To>
-                <Day>2</Day>
-                <Month>7</Month>
-                <Year>2010</Year>
             </To>
         </Leave_Block>
     </Dates_Of_Leave>
@@ -32,7 +20,6 @@
         <DaysWorking>
             <WeekDay>MONDAY</WeekDay>
             <WeekDay>TUESDAY</WeekDay>
-            <WeekDay>WEDNESDAY</WeekDay>
             <WeekDay>THURSDAY</WeekDay>
         </DaysWorking>
     </FullOrPartTime>

@@ -6,6 +6,7 @@
 package main.java.ReadData;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
 import java.time.DayOfWeek;
@@ -37,7 +38,7 @@ public class ConsultantList implements Serializable {
         try {
             Builder builder = new Builder();
         //    File xfile = new File(fileName);
-            Document doc = builder.build(getClass().getResourceAsStream(fileName));
+            Document doc = builder.build(new FileInputStream(fileName));
 
             Element root = doc.getRootElement();
 
@@ -143,7 +144,7 @@ public class ConsultantList implements Serializable {
     }
 
     public static void main(String[] args) {
-        new ConsultantList("src/main/resources/Data/All_Consultants.xml");
+        new ConsultantList("Resources/Data/All_Consultants.xml");
 
     }
 
