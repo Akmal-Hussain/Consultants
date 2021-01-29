@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Consultant>
     <Name> Kemy Naidoo </Name>
-    <Dates_Of_Leave>
-        <Leave_Block>
-            <From>
-                <Day>13</Day>
-                <Month>1</Month>
-                <Year>2020</Year>
-            </From>
-            <To>
-                <Day>17</Day>
-                <Month>1</Month>
-                <Year>2020</Year>
-            </To>
-        </Leave_Block>
-    </Dates_Of_Leave>
+    <Dates_Of_Leave/>
     <FullOrPartTime>Full
         <Factor>1.0</Factor>
         <DaysWorking>

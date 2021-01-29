@@ -141,9 +141,9 @@ public class Shift {
     public void setShiftType(String shiftType) {
         boolean isTrueShift = false;
         for (String weekday : ShiftStructureReader.getWeekdayDay()) {
-            if (shiftType.equalsIgnoreCase(weekday)) {
+            if (shiftType.equalsIgnoreCase(weekday) && startDate.getDayOfWeek()== DayOfWeek.MONDAY) {
                 isTrueShift = true;
-                endDate = startDate;
+                endDate = startDate.plusDays(4L);
             }
         }
         for (String weekday : ShiftStructureReader.getWeekdayNight()) {
@@ -153,7 +153,7 @@ public class Shift {
             }
         }
         for (String weekday : ShiftStructureReader.getWeekend()) {
-            if (shiftType.equalsIgnoreCase(weekday)) {
+            if (shiftType.equalsIgnoreCase(weekday) && startDate.getDayOfWeek()== DayOfWeek.FRIDAY) {
                 isTrueShift = true;
                 endDate = startDate.plusDays(8-startDate.getDayOfWeek().getValue());
             }

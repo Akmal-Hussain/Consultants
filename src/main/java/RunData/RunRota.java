@@ -98,11 +98,7 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
         finalShiftScore.setScore(solvedShiftList.getScore());
         display.update(finalShiftScore);
   
-      try {
-            // setLookAndFeel();
-            Thread.sleep(2000);
-        } catch (InterruptedException ex) {
-        }
+      
             DisplaySolution d = new DisplaySolution(solvedShiftList, solver, display);
 
 

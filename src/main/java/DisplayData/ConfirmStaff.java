@@ -440,7 +440,7 @@ new DatesReader("/main/resources/Data/Dates.xml");
         add.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               LocalDate[] blankLeaveDates = new LocalDate[]{LocalDate.of(1999, 1, 1), LocalDate.of(1999, 1, 1)};
+               LocalDate[] blankLeaveDates = new LocalDate[]{LocalDate.of(1999, 1, 1), LocalDate.of(1999, 1, 2)};
                c.getLeaveDatesList().add(blankLeaveDates); 
                dispose();
                new ConfirmStaff(ConsultantList.getConsultantList(),c);

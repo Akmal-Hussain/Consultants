@@ -7,8 +7,8 @@
             <Year>2020</Year>
         </From>
         <To>
-            <Day>2</Day>
-            <Month>2</Month>
+            <Day>12</Day>
+            <Month>8</Month>
             <Year>2020</Year>
         </To>
     </Range>
@@ -29,6 +29,18 @@
             <To>
                 <Day>24</Day>
                 <Month>1</Month>
+                <Year>2020</Year>
+            </To>
+        </SchoolHoliday>
+        <SchoolHoliday>
+            <From>
+                <Day>4</Day>
+                <Month>5</Month>
+                <Year>2020</Year>
+            </From>
+            <To>
+                <Day>15</Day>
+                <Month>5</Month>
                 <Year>2020</Year>
             </To>
         </SchoolHoliday>

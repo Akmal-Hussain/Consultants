@@ -203,7 +203,7 @@ public class ConfirmDates extends JFrame
         addSchoolHoliday.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                LocalDate[] blankSchoolHoliday = new LocalDate[]{LocalDate.of(1999, 1, 1), LocalDate.of(1999, 1, 1)};
+                LocalDate[] blankSchoolHoliday = new LocalDate[]{LocalDate.of(1999, 1, 1), LocalDate.of(1999, 1, 2)};
                 DatesReader.getSchoolHolidays().add(blankSchoolHoliday);
                 DatesReader.updateDatesReader();
                 dispose();
@@ -327,8 +327,38 @@ public class ConfirmDates extends JFrame
         for (JButton[] schoolHolidayPair : schoolHolidayButtonsList) {
             for (JButton schoolHolidayDate : schoolHolidayPair) {
                 if (ae.getSource().equals(schoolHolidayDate)) {
-                    System.out.println("Here");
-                    for (int x = 0; x < DatesReader.getSchoolHolidays().size(); x++) {
+                 for (LocalDate[] dates: DatesReader.getSchoolHolidays()){
+                     for (int y=0; y<2;y++){
+                         if (dates[y].toString().equals(((JButton) ae.getSource()).getText())) {
+                             int a = y;
+                             SelectedDate d = new SelectedDate(schoolHolidayDate, this) {
+
+                                    @Override
+                                    public void changeDate(LocalDate d) {
+                                        dates[a] = d;
+                                        System.out.println(DatesReader.getRange()[0]);
+                    DatesReader.updateDatesReader();
+                    //pop.hide();
+                    dispose();
+                    new ConfirmDates();
+                             
+                         }
+                             };
+                 }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    /*   for (int x = 0; x < DatesReader.getSchoolHolidays().size(); x++) {
                         int y = x;
                         for (int z = 0; z < 2; z++) {
                             if (DatesReader.getSchoolHolidays().get(x)[z].toString().equals(((JButton) ae.getSource()).getText())) {
@@ -347,12 +377,17 @@ public class ConfirmDates extends JFrame
                                 };
                             }
                         }
-                    }
+                    }*/
                     
 
+                     }
+                 }
+            
+        
                 }
             }
         }
-
     }
 }
+
+

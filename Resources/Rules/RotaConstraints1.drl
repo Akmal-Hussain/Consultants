@@ -18,12 +18,28 @@ global HardSoftScoreHolder scoreHolder;
 
 ////////////////////////////// HARD CONSTRAINTS ///////////////////////////////////////////////
 
-rule "1: leavedates" salience 1
+rule "1.1: leavedates COW and NOW" salience 1
     when
-        Shift($q: consultant, $startDate : startDate, $endDate : endDate, $id : id)
+        Shift($q: consultant, $startDate : startDate, $endDate : endDate, shiftType == "COW" || shiftType =="NOW")
+        ConsultantReader($q == this, leaveDates.contains($startDate))
+then
+  scoreHolder.addHardConstraintMatch(kcontext, -7);
+    end
+
+rule "1.2: leavedates COW and NOW" salience 1
+    when
+        Shift($q: consultant, $startDate : startDate, $endDate : endDate, shiftType == "COW" || shiftType =="NOW")
+        ConsultantReader($q == this, leaveDates.contains($endDate))
+then
+  scoreHolder.addHardConstraintMatch(kcontext, -3);
+    end
+
+rule "1.3: leavedates onCalls" salience 1
+    when
+        Shift($q: consultant, $startDate : startDate, $endDate : endDate, shiftType == "PaedOnCall" || shiftType =="NeoOnCall")
         ConsultantReader($q == this, leaveDates.contains($startDate) || leaveDates.contains($endDate))
 then
-  scoreHolder.addHardConstraintMatch(kcontext, -4);
+  scoreHolder.addHardConstraintMatch(kcontext, -3);
     end
 
 rule "2.1: Some can only do paed on calls" salience 1
@@ -31,7 +47,7 @@ rule "2.1: Some can only do paed on calls" salience 1
         $q : ConsultantReader(onCalls == TypeOfWorking.Paeds)
         Shift($q == consultant, shiftType == "NeoOnCall")
     then
-  scoreHolder.addHardConstraintMatch(kcontext, -4);
+  scoreHolder.addHardConstraintMatch(kcontext, -5);
     end
 
 rule "2.2: Most do both onCalls" salience 1
@@ -48,29 +64,46 @@ rule "3.1: COW week only" salience 1
 // no other shifts COW or NOW shifts that week and the weekend before
     when
         Shift($id : id, $p: consultant, shiftType == "COW", $startDate:startDate)
-        Shift($id != id, $p == consultant, shiftType != "NeoOnCall",
+        Shift($id != id, $p == consultant, shiftType != "NeoOnCall", shiftType != "PaedOnCall",
                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
                    startDate.get(WeekFields.of(Locale.UK).weekOfYear()) || 
-                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) ==  
-                      endDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+                      $startDate ==  endDate)
     then
  scoreHolder.addHardConstraintMatch(kcontext, -4);
     end
 
-
 rule "3.2: COW week only" salience 1
-// no other PaedOnCall or NeoOnCall shifts that week and the weekend before
+// if weekend COW cannot have COW or NOW before but less bad than 3.1
     when
         Shift($id : id, $p: consultant, shiftType == "COW", $startDate:startDate)
-        Shift($id != id, $p == consultant, shiftType == "NeoOnCall",
+        Shift($id != id, $p == consultant, shiftType != "NeoOnCall", shiftType != "PaedOnCall",
+                     $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   endDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+    then
+ scoreHolder.addHardConstraintMatch(kcontext, -1);
+    end
+
+rule "3.3: COW week only" salience 1
+// no other PaedOnCall or NeoOnCall shifts that week and the weekend before
+    when
+        Shift($id : id, $p: consultant, shiftType == "COW", $startDate:startDate, $endDate:endDate)
+        Shift($id != id, $p == consultant, shiftType == "NeoOnCall" || shiftType == "PaedOnCall",
                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
                    startDate.get(WeekFields.of(Locale.UK).weekOfYear()) || 
-                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) ==  
-                      endDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+                           $endDate ==  startDate)
     then
  scoreHolder.addHardConstraintMatch(kcontext, -2);
     end
 
+rule "3.4: COW week only" salience 1
+// if weekend Cow and have to work onCall that week - breaks hard constraint, can't do Thursday
+    when
+        Shift($id : id, $p: consultant, shiftType == "COW", $startDate:startDate, startDate.getDayOfWeek() == DayOfWeek.FRIDAY)
+        Shift($id != id, $p == consultant, shiftType == "NeoOnCall" || shiftType == "PaedOnCall",
+                     $startDate == endDate)
+    then
+ scoreHolder.addHardConstraintMatch(kcontext, -1);
+    end
 
 
 rule "4.1: NOW week conditions" salience 1
@@ -99,6 +132,26 @@ then
  scoreHolder.addHardConstraintMatch(kcontext, -1);
     end
 
+rule "4.3: NOW week only" salience 1
+// no other PaedOnCall or NeoOnCall shifts that week on the Monday after weekend
+    when
+        Shift($id : id, $p: consultant, shiftType == "NOW", $endDate:endDate, $startDate:startDate, startDate.getDayOfWeek() == DayOfWeek.FRIDAY)
+        Shift($id != id, $p == consultant, shiftType == "NeoOnCall" || shiftType == "PaedOnCall",
+                           $endDate ==  startDate || $startDate == endDate)
+    then
+ scoreHolder.addHardConstraintMatch(kcontext, -4);
+    end
+
+rule "4.4: NOW week conditions" salience 1
+//No weekend shifts on weekend before a NOW weekend" salience 1
+when
+        Shift($id : id, $p: consultant, shiftType == "NOW", startDate.getDayOfWeek() == DayOfWeek.FRIDAY, $startDate:startDate)
+        Shift($id != id, $p == consultant, shiftType == "COW" || shiftType =="NOW",
+                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) ==  
+                      endDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+ then
+ scoreHolder.addHardConstraintMatch(kcontext, -1);
+    end
 
 
 rule "5: Only one oncall day per week" salience 1
