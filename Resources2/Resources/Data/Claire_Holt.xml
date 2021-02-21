@@ -15,8 +15,8 @@
             </To>
         </Leave_Block>
     </Dates_Of_Leave>
-    <FullOrPartTime>Full
-        <Factor>1.0</Factor>
+    <FullOrPartTime>PartTime
+        <Factor>0.6</Factor>
         <DaysWorking>
             <WeekDay>MONDAY</WeekDay>
             <WeekDay>TUESDAY</WeekDay>
@@ -25,9 +25,11 @@
     </FullOrPartTime>
     <Types_Of_Work>
         <Week_Work>
+            <Type>COW</Type>
             <Type>NOW</Type>
         </Week_Work>
         <Weekend_Work>
+            <Type>COW</Type>
             <Type>NOW</Type>
         </Weekend_Work>
         <OnCalls>

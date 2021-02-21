@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Consultant>
-    <Name> Claire Holt </Name>
+    <Name> Ravi Kumar </Name>
     <Dates_Of_Leave>
         <Leave_Block>
             <From>
-                <Day>4</Day>
-                <Month>5</Month>
+                <Day>13</Day>
+                <Month>1</Month>
                 <Year>2020</Year>
             </From>
             <To>
-                <Day>15</Day>
-                <Month>5</Month>
+                <Day>17</Day>
+                <Month>1</Month>
                 <Year>2020</Year>
             </To>
         </Leave_Block>
@@ -25,9 +25,11 @@
     </FullOrPartTime>
     <Types_Of_Work>
         <Week_Work>
+            <Type>COW</Type>
             <Type>NOW</Type>
         </Week_Work>
         <Weekend_Work>
+            <Type>COW</Type>
             <Type>NOW</Type>
         </Weekend_Work>
         <OnCalls>

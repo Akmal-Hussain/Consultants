@@ -12,11 +12,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -157,16 +161,22 @@ public class WorkingSolution extends JFrame{
 
 
 
-
         
         add(pane);
         setExtendedState(JFrame.MAXIMIZED_BOTH);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setVisible(true);
-        SolverFactory<ShiftList> solverFactory = SolverFactory.createFromXmlResource(
-                "Configuration/config.xml");
-        solver = solverFactory.buildSolver();
+        SolverFactory<ShiftList> solverFactory;
+        try {
+            solverFactory = SolverFactory.createFromXmlInputStream((
+                    new FileInputStream("Resources/Configuration/config.xml")));
+             solver = solverFactory.buildSolver();
         runSolver();
+        } catch (FileNotFoundException ex) {
+            System.out.println("Problematic...");
+        }
+;
+        
         
     }
     /**

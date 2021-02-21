@@ -18,7 +18,11 @@ and open the template in the editor.
         <scoreDrl>Rules/RotaConstraints1.drl</scoreDrl>
     </scoreDirectorFactory>
     
-
+<!--    <termination>
+   2 minutes and 30 seconds in ISO 8601 format P[n]Y[n]M[n]DT[n]H[n]M[n]S 
+  <unimprovedSpentLimit>PT0H0M3S</unimprovedSpentLimit>
+  
+  </termination>-->
   
    <constructionHeuristic>
   <constructionHeuristicType>FIRST_FIT</constructionHeuristicType>
@@ -26,7 +30,7 @@ and open the template in the editor.
 <localSearch>
        <termination>
 <!--   2 minutes and 30 seconds in ISO 8601 format P[n]Y[n]M[n]DT[n]H[n]M[n]S -->
-  <unimprovedSpentLimit>PT6H0M3S</unimprovedSpentLimit>
+  <unimprovedSpentLimit>PT3H0M3S</unimprovedSpentLimit>
   
   </termination>
    <acceptor>
@@ -36,20 +40,6 @@ and open the template in the editor.
   <forager>
   <acceptedCountLimit>3</acceptedCountLimit>
   </forager>
-</localSearch>
-<localSearch>
-       <termination>
-  <unimprovedSpentLimit>PT6H0M3S</unimprovedSpentLimit>
-  
-  </termination>
-   <acceptor>
-       <stepCountingHillClimbingSize>500</stepCountingHillClimbingSize>
-  <entityTabuSize>7</entityTabuSize>
-   </acceptor>
-  <forager>
-  <acceptedCountLimit>1</acceptedCountLimit>
-  </forager>
-</localSearch>
 </localSearch>
   <localSearch>
        <termination>

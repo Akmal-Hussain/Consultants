@@ -1,33 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Consultant>
-    <Name> Claire Holt </Name>
-    <Dates_Of_Leave>
-        <Leave_Block>
-            <From>
-                <Day>4</Day>
-                <Month>5</Month>
-                <Year>2020</Year>
-            </From>
-            <To>
-                <Day>15</Day>
-                <Month>5</Month>
-                <Year>2020</Year>
-            </To>
-        </Leave_Block>
-    </Dates_Of_Leave>
+    <Name> Kemy Naidoo </Name>
+    <Dates_Of_Leave/>
     <FullOrPartTime>Full
         <Factor>1.0</Factor>
         <DaysWorking>
             <WeekDay>MONDAY</WeekDay>
-            <WeekDay>TUESDAY</WeekDay>
+            <WeekDay>WEDNESDAY</WeekDay>
             <WeekDay>THURSDAY</WeekDay>
         </DaysWorking>
     </FullOrPartTime>
     <Types_Of_Work>
         <Week_Work>
+            <Type>COW</Type>
             <Type>NOW</Type>
         </Week_Work>
         <Weekend_Work>
+            <Type>COW</Type>
             <Type>NOW</Type>
         </Weekend_Work>
         <OnCalls>

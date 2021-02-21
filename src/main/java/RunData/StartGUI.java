@@ -28,17 +28,17 @@ public class StartGUI {
         new PinnedShiftsReader("Resources/Data/Pinned_Shifts.xml");
 
        
-//        ShiftList unsolvedShiftList = new ShiftList();
-//        ConsultantList.addShiftTargets(unsolvedShiftList);
-//        for(ConsultantReader c: ConsultantList.getConsultantList()){
-//            System.out.println(c);
-//            System.out.println("COW week target:    "+ c.getCOW_WeekTarget());
-//            System.out.println("Now week Target:    " +c.getNOW_WeekTarget());
-//            System.out.println("COW w/e Target:     " + c.getCOW_WeekendTarget());
-//            System.out.println("NOW w/e Target:     " + c.getNOW_WeekendTarget());
-//            System.out.println("OnCalls:            " + c.getOnCallsTarget());
-//        }
-//        System.exit(-1);
+        ShiftList unsolvedShiftList = new ShiftList();
+        ConsultantList.addShiftTargets(unsolvedShiftList);
+        for(ConsultantReader c: ConsultantList.getConsultantList()){
+            System.out.println(c);
+            System.out.println("COW week target:    "+ c.getCOW_WeekTarget());
+            System.out.println("Now week Target:    " +c.getNOW_WeekTarget());
+            System.out.println("COW w/e Target:     " + c.getCOW_WeekendTarget());
+            System.out.println("NOW w/e Target:     " + c.getNOW_WeekendTarget());
+            System.out.println("OnCalls:            " + c.getOnCallsTarget());
+        }
+       // System.exit(-1);
         new ConfirmDates();
     }
     

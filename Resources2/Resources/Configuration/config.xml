@@ -15,7 +15,7 @@ and open the template in the editor.
     <scoreDirectorFactory>
 <!--        <easyScoreCalculatorClass>Rules/RotaConstraintsJava</easyScoreCalculatorClass>-->
         
-        <scoreDrl>Rules/RotaConstraints1.drl</scoreDrl>
+        <scoreDrl>/Rules/RotaConstraints1.drl</scoreDrl>
     </scoreDirectorFactory>
     
 
@@ -45,20 +45,6 @@ and open the template in the editor.
    <acceptor>
        <stepCountingHillClimbingSize>500</stepCountingHillClimbingSize>
   <entityTabuSize>7</entityTabuSize>
-   </acceptor>
-  <forager>
-  <acceptedCountLimit>1</acceptedCountLimit>
-  </forager>
-</localSearch>
-</localSearch>
-  <localSearch>
-       <termination>
-  <unimprovedSpentLimit>PT3H0M3S</unimprovedSpentLimit>
-  
-  </termination>
-   <acceptor>
-       <lateAcceptanceSize>400</lateAcceptanceSize>
-  <entityTabuSize>5</entityTabuSize>
    </acceptor>
   <forager>
   <acceptedCountLimit>1</acceptedCountLimit>

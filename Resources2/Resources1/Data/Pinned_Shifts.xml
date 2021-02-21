@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<Shifts>
+<!--    <Date>
+        <Day>10</Day>
+            <Month>1</Month>
+            <Year>2020</Year>
+
+        <Shift>
+            <Type>COW</Type>
+            <Consultant>Peter DeHalpert</Consultant>
+        </Shift>
+    </Date>
+    <Date>
+        <Day>13</Day>
+            <Month>1</Month>
+            <Year>2020</Year>
+
+        <Shift>
+            <Type>NeoOnCall</Type>
+            <Consultant>Peter DeHalpert</Consultant>
+        </Shift>
+        <Shift>
+            <Type>PaedOnCall</Type>
+            <Consultant>Peter DeHalpert</Consultant>
+        </Shift>
+    </Date>
+    <Date>
+        <Day>10</Day>
+            <Month>1</Month>
+            <Year>2020</Year>
+
+        <Shift>
+            <Type>NOW</Type>
+            <Consultant>Ak Hussain</Consultant>
+        </Shift>
+    </Date>
+    <Date>
+        <Day>17</Day>
+            <Month>1</Month>
+            <Year>2020</Year>
+
+        <Shift>
+            <Type>COW</Type>
+            <Consultant>Ak Hussain</Consultant>
+        </Shift>
+    </Date>-->
+</Shifts>

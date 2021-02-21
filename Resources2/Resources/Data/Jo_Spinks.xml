@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Consultant>
-    <Name> Claire Holt </Name>
+    <Name> Jo Spinks </Name>
     <Dates_Of_Leave>
         <Leave_Block>
             <From>
-                <Day>4</Day>
-                <Month>5</Month>
+                <Day>13</Day>
+                <Month>1</Month>
                 <Year>2020</Year>
             </From>
             <To>
-                <Day>15</Day>
-                <Month>5</Month>
+                <Day>17</Day>
+                <Month>1</Month>
                 <Year>2020</Year>
             </To>
         </Leave_Block>
@@ -20,14 +20,16 @@
         <DaysWorking>
             <WeekDay>MONDAY</WeekDay>
             <WeekDay>TUESDAY</WeekDay>
-            <WeekDay>THURSDAY</WeekDay>
+            <WeekDay>WEDNESDAY</WeekDay>
         </DaysWorking>
     </FullOrPartTime>
     <Types_Of_Work>
         <Week_Work>
+            <Type>COW</Type>
             <Type>NOW</Type>
         </Week_Work>
         <Weekend_Work>
+            <Type>COW</Type>
             <Type>NOW</Type>
         </Weekend_Work>
         <OnCalls>
