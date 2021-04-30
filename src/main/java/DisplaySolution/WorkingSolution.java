@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package main.java.DisplaySolution;
-
+//
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
