@@ -7,48 +7,99 @@ and open the template in the editor.
 
 
 <Shifts>
-<!--    <Date>
-        <Day>10</Day>
-            <Month>1</Month>
-            <Year>2020</Year>
+    <Date>
+        <Day>25</Day>
+        <Month>6</Month>
+        <Year>2021</Year>
 
+        <Shift>
+            <Type>COW</Type>
+            <Consultant>Claire Holt</Consultant>
+        </Shift>
+    </Date>
+    <Date>
+        <Day>25</Day>
+        <Month>6</Month>
+        <Year>2021</Year>
+
+        <Shift>
+            <Type>NOW</Type>
+            <Consultant>Kemy Naidoo</Consultant>
+        </Shift>
+    </Date>
+    <Date>
+        <Day>28</Day>
+        <Month>6</Month>
+        <Year>2021</Year>
         <Shift>
             <Type>COW</Type>
             <Consultant>Peter DeHalpert</Consultant>
         </Shift>
+        <Shift>
+            <Type>NOW</Type>
+            <Consultant>Ahmed Aldouri</Consultant>
+        </Shift>
+        <Shift>
+            <Type>NeoOnCall</Type>
+            <Consultant>Helen Wolfenden</Consultant>
+        </Shift>
+        <Shift>
+            <Type>PaedOnCall</Type>
+            <Consultant>Asha Madasseri</Consultant>
+        </Shift>
     </Date>
     <Date>
-        <Day>13</Day>
-            <Month>1</Month>
-            <Year>2020</Year>
+        <Day>29</Day>
+        <Month>6</Month>
+        <Year>2021</Year>
 
+        <Shift>
+            <Type>PaedOnCall</Type>
+            <Consultant>Elspeth Brooker</Consultant>
+        </Shift>
+        <Shift>
+            <Type>NeoOnCall</Type>
+            <Consultant>Elspeth Brooker</Consultant>
+        </Shift>
+    </Date>
+    <Date>
+        <Day>30</Day>
+        <Month>6</Month>
+        <Year>2021</Year>
+        <Shift>
+            <Type>NeoOnCall</Type>
+            <Consultant>Chandan Yaliwal</Consultant>
+        </Shift>
+        <Shift>
+            <Type>PaedOnCall</Type>
+            <Consultant>Chandan Yaliwal</Consultant>
+        </Shift>
+    </Date>
+    <Date>
+        <Day>1</Day>
+        <Month>7</Month>
+        <Year>2021</Year>
         <Shift>
             <Type>NeoOnCall</Type>
             <Consultant>Peter DeHalpert</Consultant>
         </Shift>
         <Shift>
             <Type>PaedOnCall</Type>
-            <Consultant>Peter DeHalpert</Consultant>
+            <Consultant>Jo Spinks</Consultant>
         </Shift>
     </Date>
     <Date>
-        <Day>10</Day>
-            <Month>1</Month>
-            <Year>2020</Year>
-
-        <Shift>
-            <Type>NOW</Type>
-            <Consultant>Ak Hussain</Consultant>
-        </Shift>
-    </Date>
-    <Date>
-        <Day>17</Day>
-            <Month>1</Month>
-            <Year>2020</Year>
-
+        <Day>2</Day>
+        <Month>7</Month>
+        <Year>2021</Year>
         <Shift>
             <Type>COW</Type>
-            <Consultant>Ak Hussain</Consultant>
+            <Consultant>Nicky Pritchard</Consultant>
         </Shift>
-    </Date>-->
+        <Shift>
+            <Type>NOW</Type>
+            <Consultant>Ahmed Aldouri</Consultant>
+        </Shift>
+        
+    </Date>
 </Shifts>

@@ -31,7 +31,7 @@
         <Factor>1.0</Factor>
         <DaysWorking>
             <WeekDay>MONDAY</WeekDay>
-            <WeekDay>TUESDAY</WeekDay>
+            <WeekDay>WEDNESDAY</WeekDay>
             <WeekDay>THURSDAY</WeekDay>
         </DaysWorking>
     </FullOrPartTime>

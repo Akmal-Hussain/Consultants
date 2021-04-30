@@ -2,46 +2,46 @@
 <Dates>
     <Range>
         <From>
-            <Day>6</Day>
-            <Month>1</Month>
-            <Year>2020</Year>
+            <Day>25</Day>
+            <Month>6</Month>
+            <Year>2021</Year>
         </From>
         <To>
-            <Day>24</Day>
-            <Month>4</Month>
-            <Year>2020</Year>
+            <Day>17</Day>
+            <Month>12</Month>
+            <Year>2021</Year>
         </To>
     </Range>
     <BankHolidays>
         <BankHoliday>
-            <Day>3</Day>
-            <Month>2</Month>
-            <Year>2020</Year>
+            <Day>30</Day>
+            <Month>8</Month>
+            <Year>2021</Year>
         </BankHoliday>
     </BankHolidays>
     <SchoolHolidays>
         <SchoolHoliday>
             <From>
-                <Day>13</Day>
-                <Month>1</Month>
-                <Year>2020</Year>
+                <Day>22</Day>
+                <Month>7</Month>
+                <Year>2021</Year>
             </From>
             <To>
-                <Day>24</Day>
-                <Month>1</Month>
-                <Year>2020</Year>
+                <Day>31</Day>
+                <Month>8</Month>
+                <Year>2021</Year>
             </To>
         </SchoolHoliday>
         <SchoolHoliday>
             <From>
-                <Day>4</Day>
-                <Month>5</Month>
-                <Year>2020</Year>
+                <Day>25</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
             </From>
             <To>
-                <Day>15</Day>
-                <Month>5</Month>
-                <Year>2020</Year>
+                <Day>5</Day>
+                <Month>11</Month>
+                <Year>2021</Year>
             </To>
         </SchoolHoliday>
     </SchoolHolidays>

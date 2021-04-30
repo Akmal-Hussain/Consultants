@@ -4,14 +4,50 @@
     <Dates_Of_Leave>
         <Leave_Block>
             <From>
-                <Day>13</Day>
-                <Month>1</Month>
-                <Year>2020</Year>
+                <Day>2</Day>
+                <Month>9</Month>
+                <Year>2021</Year>
             </From>
             <To>
-                <Day>17</Day>
-                <Month>1</Month>
-                <Year>2020</Year>
+                <Day>14</Day>
+                <Month>9</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>30</Day>
+                <Month>7</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>6</Day>
+                <Month>8</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>2</Day>
+                <Month>7</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>9</Day>
+                <Month>7</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>26</Day>
+                <Month>8</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>27</Day>
+                <Month>8</Month>
+                <Year>2021</Year>
             </To>
         </Leave_Block>
     </Dates_Of_Leave>
@@ -26,15 +62,12 @@
     <Types_Of_Work>
         <Week_Work>
             <Type>COW</Type>
-            <Type>NOW</Type>
         </Week_Work>
         <Weekend_Work>
             <Type>COW</Type>
-            <Type>NOW</Type>
         </Weekend_Work>
         <OnCalls>
             <Type>Paed</Type>
-            <Type>Neo</Type>
         </OnCalls>
     </Types_Of_Work>
     <Balance_Last_Rota>

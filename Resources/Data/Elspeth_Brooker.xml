@@ -4,14 +4,74 @@
     <Dates_Of_Leave>
         <Leave_Block>
             <From>
-                <Day>13</Day>
-                <Month>1</Month>
-                <Year>2020</Year>
+                <Day>1</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
             </From>
             <To>
+                <Day>1</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>7</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>13</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>29</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>29</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
                 <Day>17</Day>
-                <Month>1</Month>
-                <Year>2020</Year>
+                <Month>9</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>24</Day>
+                <Month>9</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>30</Day>
+                <Month>7</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>13</Day>
+                <Month>8</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>9</Day>
+                <Month>7</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>16</Day>
+                <Month>7</Month>
+                <Year>2021</Year>
             </To>
         </Leave_Block>
     </Dates_Of_Leave>
@@ -20,7 +80,7 @@
         <DaysWorking>
             <WeekDay>MONDAY</WeekDay>
             <WeekDay>TUESDAY</WeekDay>
-            <WeekDay>THURSDAY</WeekDay>
+            <WeekDay>WEDNESDAY</WeekDay>
         </DaysWorking>
     </FullOrPartTime>
     <Types_Of_Work>
@@ -38,7 +98,7 @@
         </OnCalls>
     </Types_Of_Work>
     <Balance_Last_Rota>
-        <OnCalls>0.0</OnCalls>
+        <OnCalls>-1.0</OnCalls>
         <COW_Week>0.0</COW_Week>
         <NOW_Week>0.0</NOW_Week>
         <COW_Weekend>0.0</COW_Weekend>

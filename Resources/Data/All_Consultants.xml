@@ -60,5 +60,9 @@ and open the template in the editor.
         <Name>Ak Hussain</Name>
         <FileName>Resources/Data/Ak_Hussain.xml</FileName>
     </Consultant>
+        <Consultant>
+        <Name>Asha Madasseri</Name>
+        <FileName>Resources/Data/Asha_Madasseri.xml</FileName>
+    </Consultant>
 
 </Consultants>

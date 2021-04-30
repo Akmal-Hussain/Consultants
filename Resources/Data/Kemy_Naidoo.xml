@@ -27,7 +27,7 @@
     <Balance_Last_Rota>
         <OnCalls>0.0</OnCalls>
         <COW_Week>0.0</COW_Week>
-        <NOW_Week>0.0</NOW_Week>
+        <NOW_Week>-1.0</NOW_Week>
         <COW_Weekend>0.0</COW_Weekend>
         <NOW_Weekend>0.0</NOW_Weekend>
     </Balance_Last_Rota>
