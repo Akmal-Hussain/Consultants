@@ -77,7 +77,7 @@ public class ConsultantList implements Serializable {
         double NOW_WeekdayNumber = 0;
         double NOW_WeekendNumber = 0;
         double onCallsNumber = 0;
-
+        
         for (Shift shift : shiftList.getShiftList()) {
             if (shift.getShiftType().equals("COW") && shift.getStartDate().getDayOfWeek() == DayOfWeek.MONDAY) {
                 COW_WeekdayNumber++;
@@ -168,6 +168,7 @@ public class ConsultantList implements Serializable {
         double NOW_WeekdayPercent = (NOW_WeekdayNumber+consultantShiftsCarriedNOW_Weekday)/(COW_WeekdayNumber+consultantShiftsCarriedCOW_Weekday+NOW_WeekdayNumber+consultantShiftsCarriedNOW_Weekday);
         double COW_WeekendPercent = (COW_WeekendNumber+consultantShiftsCarriedCOW_Weekend)/(COW_WeekendNumber + NOW_WeekendNumber+ consultantShiftsCarriedCOW_Weekend+ consultantShiftsCarriedNOW_Weekend);
         double NOW_WeekendPercent = (NOW_WeekendNumber+consultantShiftsCarriedNOW_Weekend)/(COW_WeekendNumber + NOW_WeekendNumber+ consultantShiftsCarriedCOW_Weekend+ consultantShiftsCarriedNOW_Weekend);
+        System.out.println("Look Here");
         for (Iterator<ConsultantReader> cs = getConsultantList().iterator(); cs.hasNext();) {
             ConsultantReader cons = cs.next();
 
@@ -183,9 +184,15 @@ public class ConsultantList implements Serializable {
                 cons.setNOW_WeekendTarget(NOW_WeekendPercent*2*partTimeFactor  * magicWeekend - cons.getBalance().get("NOW_Weekend"));
         }
             cons.setOnCallsTarget(partTimeFactor * (onCallsNumber + consultantShiftsCarriedOnCalls) / consultantNumberOnCalls - cons.getBalance().get("OnCalls"));
-
+            
+            
+            if (cons.getConsultantName().contains("Jo Spinks")) {
+                System.out.println("Registers with " + cons.getConsultantName());
+          
+            }
+            
         }
-        
+            
             /*
             if (cons.getWeekdays() == TypeOfWorking.Paeds || cons.getWeekdays() == TypeOfWorking.Both) {
                 cons.setCOW_WeekTarget(partTimeFactor * (COW_WeekdayNumber + consultantShiftsCarriedCOW_Weekday) / consultantNumberCOW_Weekday - cons.getBalance().get("COW_Week"));

@@ -70,6 +70,7 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
       
         unsolvedShiftList = new ShiftList();
         ConsultantList.addShiftTargets(unsolvedShiftList);
+
  //       WorkingSolution display = new WorkingSolution();
         
         
@@ -133,6 +134,7 @@ public class RunRota extends SwingWorker <ShiftList,ShiftScore> {
 
        // new RunRota(new WorkingSolution());
        new WorkingSolution();
+      
     }
 
     
