@@ -10,7 +10,7 @@ and open the template in the editor.
     <solutionClass>main.java.RunData.ShiftList</solutionClass>
     <entityClass>main.java.RunData.Shift</entityClass>
     
-  <environmentMode>NON_REPRODUCIBLE</environmentMode>
+  <environmentMode>jkNON_REPRODUCIBLE</environmentMode>
 
     <scoreDirectorFactory>
 <!--        <easyScoreCalculatorClass>Rules/RotaConstraintsJava</easyScoreCalculatorClass>-->
