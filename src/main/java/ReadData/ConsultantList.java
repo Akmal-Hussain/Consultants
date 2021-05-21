@@ -101,7 +101,7 @@ public class ConsultantList implements Serializable {
                 System.out.println("COW weekend totals: "+ COW_WeekendNumber);
                 System.out.println("Now weekend totals: "+ NOW_WeekendNumber);
                 System.out.println("OnCalls total: "+ onCallsNumber);
-
+        
         for (ConsultantReader c : getConsultantList()) {
             double x = c.getFactor();
 
@@ -136,9 +136,14 @@ public class ConsultantList implements Serializable {
             consultantShiftsCarriedNOW_Weekend += c.getBalance().get("NOW_Weekend");
 
         }
+        
+        System.out.println("Consultants Doing COW Weekdays" + consultantNumberCOW_Weekday);
+                System.out.println("Consultants Doing NOW Weekdays" + consultantNumberNOW_Weekday);
+
+        
         double magicWeekday = (COW_WeekdayNumber + NOW_WeekdayNumber+ consultantShiftsCarriedNOW_Weekday + consultantShiftsCarriedCOW_Weekday) / (consultantNumberCOW_Weekday+consultantNumberNOW_Weekday);
         double magicWeekend = (COW_WeekendNumber + NOW_WeekendNumber + consultantShiftsCarriedNOW_Weekend+ consultantShiftsCarriedCOW_Weekend)/  (consultantNumberCOW_Weekend +consultantNumberNOW_Weekend);
-        System.out.println("magic weekend"+magicWeekend);
+        System.out.println("magic weekday"+magicWeekday);
       
         for (Iterator<ConsultantReader> cs = getConsultantList().iterator(); cs.hasNext();) {
             ConsultantReader cons = cs.next();
@@ -192,7 +197,7 @@ public class ConsultantList implements Serializable {
             }
             
         }
-            
+        System.exit(-1);   
             /*
             if (cons.getWeekdays() == TypeOfWorking.Paeds || cons.getWeekdays() == TypeOfWorking.Both) {
                 cons.setCOW_WeekTarget(partTimeFactor * (COW_WeekdayNumber + consultantShiftsCarriedCOW_Weekday) / consultantNumberCOW_Weekday - cons.getBalance().get("COW_Week"));

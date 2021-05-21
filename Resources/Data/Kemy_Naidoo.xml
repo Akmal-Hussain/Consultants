@@ -1,7 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Consultant>
     <Name> Kemy Naidoo </Name>
-    <Dates_Of_Leave/>
+    <Dates_Of_Leave>
+        <Leave_Block>
+            <From>
+                <Day>23</Day>
+                <Month>8</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>3</Day>
+                <Month>9</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>18</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>29</Day>
+                <Month>10</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>13</Day>
+                <Month>12</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>17</Day>
+                <Month>12</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+    </Dates_Of_Leave>
     <FullOrPartTime>Full
         <Factor>1.0</Factor>
         <DaysWorking>
