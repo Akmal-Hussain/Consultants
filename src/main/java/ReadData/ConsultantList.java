@@ -197,7 +197,7 @@ public class ConsultantList implements Serializable {
             }
             
         }
-        System.exit(-1);   
+        System.exit(-1jjhg);   
             /*
             if (cons.getWeekdays() == TypeOfWorking.Paeds || cons.getWeekdays() == TypeOfWorking.Both) {
                 cons.setCOW_WeekTarget(partTimeFactor * (COW_WeekdayNumber + consultantShiftsCarriedCOW_Weekday) / consultantNumberCOW_Weekday - cons.getBalance().get("COW_Week"));
