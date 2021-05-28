@@ -5,7 +5,6 @@
  */
 package main.java.ReadData;
 
-import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.Serializable;
@@ -77,7 +76,7 @@ public class ConsultantList implements Serializable {
         double NOW_WeekdayNumber = 0;
         double NOW_WeekendNumber = 0;
         double onCallsNumber = 0;
-        
+
         for (Shift shift : shiftList.getShiftList()) {
             if (shift.getShiftType().equals("COW") && shift.getStartDate().getDayOfWeek() == DayOfWeek.MONDAY) {
                 COW_WeekdayNumber++;
@@ -95,13 +94,13 @@ public class ConsultantList implements Serializable {
                 onCallsNumber++;
             }
         }
-        
-        System.out.println("Cow weekday totals: "+ COW_WeekdayNumber);
-                System.out.println("Now weekday totals: "+ NOW_WeekdayNumber);
-                System.out.println("COW weekend totals: "+ COW_WeekendNumber);
-                System.out.println("Now weekend totals: "+ NOW_WeekendNumber);
-                System.out.println("OnCalls total: "+ onCallsNumber);
-        
+
+        System.out.println("Cow weekday totals: " + COW_WeekdayNumber);
+        System.out.println("Now weekday totals: " + NOW_WeekdayNumber);
+        System.out.println("COW weekend totals: " + COW_WeekendNumber);
+        System.out.println("Now weekend totals: " + NOW_WeekendNumber);
+        System.out.println("OnCalls total: " + onCallsNumber);
+
         for (ConsultantReader c : getConsultantList()) {
             double x = c.getFactor();
 
@@ -113,18 +112,17 @@ public class ConsultantList implements Serializable {
                 consultantNumberCOW_Weekday += x;
                 consultantNumberNOW_Weekday += x;
             }
-            
 
             if (c.getWeekends() == TypeOfWorking.Paeds || c.getWeekdays() == TypeOfWorking.Neonates) {
                 consultantNumberCOW_Weekend += x;
                 consultantNumberNOW_Weekend += x;
             }
-            
+
             if (c.getWeekends() == TypeOfWorking.Both) {
                 consultantNumberCOW_Weekend += x;
                 consultantNumberNOW_Weekend += x;
             }
-            
+
             if (c.getOnCalls() == TypeOfWorking.Both || c.getOnCalls() == TypeOfWorking.Neonates) {
                 consultantNumberOnCalls += x;
                 consultantShiftsCarriedOnCalls += c.getBalance().get("OnCalls");
@@ -136,70 +134,72 @@ public class ConsultantList implements Serializable {
             consultantShiftsCarriedNOW_Weekend += c.getBalance().get("NOW_Weekend");
 
         }
-        
-        System.out.println("Consultants Doing COW Weekdays" + consultantNumberCOW_Weekday);
-                System.out.println("Consultants Doing NOW Weekdays" + consultantNumberNOW_Weekday);
 
-        
-        double magicWeekday = (COW_WeekdayNumber + NOW_WeekdayNumber+ consultantShiftsCarriedNOW_Weekday + consultantShiftsCarriedCOW_Weekday) / (consultantNumberCOW_Weekday+consultantNumberNOW_Weekday);
-        double magicWeekend = (COW_WeekendNumber + NOW_WeekendNumber + consultantShiftsCarriedNOW_Weekend+ consultantShiftsCarriedCOW_Weekend)/  (consultantNumberCOW_Weekend +consultantNumberNOW_Weekend);
-        System.out.println("magic weekday"+magicWeekday);
-      
+        System.out.println("Consultants Doing COW Weekdays" + consultantNumberCOW_Weekday);
+        System.out.println("Consultants Doing NOW Weekdays" + consultantNumberNOW_Weekday);
+
+        double magicWeekday = (COW_WeekdayNumber + NOW_WeekdayNumber + consultantShiftsCarriedNOW_Weekday + consultantShiftsCarriedCOW_Weekday) / (consultantNumberCOW_Weekday + consultantNumberNOW_Weekday);
+        double magicWeekend = (COW_WeekendNumber + NOW_WeekendNumber + consultantShiftsCarriedNOW_Weekend + consultantShiftsCarriedCOW_Weekend) / (consultantNumberCOW_Weekend + consultantNumberNOW_Weekend);
+        System.out.println("magic weekday" + magicWeekday);
+
         for (Iterator<ConsultantReader> cs = getConsultantList().iterator(); cs.hasNext();) {
             ConsultantReader cons = cs.next();
 
             double partTimeFactor = cons.getFactor();
-            
-            if (cons.getWeekdays() == TypeOfWorking.Paeds ) {
-                cons.setCOW_WeekTarget(partTimeFactor *2 *magicWeekday - cons.getBalance().get("COW_Week"));
-                COW_WeekdayNumber -= (partTimeFactor *2 *magicWeekday - cons.getBalance().get("COW_Week"));
+
+            if (cons.getWeekdays() == TypeOfWorking.Paeds) {
+                cons.setCOW_WeekTarget(partTimeFactor * 2 * magicWeekday - cons.getBalance().get("COW_Week"));
+                COW_WeekdayNumber -= (partTimeFactor * 2 * magicWeekday - cons.getBalance().get("COW_Week"));
             } else if (cons.getWeekdays() == TypeOfWorking.Neonates) {
-                cons.setNOW_WeekTarget(partTimeFactor *2 *magicWeekday - cons.getBalance().get("NOW_Week"));
-                NOW_WeekdayNumber -= (partTimeFactor  *2*magicWeekday - cons.getBalance().get("NOW_Week"));
-            } 
-            
-             if (cons.getWeekends() == TypeOfWorking.Paeds ) {
-                cons.setCOW_WeekendTarget(partTimeFactor *2 *magicWeekend - cons.getBalance().get("COW_Weekend"));
-                COW_WeekendNumber -= (partTimeFactor *2 *magicWeekend - cons.getBalance().get("COW_Weekend"));
+                cons.setNOW_WeekTarget(partTimeFactor * 2 * magicWeekday - cons.getBalance().get("NOW_Week"));
+                NOW_WeekdayNumber -= (partTimeFactor * 2 * magicWeekday - cons.getBalance().get("NOW_Week"));
+            }
+
+            if (cons.getWeekends() == TypeOfWorking.Paeds) {
+                cons.setCOW_WeekendTarget(partTimeFactor * 2 * magicWeekend - cons.getBalance().get("COW_Weekend"));
+                COW_WeekendNumber -= (partTimeFactor * 2 * magicWeekend - cons.getBalance().get("COW_Weekend"));
             } else if (cons.getWeekends() == TypeOfWorking.Neonates) {
-                cons.setNOW_WeekendTarget(partTimeFactor *2 *magicWeekend - cons.getBalance().get("NOW_Weekend"));
-                NOW_WeekendNumber -= (partTimeFactor  *2*magicWeekend - cons.getBalance().get("NOW_Weekend"));
-            } 
-             
+                cons.setNOW_WeekendTarget(partTimeFactor * 2 * magicWeekend - cons.getBalance().get("NOW_Weekend"));
+                NOW_WeekendNumber -= (partTimeFactor * 2 * magicWeekend - cons.getBalance().get("NOW_Weekend"));
+            }
+
         }
-        
-        
-        double COW_WeekdayPercent = (COW_WeekdayNumber+consultantShiftsCarriedCOW_Weekday)/(COW_WeekdayNumber+consultantShiftsCarriedCOW_Weekday+NOW_WeekdayNumber+consultantShiftsCarriedNOW_Weekday);
-        double NOW_WeekdayPercent = (NOW_WeekdayNumber+consultantShiftsCarriedNOW_Weekday)/(COW_WeekdayNumber+consultantShiftsCarriedCOW_Weekday+NOW_WeekdayNumber+consultantShiftsCarriedNOW_Weekday);
-        double COW_WeekendPercent = (COW_WeekendNumber+consultantShiftsCarriedCOW_Weekend)/(COW_WeekendNumber + NOW_WeekendNumber+ consultantShiftsCarriedCOW_Weekend+ consultantShiftsCarriedNOW_Weekend);
-        double NOW_WeekendPercent = (NOW_WeekendNumber+consultantShiftsCarriedNOW_Weekend)/(COW_WeekendNumber + NOW_WeekendNumber+ consultantShiftsCarriedCOW_Weekend+ consultantShiftsCarriedNOW_Weekend);
+
+        double COW_WeekdayPercent = (COW_WeekdayNumber + consultantShiftsCarriedCOW_Weekday) / (COW_WeekdayNumber + consultantShiftsCarriedCOW_Weekday + NOW_WeekdayNumber + consultantShiftsCarriedNOW_Weekday);
+        double NOW_WeekdayPercent = (NOW_WeekdayNumber + consultantShiftsCarriedNOW_Weekday) / (COW_WeekdayNumber + consultantShiftsCarriedCOW_Weekday + NOW_WeekdayNumber + consultantShiftsCarriedNOW_Weekday);
+        double COW_WeekendPercent = (COW_WeekendNumber + consultantShiftsCarriedCOW_Weekend) / (COW_WeekendNumber + NOW_WeekendNumber + consultantShiftsCarriedCOW_Weekend + consultantShiftsCarriedNOW_Weekend);
+        double NOW_WeekendPercent = (NOW_WeekendNumber + consultantShiftsCarriedNOW_Weekend) / (COW_WeekendNumber + NOW_WeekendNumber + consultantShiftsCarriedCOW_Weekend + consultantShiftsCarriedNOW_Weekend);
         System.out.println("Look Here");
         for (Iterator<ConsultantReader> cs = getConsultantList().iterator(); cs.hasNext();) {
             ConsultantReader cons = cs.next();
 
             double partTimeFactor = cons.getFactor();
 
-            
-            if (cons.getWeekdays() == TypeOfWorking.Both ) {
-                cons.setCOW_WeekTarget(COW_WeekdayPercent*2*partTimeFactor  *magicWeekday - cons.getBalance().get("COW_Week"));
-                cons.setNOW_WeekTarget(NOW_WeekdayPercent*2*partTimeFactor  * magicWeekday - cons.getBalance().get("NOW_Week"));
-        }
-            if (cons.getWeekends() == TypeOfWorking.Both ) {
-                cons.setCOW_WeekendTarget(COW_WeekendPercent*2*partTimeFactor  *magicWeekend - cons.getBalance().get("COW_Weekend"));
-                cons.setNOW_WeekendTarget(NOW_WeekendPercent*2*partTimeFactor  * magicWeekend - cons.getBalance().get("NOW_Weekend"));
-        }
+            if (cons.getWeekdays() == TypeOfWorking.Both) {
+                cons.setCOW_WeekTarget(COW_WeekdayPercent * 2 * partTimeFactor * magicWeekday - cons.getBalance().get("COW_Week"));
+                cons.setNOW_WeekTarget(NOW_WeekdayPercent * 2 * partTimeFactor * magicWeekday - cons.getBalance().get("NOW_Week"));
+            }
+            if (cons.getWeekends() == TypeOfWorking.Both) {
+                cons.setCOW_WeekendTarget(COW_WeekendPercent * 2 * partTimeFactor * magicWeekend - cons.getBalance().get("COW_Weekend"));
+                cons.setNOW_WeekendTarget(NOW_WeekendPercent * 2 * partTimeFactor * magicWeekend - cons.getBalance().get("NOW_Weekend"));
+            }
             cons.setOnCallsTarget(partTimeFactor * (onCallsNumber + consultantShiftsCarriedOnCalls) / consultantNumberOnCalls - cons.getBalance().get("OnCalls"));
-            
+            double a = 0;
+            double b = 0;
+            double c = 0;
+            double d = 0;
+            double e = 0;
             switch (cons.getConsultantName().trim()) {
                 case "Jo Spinks":
                     System.out.println("1");
+
                     break;
                 case "Ak Hussain":
-                                        System.out.println("2");
+                    System.out.println("2");
 
                     break;
                 case "Balaji Surayan":
-                                        System.out.println("3");
+                    System.out.println("3");
 
                     break;
                 case "Ahmed Aldouri":
@@ -213,7 +213,7 @@ public class ConsultantList implements Serializable {
                     break;
                 case "Chandan Yaliwal":
                     System.out.println("7");
-                  
+
                     break;
                 case "Claire Holt":
                     System.out.println("8");
@@ -226,7 +226,7 @@ public class ConsultantList implements Serializable {
                     break;
                 case "Kemy Naidoo":
                     System.out.println("11");
-                    
+
                     break;
                 case "Nicky Pritchard":
                     System.out.println("12");
@@ -238,14 +238,14 @@ public class ConsultantList implements Serializable {
                     System.out.println("14");
                     break;
             }
-            if (cons.getConsultantName().contains("Jo Spinks")) {
-                System.out.println("Registers with " + cons.getConsultantName());
-          
-            }
-            
+            cons.setCOW_WeekTarget(a);
+            cons.setNOW_WeekTarget(b);
+            cons.setCOW_WeekendTarget(c);
+            cons.setNOW_WeekendTarget(d);
+            cons.setOnCallsTarget(e);
         }
-       // System.exit(-1);   
-            /*
+        // System.exit(-1);   
+        /*
             if (cons.getWeekdays() == TypeOfWorking.Paeds || cons.getWeekdays() == TypeOfWorking.Both) {
                 cons.setCOW_WeekTarget(partTimeFactor * (COW_WeekdayNumber + consultantShiftsCarriedCOW_Weekday) / consultantNumberCOW_Weekday - cons.getBalance().get("COW_Week"));
             } else {cons.setCOW_WeekTarget(0);}
