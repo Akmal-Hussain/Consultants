@@ -190,14 +190,61 @@ public class ConsultantList implements Serializable {
         }
             cons.setOnCallsTarget(partTimeFactor * (onCallsNumber + consultantShiftsCarriedOnCalls) / consultantNumberOnCalls - cons.getBalance().get("OnCalls"));
             
-            
+            switch (cons.getConsultantName().trim()) {
+                case "Jo Spinks":
+                    System.out.println("1");
+                    break;
+                case "Ak Hussain":
+                                        System.out.println("2");
+
+                    break;
+                case "Balaji Surayan":
+                                        System.out.println("3");
+
+                    break;
+                case "Ahmed Aldouri":
+                    System.out.println("4");
+                    break;
+                case "Ann Gordon":
+                    System.out.println("5");
+                    break;
+                case "Asha Madasseri":
+                    System.out.println("6");
+                    break;
+                case "Chandan Yaliwal":
+                    System.out.println("7");
+                  
+                    break;
+                case "Claire Holt":
+                    System.out.println("8");
+                    break;
+                case "Elspeth Brooker":
+                    System.out.println("9");
+                    break;
+                case "Helen Wolfenden":
+                    System.out.println("10");
+                    break;
+                case "Kemy Naidoo":
+                    System.out.println("11");
+                    
+                    break;
+                case "Nicky Pritchard":
+                    System.out.println("12");
+                    break;
+                case "Peter DeHalpert":
+                    System.out.println("13");
+                    break;
+                case "Ravi Kumar":
+                    System.out.println("14");
+                    break;
+            }
             if (cons.getConsultantName().contains("Jo Spinks")) {
                 System.out.println("Registers with " + cons.getConsultantName());
           
             }
             
         }
-        System.exit(-1jjhg);   
+       // System.exit(-1);   
             /*
             if (cons.getWeekdays() == TypeOfWorking.Paeds || cons.getWeekdays() == TypeOfWorking.Both) {
                 cons.setCOW_WeekTarget(partTimeFactor * (COW_WeekdayNumber + consultantShiftsCarriedCOW_Weekday) / consultantNumberCOW_Weekday - cons.getBalance().get("COW_Week"));
