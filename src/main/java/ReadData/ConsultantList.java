@@ -191,51 +191,102 @@ public class ConsultantList implements Serializable {
             double e = 0;
             switch (cons.getConsultantName().trim()) {
                 case "Jo Spinks":
-                    System.out.println("1");
-
+                    a = 2.5;
+                    b = 0;
+                    c = 2.5;
+                    d = 0;
+                    e = 5.75;
                     break;
                 case "Ak Hussain":
-                    System.out.println("2");
-
+                    a = 0.7;
+                    b = 3;
+                    c = 1.2;
+                    d = 2.4;
+                    e = 9.5;
                     break;
                 case "Balaji Surayan":
-                    System.out.println("3");
-
+                    a = 0.7;
+                    b = 3;
+                    c = 1.2;
+                    d = 2.4;
+                    e = 9.5;
                     break;
                 case "Ahmed Aldouri":
-                    System.out.println("4");
+                    a = 0.7;
+                    b = 4;
+                    c = 1.2;
+                    d = 3.4;
+                    e = 9.5;
                     break;
                 case "Ann Gordon":
-                    System.out.println("5");
+                    a = 0.7;
+                    b = 3;
+                    c = 1.2;
+                    d = 2.4;
+                    e = 9.5;
                     break;
                 case "Asha Madasseri":
-                    System.out.println("6");
+                    a = 3.6;
+                    b = 0;
+                    c = 3.6;
+                    d = 0;
+                    e = 10.5;
                     break;
                 case "Chandan Yaliwal":
-                    System.out.println("7");
-
+                    a = 3.6;
+                    b = 0;
+                    c = 1.2;
+                    d = 2.4;
+                    e = 10.5;
                     break;
                 case "Claire Holt":
-                    System.out.println("8");
+                    a = 2.5;
+                    b = 0;
+                    c = 3.5;
+                    d = 0;
+                    e = 4.75;
                     break;
                 case "Elspeth Brooker":
-                    System.out.println("9");
+                    a = 2.2;
+                    b = 1.5;
+                    c = 1.2;
+                    d = 2.4;
+                    e = 10.5;
                     break;
                 case "Helen Wolfenden":
-                    System.out.println("10");
+                    a = 2.2;
+                    b = 1.5;
+                    c = 1.2;
+                    d = 2.4;
+                    e = 10.5;
                     break;
                 case "Kemy Naidoo":
-                    System.out.println("11");
-
+                    a = 0.7;
+                    b = 3;
+                    c = 1.2;
+                    d = 3.4;
+                    e = 9.5;
                     break;
                 case "Nicky Pritchard":
-                    System.out.println("12");
+                    a = 0.7;
+                    b = 3;
+                    c = 2.2;
+                    d = 2.4;
+                    e = 9.5;
                     break;
                 case "Peter DeHalpert":
-                    System.out.println("13");
+                    a = 1.7;
+                    b = 3;
+                    c = 1.2;
+                    d = 2.4;
+                    e = 10.5;
                     break;
                 case "Ravi Kumar":
-                    System.out.println("14");
+                    a = 3.6;
+                    b = 0;
+                    c = 3.6;
+                    d = 0;
+                    e = 9.5;
                     break;
             }
             cons.setCOW_WeekTarget(a);
