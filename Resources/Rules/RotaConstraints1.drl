@@ -149,7 +149,7 @@ when
         Shift($id : id, $p: consultant, shiftType == "NOW", startDate.getDayOfWeek() == DayOfWeek.FRIDAY, $startDate:startDate)
         Shift($id != id, $p == consultant, shiftType == "COW" || shiftType =="NOW",
                       $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) ==  
-                      endDate.get(WeekFields.of(Locale.UK).weekOfYear()))
+                      endDate.get(WeekFields.of(Locale.UK).weekOfYear()), startDate.getDayOfWeek() == DayOfWeek.FRIDAY)
  then
  scoreHolder.addHardConstraintMatch(kcontext, -1);
     end

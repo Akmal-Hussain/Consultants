@@ -62,6 +62,30 @@
                 <Year>2021</Year>
             </To>
         </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>10</Day>
+                <Month>11</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>10</Day>
+                <Month>11</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
+        <Leave_Block>
+            <From>
+                <Day>17</Day>
+                <Month>12</Month>
+                <Year>2021</Year>
+            </From>
+            <To>
+                <Day>17</Day>
+                <Month>12</Month>
+                <Year>2021</Year>
+            </To>
+        </Leave_Block>
     </Dates_Of_Leave>
     <FullOrPartTime>Full
         <Factor>1.0</Factor>
