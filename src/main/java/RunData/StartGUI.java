@@ -5,6 +5,7 @@
  */
 package main.java.RunData;
 
+import java.time.LocalDate;
 import main.java.DisplayData.ConfirmDates;
 import main.java.ReadData.ConsultantList;
 import main.java.ReadData.ConsultantReader;
@@ -37,8 +38,10 @@ public class StartGUI {
             System.out.println("COW w/e Target:     " + c.getCOW_WeekendTarget());
             System.out.println("NOW w/e Target:     " + c.getNOW_WeekendTarget());
             System.out.println("OnCalls:            " + c.getOnCallsTarget());
+            for (LocalDate d: c.getLeaveDates()) {
+                System.out.println(d);
+            }
         }
-       // System.exit(-1);
         new ConfirmDates();
     }
     

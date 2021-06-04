@@ -41,7 +41,7 @@ rule "1.3: leavedates onCalls" salience 1
 then
   scoreHolder.addHardConstraintMatch(kcontext, -3);
     end
-
+/*
 rule "2.1: Some can only do paed on calls" salience 1
     when 
         $q : ConsultantReader(onCalls == TypeOfWorking.Paeds)
@@ -303,3 +303,4 @@ when
 then
     scoreHolder.addSoftConstraintMatch(kcontext, -(int)Math.pow($num.doubleValue()-$aim, 2));
 end
+*/
