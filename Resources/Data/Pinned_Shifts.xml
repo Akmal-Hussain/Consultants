@@ -726,13 +726,5 @@ and open the template in the editor.
             <Consultant>Nicky Pritchard</Consultant>
         </Shift>
     </Date>
-    <Date>
-        <Day>3</Day>
-        <Month>8</Month>
-        <Year>2021</Year>
-        <Shift>
-            <Type>PaedOnCall</Type>
-            <Consultant>Nicky Pritchard</Consultant>
-        </Shift>
-    </Date>    
+    
 </Shifts>

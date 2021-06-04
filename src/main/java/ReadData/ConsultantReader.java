@@ -27,6 +27,12 @@ public class ConsultantReader implements Serializable {
     String consultantName;
     String filename;
 
+    LocalDate[][] leaveDatesArray;
+    List<LocalDate[]> leaveDatesList;
+    List <DayOfWeek> daysWorkingList;
+    List<LocalDate> leaveDates = new ArrayList<>();
+    DayOfWeek[] daysWorking;
+    HashMap<String, Double> balance = new HashMap<>();
     
     double COW_WeekTarget;
     double NOW_WeekTarget;
@@ -77,7 +83,7 @@ public class ConsultantReader implements Serializable {
             }
             //          LocalDate localDate = leaveDatesArray[0][0];
             //          List<LocalDate> dates leaveDates.add(localDate);
-            leaveDates = new ArrayList<>();
+            
             LocalDate localDate;
             for (int x = 0; x < y; x++) {
                 localDate = leaveDatesArray[x][0];
@@ -196,7 +202,7 @@ public class ConsultantReader implements Serializable {
         onCalls = t;
     }
     
-    HashMap<String, Double> balance = new HashMap<>();
+    
 
     public HashMap<String, Double> getBalance() {
         return balance;
@@ -249,8 +255,7 @@ public class ConsultantReader implements Serializable {
 public String getConsultantName() {
         return consultantName;
     }
-    LocalDate[][] leaveDatesArray;
-    List<LocalDate[]> leaveDatesList;
+    
     
     public List<LocalDate[]> getLeaveDatesList(){
         return leaveDatesList;
@@ -279,13 +284,12 @@ public String getConsultantName() {
         fullOrPartTime = t;
     }
     
-    DayOfWeek[] daysWorking;
+    
 
     public List<DayOfWeek> getDaysWorkingList() {
         return daysWorkingList;
     }
-    List <DayOfWeek> daysWorkingList;
-    List<LocalDate> leaveDates;
+    
 
     public List<LocalDate> getLeaveDates() {
         return leaveDates;
@@ -298,11 +302,12 @@ public String getConsultantName() {
         name.appendChild(consultantName);
         
         Element datesOfLeave = new Element("Dates_Of_Leave");
+        leaveDates.clear();
         for (LocalDate[]d:leaveDatesList){
             Element leaveBlock = new Element("Leave_Block");
             Element fro = ReaderHelper.setDate(d[0],"From");
             Element too = ReaderHelper.setDate(d[1],"To");
-            leaveDates.clear();
+            
             
             LocalDate localDate = d[0];
       
