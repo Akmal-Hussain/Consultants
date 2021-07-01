@@ -12,7 +12,8 @@ import java.util.Locale;
 import java.util.Arrays;
 import java.lang.Math;
 
-
+// last change done on the July changed the NOW week to make it -2 if you have NOW weekend and week and one on call.
+// Also changed rule 6 and made 3.31 and 3.32... from 3.3
 global HardSoftScoreHolder scoreHolder;
 
 
@@ -83,16 +84,32 @@ rule "3.2: COW week only" salience 1
  scoreHolder.addHardConstraintMatch(kcontext, -1);
     end
 
-rule "3.3: COW week only" salience 1
+rule "3.31: COW week only" salience 1
 // no other PaedOnCall or NeoOnCall shifts that week and the weekend before
     when
         Shift($id : id, $p: consultant, shiftType == "COW", $startDate:startDate, $endDate:endDate)
-        Shift($id != id, $p == consultant, shiftType == "NeoOnCall" || shiftType == "PaedOnCall",
+        Shift($id != id, $p == consultant, 
+//shiftType == "NeoOnCall" || 
+shiftType == "PaedOnCall",
                      $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
                    startDate.get(WeekFields.of(Locale.UK).weekOfYear()) || 
                            $endDate ==  startDate)
     then
  scoreHolder.addHardConstraintMatch(kcontext, -2);
+    end
+
+rule "3.32: COW week only" salience 1
+// no other PaedOnCall or NeoOnCall shifts that week and the weekend before
+    when
+        Shift($id : id, $p: consultant, shiftType == "COW", $startDate:startDate, $endDate:endDate)
+        Shift($id != id, $p == consultant, 
+//shiftType == "PaedOnCall" ||
+shiftType == "NeoOnCall",  
+                     $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()) || 
+                           $endDate ==  startDate)
+    then
+ scoreHolder.addHardConstraintMatch(kcontext, -1);
     end
 
 rule "3.4: COW week only" salience 1
@@ -130,7 +147,7 @@ when
         Shift($id != id, $id1 != id, $p == consultant, shiftType == "PaedOnCall" || shiftType == "NeoOnCall",               
  $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == startDate.get(WeekFields.of(Locale.UK).weekOfYear()))
 then
- scoreHolder.addHardConstraintMatch(kcontext, -1);
+ scoreHolder.addHardConstraintMatch(kcontext, -2);
     end
 
 rule "4.3: NOW week only" salience 1
@@ -177,6 +194,10 @@ when
     Shift ($p != consultant, shiftType == "NOW", $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
                    startDate.get(WeekFields.of(Locale.UK).weekOfYear()),
                     startDate.getDayOfWeek() == DayOfWeek.MONDAY)
+Shift ($p != consultant, shiftType == "COW", $startDate.get(WeekFields.of(Locale.UK).weekOfYear()) == 
+                   startDate.get(WeekFields.of(Locale.UK).weekOfYear()),
+                    startDate.getDayOfWeek() == DayOfWeek.MONDAY)
+
 
  //                 ||
 //(ConsultantReader($p == this, daysWorkingList.contains($startDate.getDayOfWeek)) &&
